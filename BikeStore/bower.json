@@ -1,0 +1,14 @@
+{
+  "name": "BikeStore",
+  "homepage": "https://github.com/igor645/BikeStore",
+  "authors": [
+    "Igor Wieczorek <wieczorekkigor@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "bootstrap": "4.1.3"
+  }
+}
