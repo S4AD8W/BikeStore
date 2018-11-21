@@ -1,46 +1,76 @@
-﻿using BikeStore.Core;
-using BikeStore.Core.Domain.Repository;
-using BikeStore.Infrastructure.DTO;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
+using BikeStore.core.Domain;
+using BikeStore.Infrastructure.Commands.Users;
+using BikeStore.Infrastructure.DTO;
+using BikeStore.Infrastructure.Services.Emails;
+using BikeStore.Infrastructure.Services.Messages;
 
+namespace BikeStore.Infrastructure.Services {
 
-
-namespace BikeStore.Infrastructure.Services
-{
   public class UserService : IUserService {
 
-    private readonly IUserRepository mUserRepository;
+    private readonly IUserRepository mUserRepository;       //interfejs repozytorium użytkowników 
+    private readonly IEncrypter mEncrypter;
+    private readonly IMapper mMapper;
+    private readonly IMessage mMessage;
 
-    public UserService(IUserRepository UserRepository) {
+    public UserService(IUserRepository xUserRepository, IEncrypter xEncrypter, IMapper xMapper, IMessage xMessage ) {
 
-      mUserRepository = UserRepository;
+      mUserRepository = xUserRepository;
+      mEncrypter = xEncrypter;
+      mMapper = xMapper;
+      mMessage = xMessage;
+
     }
 
-    public Task<UserDto> GetAsync(string email) {
+    public async Task<cUserDto> GetUserAsync(string xEmail) {
 
-      throw new NotImplementedException();
-    }
+      var pUser = await mUserRepository.Get(xEmail);
 
-    public Task LoginAsync(string email, string password) {
-      throw new NotImplementedException();
-    }
+      return mMapper.Map<User,cUserDto >(pUser);
 
+    } 
 
-    public async Task RegisterAsync(Guid xUserId, string xEmail, string xUsername, string xPassword, string xName, string xSurname) {
+    public async Task <bool> LoginAsync(string xEmail, string xPassword) {
 
-      User pUser = await mUserRepository.GetAsync(xEmail);
-
-      if (pUser == null) {
-        throw new Exception("nosem janusza");
+      User pUser = await mUserRepository.Get(xEmail);
+      if(pUser == null) {
+        return false;
       }
 
-      pUser = new User(xUserId, xEmail, xUsername, xPassword, xName, xUsername);
+      string pHash = mEncrypter.GetHash(xPassword, pUser.Salt);
 
-      await mUserRepository.AddAsync(pUser);
+      if(pUser.Password == pHash) {
+        return true;
+      }
 
+      return false;
+      
     }
+
+    public async Task<bool> RegisterAsync(Guid xUserId, string xEmail, string xUsername, string xPassword, string xRole) {
+
+      User pUser = await mUserRepository.Get(xEmail);
+
+      if (pUser != null) {
+        mMessage.SetMesage("The user's e-mail address exists");
+        return false;
+      } else {
+        string pSalt = mEncrypter.GetSalt(xPassword);
+        string pHash = mEncrypter.GetHash(xPassword, pSalt);
+        pUser = new User(xUserId, xEmail, xUsername, pHash, "rodo", "rodo", pSalt, xRole);
+        await mUserRepository.Add(pUser);
+        return true;
+      }
+      
+    }
+
+    
   }
+
 }
+

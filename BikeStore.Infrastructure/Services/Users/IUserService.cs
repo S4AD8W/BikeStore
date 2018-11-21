@@ -1,16 +1,20 @@
-﻿using BikeStore.Infrastructure.DTO;
+﻿using BikeStore.Infrastructure.Commands.Users;
+using BikeStore.Infrastructure.DTO;
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace BikeStore.Infrastructure.Services{
+ public interface IUserService : IService  {
+    //interfejs serwisu użytkownika 
 
-  public interface IUserService : IService {
+    Task <cUserDto> GetUserAsync(string xEmail);
 
-    Task<UserDto> GetAsync(string email);
-    Task RegisterAsync(Guid userId, string email,
-        string username, string password, string xName, string xSurname);
-    Task LoginAsync(string email, string password);
+    Task<bool> RegisterAsync(Guid xUserId, string xEmail,
+            string xUsername, string xPassword, string xRole);
+
+    Task<bool> LoginAsync(string xEmail, string xPassword);
+
   }
 }

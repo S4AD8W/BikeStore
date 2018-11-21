@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace BikeStore.Infrastructure.Commands{
+namespace BikeStore.core.Repositories{
 
   //Interfejs markujący 
- public  interface ICommand  {
+ public interface IRepository{
 
   }
 }

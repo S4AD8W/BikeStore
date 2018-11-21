@@ -1,10 +1,14 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace BikeStore.Infrastructure.Commands {
-  public interface ICommandDispatcher {
+
+  public  interface ICommandDispatcher {
     // Interfejs odpowiadający za rozdysponwyaniem komend 
 
-    Task DispatchAsync<T>(T command) where T : ICommand;
+    Task  DispatchAsync<T>(T command) where T : ICommand;
 
   }
 }

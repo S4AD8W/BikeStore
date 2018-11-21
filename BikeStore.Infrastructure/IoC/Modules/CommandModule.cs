@@ -1,12 +1,12 @@
 ﻿using Autofac;
+using Microsoft.AspNetCore.Http;
 using BikeStore.Infrastructure.Commands;
-using System;
-using System.Collections.Generic;
+using BikeStore.Infrastructure.Services.Emails;
 using System.Reflection;
-using System.Text;
 
-namespace BikeStore.Infrastructure.IoC.Modules {
-  class CommandModule : Autofac.Module {
+namespace BikeStore.Infrastructure.IoC.Modules{
+
+  class CommandModule : Autofac.Module{
     //Klaa odpowiadająca za konfiguracje wstrzykiwania zależność dla commend
 
     protected override void Load(ContainerBuilder builder) {
@@ -21,6 +21,17 @@ namespace BikeStore.Infrastructure.IoC.Modules {
       builder.RegisterType<CommandDispatcher>()             //rejestracja typu 
           .As<ICommandDispatcher>()                         //informacja jaki mabyć urzyty interfejs dla danego typu 
           .InstancePerLifetimeScope();                      //ustalenie czasu życia 
+
+      
+
+      builder.RegisterAssemblyTypes(assembly)
+           .Where(x => x.IsAssignableTo<IEmail>())        //pobranie typów z assembly tylko tych które implementują interfejs IService
+           .AsImplementedInterfaces()
+           .InstancePerLifetimeScope();
+
+      builder.RegisterType<HttpContextAccessor>().As<IHttpContextAccessor>()
+            .SingleInstance();
     }
   }
 }
+ 

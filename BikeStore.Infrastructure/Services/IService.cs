@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace BikeStore.Infrastructure.Services {
-  public interface IService {
+namespace BikeStore.Infrastructure.Services{
+
+ public interface IService{
 
   }
 

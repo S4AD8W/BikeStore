@@ -1,9 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 
-namespace BikeStore.Core {
+namespace BikeStore.core.Domain {
+  public class UserInfo {
+    public string FirstName { get; set; }
+
+    public string LastName { get; set; }
+
+    public bool HasAdminRights { get; set; }
+  }
+
   public class User {
 
     public Guid Id { get; protected set; }
@@ -12,15 +19,16 @@ namespace BikeStore.Core {
     public string Username { get; protected set; }
     public string Name { get; protected set; }
     public string Surname { get; protected set; }
+    public string Salt { get; protected set; }
     public DateTime CreatedAt { get; protected set; }
     public DateTime UpdatedAt { get; protected set; }
-
+    public string Role { get; set; }
 
     protected User() {
 
     }
 
-    public User(Guid xUserId, string xEmail, string xUsername, string xPassword, string xName, string xSurname) {
+    public User(Guid xUserId, string xEmail, string xUsername, string xPassword, string xName, string xSurname, string xSalt, string xRole ) {
       Id = xUserId;
       SetEmail(xEmail);
       SetUsername(xUsername);
@@ -28,6 +36,8 @@ namespace BikeStore.Core {
       CreatedAt = DateTime.UtcNow;
       SetName(xName);
       SetSurname(xSurname);
+      SetSatl(xSalt);
+      this.Role = xRole;
     }
 
 
@@ -53,18 +63,18 @@ namespace BikeStore.Core {
 
 
     public void SetPassword(string xPassword) {
-      if (string.IsNullOrWhiteSpace(xPassword)) {
-        throw new Exception();
-      }
-      if (xPassword.Length < 4) {
-        throw new Exception();
-      }
-      if (xPassword.Length > 100) {
-        throw new Exception();
-      }
-      if (Password == xPassword) {
-        return;
-      }
+      //if (string.IsNullOrWhiteSpace(xPassword)) {
+      //  throw new Exception();
+      //}
+      //if (xPassword.Length < 4) {
+      //  throw new Exception();
+      //}
+      //if (xPassword.Length > 100) {
+      //  throw new Exception();
+      //}
+      //if (Password == xPassword) {
+      //  return;
+      //}
       Password = xPassword;
       UpdatedAt = DateTime.UtcNow;
     }
@@ -87,6 +97,12 @@ namespace BikeStore.Core {
 
       Surname = xSurname;
       UpdatedAt = DateTime.UtcNow;
+
+    }
+
+    public void  SetSatl(string xSalt) {
+
+      this.Salt = xSalt;
 
     }
   }

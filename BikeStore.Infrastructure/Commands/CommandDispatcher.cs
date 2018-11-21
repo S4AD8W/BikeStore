@@ -9,15 +9,16 @@ namespace BikeStore.Infrastructure.Commands {
 
     private readonly IComponentContext mContext;            //pochodzi z bibloteki autoFact 
 
-    public CommandDispatcher(IComponentContext xContext)    //Konsturktor przyjmujący zależność wstrzkniete przez Autofact
-    {
+    public CommandDispatcher(IComponentContext xContext){    //Konsturktor przyjmujący zależność wstrzkniete przez Autofact
+    
       mContext = xContext;
+
     }
 
     public async Task DispatchAsync<T>(T command) where T : ICommand {
       //funkcja odpowiadajca za wywołanie kommendy 
 
-      if (command == null) {                                //sprawdzenie czy komenda niejest pusta 
+      if (command == null) {                                //sprawdzenie czy komenda nie jest pusta 
 
         throw new ArgumentNullException(nameof(command),
             $"Command: '{typeof(T).Name}' can not be null.");
@@ -26,6 +27,7 @@ namespace BikeStore.Infrastructure.Commands {
       var handler = mContext.Resolve<ICommandHandler<T>>(); //rozpoznanie typu komendy ktura zostąła wstrzyknieta przez IoC
 
       await handler.HandleAsync(command);                   //wywołanie komendy 
+
     }
   }
 }
