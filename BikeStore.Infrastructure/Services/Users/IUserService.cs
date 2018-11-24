@@ -9,12 +9,16 @@ namespace BikeStore.Infrastructure.Services{
  public interface IUserService : IService  {
     //interfejs serwisu użytkownika 
 
-    Task <cUserDto> GetUserAsync(string xEmail);
+    Task<cUserDto> GetUserAsync(string xEmail);
 
     Task<bool> RegisterAsync(Guid xUserId, string xEmail,
-            string xUsername, string xPassword, string xRole);
+            string xUserName, string xUserSurname, string xPassword, string xRole);
 
     Task<bool> LoginAsync(string xEmail, string xPassword);
+
+    Task<bool> ConfirmEmail(Guid xUserId);
+
+    Task<string> ResetPassword(string xEmail);
 
   }
 }

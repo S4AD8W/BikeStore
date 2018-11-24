@@ -3,35 +3,29 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace BikeStore.core.Domain {
-  public class UserInfo {
-    public string FirstName { get; set; }
-
-    public string LastName { get; set; }
-
-    public bool HasAdminRights { get; set; }
-  }
+ 
 
   public class User {
 
-    public Guid Id { get; protected set; }
-    public string Email { get; protected set; }
-    public string Password { get; protected set; }
-    public string Username { get; protected set; }
-    public string Name { get; protected set; }
-    public string Surname { get; protected set; }
-    public string Salt { get; protected set; }
     public DateTime CreatedAt { get; protected set; }
-    public DateTime UpdatedAt { get; protected set; }
+    public string Email { get; protected set; }
+    public Guid Id { get; protected set; }
+    public bool IsEmailConfirm { get; set; }
+    public string Name { get; protected set; }
+    public string Password { get; protected set; }
     public string Role { get; set; }
+    public string Salt { get; protected set; }
+    public string Surname { get; protected set; }
+    public DateTime UpdatedAt { get; protected set; }
+
 
     protected User() {
 
     }
 
-    public User(Guid xUserId, string xEmail, string xUsername, string xPassword, string xName, string xSurname, string xSalt, string xRole ) {
+    public User(Guid xUserId, string xEmail, string xPassword, string xName, string xSurname, string xSalt, string xRole) {
       Id = xUserId;
       SetEmail(xEmail);
-      SetUsername(xUsername);
       SetPassword(xPassword);
       CreatedAt = DateTime.UtcNow;
       SetName(xName);
@@ -41,11 +35,7 @@ namespace BikeStore.core.Domain {
     }
 
 
-    public void SetUsername(string xUsername) {
 
-      Username = xUsername.ToLowerInvariant();
-      UpdatedAt = DateTime.UtcNow;
-    }
 
     public void SetEmail(string xEmail) {
 
@@ -100,7 +90,7 @@ namespace BikeStore.core.Domain {
 
     }
 
-    public void  SetSatl(string xSalt) {
+    public void SetSatl(string xSalt) {
 
       this.Salt = xSalt;
 

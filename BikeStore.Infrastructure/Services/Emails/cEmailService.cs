@@ -35,5 +35,21 @@ namespace BikeStore.Infrastructure.Services.Emails {
       return pIsSend;
 
     }
+
+    public async Task SendNewPasswordToUser(string xSendTo, string xNewPassword) {
+      //funkcja wysłająca email z nowym chasłem 
+
+      string pMessage;
+      string pSubiect;
+
+      pSubiect = $@"Restart Password";
+      pMessage = $@"Your new password to service:{xNewPassword}";
+
+      mEmailClient.SendEmail(pSubiect, pMessage, xSendTo);  //wywołanie usługi aby wysłała nowe chasło
+
+      await Task.CompletedTask;
+
+    }
+
   }
 }

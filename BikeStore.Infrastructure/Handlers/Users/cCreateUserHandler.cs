@@ -12,33 +12,32 @@ namespace BikeStore.Infrastructure.Handlers.Users {
 
   class cCreateUserHandler : ICommandHandler<CreateUser> {
 
-    private readonly IUserService mUserService;
-    private readonly IEmailService mEmailService;
+      private readonly IUserService mUserService;
+      private readonly IEmailService mEmailService;
 
-    public cCreateUserHandler(IUserService UserService, IEmailService xEmailService) {
+      public cCreateUserHandler(IUserService UserService, IEmailService xEmailService) {
 
-      mUserService = UserService;
-      mEmailService = xEmailService; 
-    }
+        mUserService = UserService;
+        mEmailService = xEmailService;
+      }
 
-    public async Task HandleAsync(CreateUser xCommand) {
-      bool pIsResult;
-      Guid pUserID;
+      public async Task HandleAsync(CreateUser xCommand) {
+        bool pIsResult;
+        Guid pUserID;
 
-      pUserID = new Guid();
-      pIsResult = await mUserService.RegisterAsync(pUserID,xCommand.Email, xCommand.Name, xCommand.Password, "User");                   //Dodanie użytkownika 
+        pUserID = Guid.NewGuid();
 
-      if (pIsResult) {
-       new Thread(() => {
+        pIsResult = await mUserService.RegisterAsync(pUserID, xCommand.Email, xCommand.Name, xCommand.Surname, xCommand.Password, "User");                   //Dodanie użytkownika 
 
-        Thread.CurrentThread.IsBackground = true;
-          mEmailService.SendUserAccountConfirmation(xCommand.Email, pUserID);
-        }).Start();
+        if (pIsResult) {                                      //sprawdzenie czy serwis użytkowników dodął nowego użytkownika
+          new Thread(() => {                                   //utworzenie nowego wontku
+            Thread.CurrentThread.IsBackground = true;
+            mEmailService.SendUserAccountConfirmation(xCommand.Email, pUserID); //wywołanie serwisu aby wysłał link potwierdzający 
+          }).Start();
+        }
+
       }
 
     }
 
-
   }
-
-}

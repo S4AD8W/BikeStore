@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BikeStore.Infrastructure.Commands;
+using BikeStore.Infrastructure.Commands.Accounts;
 using BikeStore.Infrastructure.Commands.Users;
 using BikeStore.Infrastructure.Extensions;
 using BikeStore.Infrastructure.Services.Messages;
@@ -73,6 +74,30 @@ namespace BikeStore.Controllers {
       await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme); //wylogowanie użytkownika 
 
       return RedirectToAction("Index", "Home");             //przekierowanie do widoku głownego 
+
+    }
+
+    public IActionResult ResetPassword() => View();         //funkcja odpowiadająca za wyświetlenie widoku do restartu hasła 
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> ResetPassword(ResetPassword xResetPassword) {
+      //funkcja odpowiadająca za restart chasła 
+      //xResetPassword - komenda odpowiadająca za restart hasła 
+
+      if (!ModelState.IsValid) {                            //sprawdzenie czy komeda  sostąła prawidłowo przez użytkownika uzupełniona 
+        return View(xResetPassword);                        //zwrucenie widoku 
+      }
+
+      await DispatchAsync(xResetPassword);                  //wywołanie komendy 
+
+      if (mMessage.IsMessage) {                             //sprawdzenie czy serwis nie zwrucił komunikatu 
+        ViewBag.Error = mMessage.Message;
+        return View();                                      //zwrucenie widoku z komunikatem 
+      }
+
+      //TODO:Przekierować na okno z informacją o zmianie chasła
+      return View();
 
     }
 

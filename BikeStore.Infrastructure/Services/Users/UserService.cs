@@ -18,7 +18,7 @@ namespace BikeStore.Infrastructure.Services {
     private readonly IMapper mMapper;
     private readonly IMessage mMessage;
 
-    public UserService(IUserRepository xUserRepository, IEncrypter xEncrypter, IMapper xMapper, IMessage xMessage ) {
+    public UserService(IUserRepository xUserRepository, IEncrypter xEncrypter, IMapper xMapper, IMessage xMessage) {
 
       mUserRepository = xUserRepository;
       mEncrypter = xEncrypter;
@@ -27,49 +27,96 @@ namespace BikeStore.Infrastructure.Services {
 
     }
 
+
     public async Task<cUserDto> GetUserAsync(string xEmail) {
+      //funkcja zwracająca użytkownika
+      //xEmail - email użytkownika 
 
       var pUser = await mUserRepository.Get(xEmail);
 
-      return mMapper.Map<User,cUserDto >(pUser);
+      return mMapper.Map<User, cUserDto>(pUser);
 
-    } 
+    }
 
-    public async Task <bool> LoginAsync(string xEmail, string xPassword) {
+    public async Task<bool> LoginAsync(string xEmail, string xPassword) {
+      //funkcja logująca użytkownika
 
-      User pUser = await mUserRepository.Get(xEmail);
-      if(pUser == null) {
+      User pUser = await mUserRepository.Get(xEmail);       //pobranie użytkownika z bazy
+
+      if (pUser == null) {                                  //sprawdzenie czy użytkownik istnieje 
         return false;
       }
 
-      string pHash = mEncrypter.GetHash(xPassword, pUser.Salt);
+      string pHash = mEncrypter.GetHash(xPassword, pUser.Salt); //wygenerowanie Hasza z wprowadzonego chasła przez użytkownika
 
-      if(pUser.Password == pHash) {
+      if (pUser.Password == pHash) {                        //Porównanie z haszem z bazy danych czy się zgadza 
         return true;
       }
 
       return false;
-      
+
     }
 
-    public async Task<bool> RegisterAsync(Guid xUserId, string xEmail, string xUsername, string xPassword, string xRole) {
+    public async Task<bool> RegisterAsync(Guid xUserId, string xEmail, string xUsername, string xUserSurname, string xPassword, string xRole) {
+      //funkcja rejestrująca nowego użytkownika
 
-      User pUser = await mUserRepository.Get(xEmail);
+      User pUser = await mUserRepository.Get(xEmail);       //pobranie użytkownika z bazy danych  
 
       if (pUser != null) {
-        mMessage.SetMesage("The user's e-mail address exists");
+        mMessage.SetMesage("The user's e-mail address exists"); // zwrucenie komunikatu 
         return false;
       } else {
-        string pSalt = mEncrypter.GetSalt(xPassword);
-        string pHash = mEncrypter.GetHash(xPassword, pSalt);
-        pUser = new User(xUserId, xEmail, xUsername, pHash, "rodo", "rodo", pSalt, xRole);
-        await mUserRepository.Add(pUser);
+        string pSalt = mEncrypter.GetSalt(xPassword);       //wygenerowanie soli dla hasła 
+        string pHash = mEncrypter.GetHash(xPassword, pSalt);//wygenerowanie nowego hasła 
+        pUser = new User(xUserId, xEmail, pHash, xUsername, xUserSurname, pSalt, xRole);
+        await mUserRepository.Add(pUser);                   //dodanie użytkownika do bazy danych 
         return true;
       }
-      
+
     }
 
-    
+    public async Task<bool> ConfirmEmail(Guid xUserId) {
+      //funkcja potwierdzająca email 
+      User pUser;
+
+      pUser = await mUserRepository.Get(xUserId);           // pobranie użytkownika z repozytorium 
+
+      if (!pUser.IsEmailConfirm) {                          //sprawdzenie czy email jest już potwierdzony 
+        pUser.IsEmailConfirm = true;
+        await mUserRepository.Update(pUser);                // zapis zaktualizowanego użytkownika
+      }
+
+      return true;
+
+    }
+
+    public async Task<string> ResetPassword(string xEmail) {
+      //funkcja resetująca chasło 
+
+      User pUser;
+      string pNewPassword;
+      cUserDto pUserDto;
+
+      pUser = await mUserRepository.Get(xEmail);            //pbranie użytkownika z bazy 
+
+      if (pUser != null) {                                  //sprawdzenie czy istnieje taki użytkownik
+        pUserDto = mMapper.Map<User, cUserDto>(pUser);
+
+        pNewPassword = Guid.NewGuid().ToString("N").ToLower()
+                       .Replace("1", "").Replace("o", "").Replace("0", "")
+                       .Substring(0, 10);                   //wygenerowanie nowego losowego chasła 
+
+        pUserDto.Password = mEncrypter.GetHash(pNewPassword, pUser.Salt);//utworzenie hasza z nowego hasła 
+        await mUserRepository.Update(mMapper.Map<cUserDto, User>(pUserDto)); //TODO: Do przemyślenia te mapowanie 
+
+        return pNewPassword;                                //zwrucenie nowego hasła 
+      }
+
+      mMessage.SetMesage("This email doesn't exist");       //Komunikat błędu 
+
+      return pNewPassword = null;                           //zwrucenie nulla jeżeli wystopił błąd 
+
+    }
   }
 
 }
