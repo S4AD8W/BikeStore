@@ -9,16 +9,7 @@
   <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
   <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
   <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
-  @*<environment include="Development">
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
-  </environment>
-  <environment exclude="Development">
-    <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
-          asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
-          asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
-    <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
-  </environment>*@
+  
 </head>
 <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -50,7 +41,11 @@
           <a class="nav-link disabled" href="#">Disabled</a>
         </li>
       </ul>
-      @await Html.PartialAsync("_LoginPartial")
+      <ul class="nav navbar-nav navbar-right">
+        <li><a asp-area="" asp-controller="Account" asp-action="Register">Register</a></li>
+        <li><a asp-area="" asp-controller="Account" asp-action="Login">Log in</a></li>
+        <li><a asp-action="LogOut" asp-controller="Account">Logout</a></li>
+      </ul>
 
     </div>
   </nav>

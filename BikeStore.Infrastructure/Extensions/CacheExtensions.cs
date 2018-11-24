@@ -19,7 +19,7 @@ namespace BikeStore.Infrastructure.Extensions {
     //klasa rozszerzająca interfejs zapisu w pamięci aplikacji 
 
    
-    public static void SetJwt(this IMemoryCache xCache, Guid xUserID, ClaimsPrincipal  xUserClaimsPrincipal) //funkcja zapisująca token w pamieci na 10 s
+    public static void SetUserClaims(this IMemoryCache xCache, Guid xUserID, ClaimsPrincipal  xUserClaimsPrincipal) //funkcja zapisująca token w pamieci na 10 s
       => xCache.Set(GetUuserClaims(xUserID), xUserClaimsPrincipal, TimeSpan.FromSeconds(10));
 
     public static ClaimsPrincipal GetUserClaimsPrincipal(this IMemoryCache xCache, Guid xUserID)

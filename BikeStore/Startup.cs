@@ -39,8 +39,8 @@ namespace BikeStore {
         o.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
         o.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
       }).AddCookie(options => {
-        options.AccessDeniedPath = new PathString("/Login/Login");
-        options.LoginPath = new PathString("/Login/Login");
+        options.AccessDeniedPath = new PathString("/Account/Login");
+        options.LoginPath = new PathString("/Account/Login");
       });
 
       services.AddAuthorization(options => {

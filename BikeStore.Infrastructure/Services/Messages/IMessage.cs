@@ -7,6 +7,7 @@ namespace BikeStore.Infrastructure.Services.Messages {
 
     bool IsMessage { get; set; }
     string Message { get; set; }
+    Guid UserId { get; set; }
 
     void SetMesage(string xMessage);
 
