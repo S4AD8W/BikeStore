@@ -9,11 +9,11 @@
   <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
   <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
   <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
-  
+
 </head>
 <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a asp-action="Index" asp-controller="Home">BikeStor</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -42,9 +42,7 @@
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a asp-area="" asp-controller="Account" asp-action="Register">Register</a></li>
-        <li><a asp-area="" asp-controller="Account" asp-action="Login">Log in</a></li>
-        <li><a asp-action="LogOut" asp-controller="Account">Logout</a></li>
+        @await Component.InvokeAsync(nameof(BikeStore.ViewsComponent.UserViewsManager))
       </ul>
 
     </div>
@@ -52,7 +50,7 @@
 
   <div class="container body-content">
     @RenderBody()
-    
+
     <hr />
     <footer>
       <p>&copy; 2018 - BikeStore</p>

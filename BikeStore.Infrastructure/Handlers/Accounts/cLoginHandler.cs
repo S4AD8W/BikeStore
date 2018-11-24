@@ -37,8 +37,8 @@ namespace BikeStore.Infrastructure.Handlers.Accounts {
       if (pIsLogin == true) {
         cUserDto pUser = await mUserService.GetUserAsync(xCommand.Email);
         var pUserPlaimsPrincipal = SetUserClaimsPrincipal(pUser.Role, pUser.Id.ToString(), pUser.Name, pUser.Surname);
-
-        mCache.SetUserClaims(pUser.Id, pUserPlaimsPrincipal);
+          mCache.SetUserClaims(pUser.Id, pUserPlaimsPrincipal);
+        mMessage.UserId = pUser.Id;
         await Task.CompletedTask;
       } else {
         mMessage.SetMesage("invalid credetial");

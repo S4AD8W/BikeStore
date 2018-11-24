@@ -42,7 +42,8 @@ namespace BikeStore.Controllers {
         return View();
       }
 
-      return RedirectToAction("Index", "Home");
+      return RedirectToAction("RegisterSuccess", "Account");
+
     }
 
     public IActionResult Login() => View();                //funkcja zwracająca widok logowania 
@@ -100,6 +101,8 @@ namespace BikeStore.Controllers {
       return View();
 
     }
+
+    public IActionResult RegisterSuccess() => View();
 
   }
 }
