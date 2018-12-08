@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BikeStore.Db\BikeStore.Db.csproj" />
     <ProjectReference Include="..\BikeStore.Infrastructure\BikeStore.Infrastructure.csproj" />
   </ItemGroup>
 

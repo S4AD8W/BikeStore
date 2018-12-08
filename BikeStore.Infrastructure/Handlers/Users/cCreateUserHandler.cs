@@ -29,6 +29,7 @@ namespace BikeStore.Infrastructure.Handlers.Users {
 
         pIsResult = await mUserService.RegisterAsync(pUserID, xCommand.Email, xCommand.Name, xCommand.Surname, xCommand.Password, "User");                   //Dodanie użytkownika 
 
+      //TDOO:utwórz nowoego taska i niech on sobie sam sobą zarządza 
         if (pIsResult) {                                      //sprawdzenie czy serwis użytkowników dodął nowego użytkownika
           new Thread(() => {                                   //utworzenie nowego wontku
             Thread.CurrentThread.IsBackground = true;

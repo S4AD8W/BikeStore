@@ -6,11 +6,10 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using BikeStore.Infrastructure.IoC;
-
+using BikeStore.Ddlayer.entities;
 namespace BikeStore {
   public class Startup {
 
@@ -56,7 +55,9 @@ namespace BikeStore {
         options.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
       });
 
-
+      services.AddEntityFrameworkSqlServer()
+                   .AddEntityFrameworkInMemoryDatabase()
+                   .AddDbContext<BikeStoreContext>();
 
       services.AddMemoryCache();
       services.AddSession();

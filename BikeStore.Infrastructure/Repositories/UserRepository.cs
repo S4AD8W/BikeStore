@@ -4,10 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BikeStore.core.Domain;
+using BikeStore.Ddlayer.entities;
 
 namespace BikeStore.Infrastructure.Repositories {
 
-  public class UserRepository : IUserRepository {
+  public class UserRepository : IUserRepository, ISqlRepository  {
+
+    public readonly BikeStoreContext mBikeStoreContext;
+
+    public UserRepository(BikeStoreContext xBikeStoreContext) {
+      mBikeStoreContext = xBikeStoreContext;
+    }
 
     private static readonly ISet<User> mUsers = new HashSet<User>{       //Przykładowe dane, w tym miejscu powina być warstwa dostepu do doanych 
             new User(new Guid(), "user3@email.com","secret","Jan", "Kwalski", "salt", "User" )
@@ -26,9 +33,8 @@ namespace BikeStore.Infrastructure.Repositories {
 
     public async Task Add(User xUser) {
 
-      mUsers.Add(xUser);
-      await Task.CompletedTask;
-
+       await mBikeStoreContext.AddAsync(xUser);
+      mBikeStoreContext.SaveChanges();
     }
 
     public async Task Update(User user) {

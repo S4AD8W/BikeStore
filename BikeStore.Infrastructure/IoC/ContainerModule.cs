@@ -24,6 +24,7 @@ namespace BikeStore.Infrastructure.IoC {
       builder.RegisterModule<cRepositoryModule>();
       builder.RegisterModule<CommandModule>();
       builder.RegisterModule<ServiceModule>();
+      builder.RegisterModule<SqlModule>();
       builder.RegisterModule(new SettingsModule(mConfiguration));
     }
 

@@ -5,9 +5,11 @@ VisualStudioVersion = 15.0.28010.2048
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BikeStore", "BikeStore\BikeStore.csproj", "{4601C8DC-1BCE-44EB-8D3D-AD7B90C36ED0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BikeStore.core", "BikeStore.core\BikeStore.core.csproj", "{BCF9DA38-D420-4EB2-A8FB-8AEFFF1F1706}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BikeStore.core", "BikeStore.core\BikeStore.core.csproj", "{BCF9DA38-D420-4EB2-A8FB-8AEFFF1F1706}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BikeStore.Infrastructure", "BikeStore.Infrastructure\BikeStore.Infrastructure.csproj", "{17A67AA2-6680-4CB6-8304-75B07C675654}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BikeStore.Infrastructure", "BikeStore.Infrastructure\BikeStore.Infrastructure.csproj", "{17A67AA2-6680-4CB6-8304-75B07C675654}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BikeStore.Db", "BikeStore.Db\BikeStore.Db.csproj", "{0F1E665D-3C25-49B8-8270-7EAB803D393B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{17A67AA2-6680-4CB6-8304-75B07C675654}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{17A67AA2-6680-4CB6-8304-75B07C675654}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{17A67AA2-6680-4CB6-8304-75B07C675654}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F1E665D-3C25-49B8-8270-7EAB803D393B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F1E665D-3C25-49B8-8270-7EAB803D393B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F1E665D-3C25-49B8-8270-7EAB803D393B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F1E665D-3C25-49B8-8270-7EAB803D393B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
