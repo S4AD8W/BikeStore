@@ -4,15 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BikeStore.core.Domain;
-using BikeStore.Ddlayer.entities;
+using BikeStore.Infrastructure.EF;
 
 namespace BikeStore.Infrastructure.Repositories {
 
   public class UserRepository : IUserRepository, ISqlRepository  {
 
-    public readonly BikeStoreContext mBikeStoreContext;
+    public readonly BikesStoreContext mBikeStoreContext;
 
-    public UserRepository(BikeStoreContext xBikeStoreContext) {
+    public UserRepository(BikesStoreContext xBikeStoreContext) {
       mBikeStoreContext = xBikeStoreContext;
     }
 

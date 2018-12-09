@@ -8,11 +8,11 @@
     <PackageReference Include="Autofac" Version="4.8.1" />
     <PackageReference Include="AutoMapper" Version="7.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.1.5" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="2.1.2" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\BikeStore.core\BikeStore.core.csproj" />
-    <ProjectReference Include="..\BikeStore.Db\BikeStore.Db.csproj" />
   </ItemGroup>
 
   <ItemGroup>
