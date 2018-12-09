@@ -25,7 +25,7 @@ namespace BikeStore.Infrastructure.Repositories {
 
 
     public async Task<User> Get(string xEmail)
-      => await Task.FromResult(mUsers.SingleOrDefault(x => x.Email == xEmail));
+      => await Task.FromResult(mBikeStoreContext.Users.SingleOrDefault(x => x.Email == xEmail));
 
     public Task<IEnumerable<User>> GetAll() {
       throw new NotImplementedException();
