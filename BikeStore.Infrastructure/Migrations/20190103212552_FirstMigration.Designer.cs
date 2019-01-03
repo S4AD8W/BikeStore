@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace BikeStore.Infrastructure.Migrations
 {
     [DbContext(typeof(BikesStoreContext))]
-    [Migration("20181209125943_Initial1")]
-    partial class Initial1
+    [Migration("20190103212552_FirstMigration")]
+    partial class FirstMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,24 @@ namespace BikeStore.Infrastructure.Migrations
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn)
                 .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
+
+            modelBuilder.Entity("BikeStore.core.Domain.ForkNotification", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Dscr");
+
+                    b.Property<byte[]>("ForksImage");
+
+                    b.Property<string>("ForksModel");
+
+                    b.Property<Guid>("UserId");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("ForksNotifications");
+                });
 
             modelBuilder.Entity("BikeStore.core.Domain.User", b =>
                 {

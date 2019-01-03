@@ -1,12 +1,29 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace BikeStore.Infrastructure.Migrations
 {
-    public partial class Initial1 : Migration
+    public partial class FirstMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "ForksNotifications",
+                columns: table => new
+                {
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    Dscr = table.Column<string>(nullable: true),
+                    UserId = table.Column<Guid>(nullable: false),
+                    ForksModel = table.Column<string>(nullable: true),
+                    ForksImage = table.Column<byte[]>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ForksNotifications", x => x.ID);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
@@ -30,6 +47,9 @@ namespace BikeStore.Infrastructure.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "ForksNotifications");
+
             migrationBuilder.DropTable(
                 name: "Users");
         }

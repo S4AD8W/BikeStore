@@ -19,6 +19,24 @@ namespace BikeStore.Infrastructure.Migrations
                 .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
+            modelBuilder.Entity("BikeStore.core.Domain.ForkNotification", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Dscr");
+
+                    b.Property<byte[]>("ForksImage");
+
+                    b.Property<string>("ForksModel");
+
+                    b.Property<Guid>("UserId");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("ForksNotifications");
+                });
+
             modelBuilder.Entity("BikeStore.core.Domain.User", b =>
                 {
                     b.Property<Guid>("Id")
