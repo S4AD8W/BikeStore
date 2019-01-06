@@ -62,7 +62,7 @@ namespace BikeStore {
       services.AddSession();
      
      services.AddEntityFrameworkNpgsql()
-               .AddDbContext<BikesStoreContext>()
+               .AddDbContext<BikeStoreContext>()
                .BuildServiceProvider();
 
       var builder = new ContainerBuilder();

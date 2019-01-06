@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace BikeStore.Infrastructure.EF {
-public class BikesStoreContext : DbContext{
+public class BikeStoreContext : DbContext{
 
     public DbSet<User> Users { get; set; }
     public DbSet<ForkNotification> ForksNotifications { get; set; }

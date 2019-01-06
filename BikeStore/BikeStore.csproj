@@ -19,4 +19,8 @@
     <ProjectReference Include="..\BikeStore.Infrastructure\BikeStore.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="View\" />
+  </ItemGroup>
+
 </Project>

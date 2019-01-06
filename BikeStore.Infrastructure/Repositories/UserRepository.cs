@@ -10,9 +10,9 @@ namespace BikeStore.Infrastructure.Repositories {
 
   public class UserRepository : IUserRepository, ISqlRepository  {
 
-    public readonly BikesStoreContext mBikeStoreContext;
+    public readonly BikeStoreContext mBikeStoreContext;
 
-    public UserRepository(BikesStoreContext xBikeStoreContext) {
+    public UserRepository(BikeStoreContext xBikeStoreContext) {
       mBikeStoreContext = xBikeStoreContext;
     }
 

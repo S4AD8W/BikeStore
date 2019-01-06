@@ -9,7 +9,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace BikeStore.Infrastructure.Migrations
 {
-    [DbContext(typeof(BikesStoreContext))]
+    [DbContext(typeof(BikeStoreContext))]
     [Migration("20190103212552_FirstMigration")]
     partial class FirstMigration
     {

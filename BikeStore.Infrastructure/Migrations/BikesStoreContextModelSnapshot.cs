@@ -8,7 +8,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace BikeStore.Infrastructure.Migrations
 {
-    [DbContext(typeof(BikesStoreContext))]
+    [DbContext(typeof(BikeStoreContext))]
     partial class BikesStoreContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
