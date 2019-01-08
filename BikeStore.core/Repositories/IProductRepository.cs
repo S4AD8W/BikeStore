@@ -5,11 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace BikeStore.core.Repositories {
-  interface IProductsRepository : IRepository {
+ public interface IProductsRepository : IRepository {
 
-    Task AddProduct(Product xProduct);
-    Task DeleteProduct(Product xProduct);
-    Task DeleteProduct(int xId);
-    Task<IEnumerable<Product>> GetAllProduct();
+    Task AddProductAsync(Product xProduct);
+    Task DeleteProductAsync(Product xProduct);
+    Task DeleteProductAsync(int xId);
+    Task<IEnumerable<Product>> GetAllProductAsync();
   }
 }
