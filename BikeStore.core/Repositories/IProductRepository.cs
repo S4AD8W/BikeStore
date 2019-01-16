@@ -1,6 +1,7 @@
 ﻿using BikeStore.core.Domain;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,5 +12,6 @@ namespace BikeStore.core.Repositories {
     Task DeleteProductAsync(Product xProduct);
     Task DeleteProductAsync(int xId);
     Task<IEnumerable<Product>> GetAllProductAsync();
+    IQueryable<Product> Product { get; }
   }
 }

@@ -4,6 +4,7 @@ using BikeStore.Infrastructure.EF;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,6 +15,8 @@ namespace BikeStore.Infrastructure.Repositories {
     public ProductsRpository(BikeStoreContext xDB) {
       mDB = xDB;
     }
+
+    public IQueryable<Product> Product => mDB.Product;
 
     public async Task AddProductAsync(Product xProduct) {
       await mDB.Product.AddAsync(xProduct);
