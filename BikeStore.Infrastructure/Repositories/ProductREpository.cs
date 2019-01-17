@@ -40,6 +40,11 @@ namespace BikeStore.Infrastructure.Repositories {
 
     }
 
+    public async Task EditProductAsync(Product xProduct) {
+      mDB.Entry(xProduct).State = EntityState.Modified; // edycja systemu profilowego w kontekscie bazy danych 
+      await mDB.SaveChangesAsync();
+    }
+
     public async Task<IEnumerable<Product>> GetAllProductAsync()
       => await mDB.Product.ToListAsync();
   }

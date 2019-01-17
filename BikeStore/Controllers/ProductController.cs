@@ -8,11 +8,13 @@ using BikeStore.Infrastructure.Commands;
 using BikeStore.ViewModels;
 using BikeStore.ViewsModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace BikeStore.Controllers {
   public class ProductController : BikeStoreControllerBaseController {
 
     private readonly IProductsRepository mProductsRepository;
+   
     public int mPageSize = 3;
     public ProductController(ICommandDispatcher xCommandDispatcher, IProductsRepository xProductsRepository) 
       : base(xCommandDispatcher) {
@@ -33,9 +35,44 @@ namespace BikeStore.Controllers {
         TotalItems = mProductsRepository.Product.Count()
       }
     });
-
+    [HttpGet]
     public IActionResult AddProduct()
       => View();
+    [HttpPost]
+    public async Task<IActionResult> AddProduct(Product xProduct) {
+
+      await mProductsRepository.AddProductAsync(xProduct);
+
+     return RedirectToAction("ListProduct");
+
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> EditProduct(int xId) {
+
+      Product pProduct = await mProductsRepository.Product.SingleOrDefaultAsync(x => x.ProductID == xId);
+
+      return View(pProduct);
+
+    }
+
+    [HttpPost]
+    public async Task<IActionResult>EditProduct(Product xProduct) {
+
+      await mProductsRepository.EditProductAsync(xProduct);
+
+      return RedirectToAction("ListProduct");
+    }
+
+    [HttpGet]
+    public async Task<IActionResult>DeleteProduct(int xId)    {
+
+      Product pProduct = await mProductsRepository.Product.SingleOrDefaultAsync(x => x.ProductID == xId);
+       await mProductsRepository.DeleteProductAsync(pProduct);
+
+      return RedirectToAction("ListProduct");
+
+    }
 
   }
 }
