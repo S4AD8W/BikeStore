@@ -10,6 +10,9 @@
 <p>
   <a asp-action="AddProduct">Create New</a>
 </p>
+<div id="categories" class="col-12">
+  @await Component.InvokeAsync("NvigationProduct")
+</div>
 <table class="table">
   <thead>
     <tr>
@@ -33,7 +36,7 @@
           @Html.DisplayFor(modelItem => item.Descryption)
         </td>
         <td>
-          @Html.DisplayFor(modelItem => item.Price)
+          @item.Price.ToString("c")
         </td>
         <td>
           @Html.DisplayFor(modelItem => item.Category)
@@ -48,7 +51,7 @@
   </tbody>
 </table>
 
-<div page-model="@Model.PagingInfo" page-action="List" page-classes-enabled="true"
+<div page-model="@Model.PagingInfo" page-action="ListProduct" page-classes-enabled="true"
        page-class="btn" page-class-normal="btn-secondary"
        page-class-selected="btn-primary" class="btn-group pull-right m-1">
   </div>

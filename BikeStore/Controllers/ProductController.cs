@@ -21,20 +21,23 @@ namespace BikeStore.Controllers {
       mProductsRepository = xProductsRepository;
     }
 
-    public async Task<IActionResult> ListProduct(int xProductPage = 1) 
-      => View(new ProductsListVM
-    {
-      Products = mProductsRepository.Product
+    public async Task<IActionResult> ListProduct(string category, int productpage = 1) 
+      => View(new ProductsListVM {
+        Products = mProductsRepository.Product
+                    .Where(p => category == null || p.Category == category)
                     .OrderBy(p => p.ProductID)
-                    .Skip((xProductPage- 1) * mPageSize)
+                    .Skip((productpage - 1) * mPageSize)
                     .Take(mPageSize),
-      PagingInfo = new PagingInfo
-      {
-        CurrentPage = xProductPage,
-        ItemsPerPage = mPageSize,
-        TotalItems = mProductsRepository.Product.Count()
-      }
-    });
+        PagingInfo = new PagingInfo {
+          CurrentPage = productpage,
+          ItemsPerPage = mPageSize,
+          TotalItems = category == null ?
+                        mProductsRepository.Product.Count() :
+                        mProductsRepository.Product.Where(e =>
+                            e.Category == category).Count()
+        },
+        CurrentCategory = category
+      });
     [HttpGet]
     public IActionResult AddProduct()
       => View();
