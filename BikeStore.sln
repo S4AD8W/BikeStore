@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BikeStore.core", "BikeStore
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BikeStore.Infrastructure", "BikeStore.Infrastructure\BikeStore.Infrastructure.csproj", "{17A67AA2-6680-4CB6-8304-75B07C675654}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BikeStoreTest", "XUnitTestProject1\BikeStoreTest.csproj", "{7A2EC8AD-F8D9-433E-93CF-0A81B2A28D83}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BikeStoreTest", "XUnitTestProject1\BikeStoreTest.csproj", "{7A2EC8AD-F8D9-433E-93CF-0A81B2A28D83}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseEntity", "DatabaseEntity\DatabaseEntity.csproj", "{7D9ECD25-B850-4501-B2BC-2CE444D88E26}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{7A2EC8AD-F8D9-433E-93CF-0A81B2A28D83}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7A2EC8AD-F8D9-433E-93CF-0A81B2A28D83}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7A2EC8AD-F8D9-433E-93CF-0A81B2A28D83}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D9ECD25-B850-4501-B2BC-2CE444D88E26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D9ECD25-B850-4501-B2BC-2CE444D88E26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D9ECD25-B850-4501-B2BC-2CE444D88E26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D9ECD25-B850-4501-B2BC-2CE444D88E26}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
