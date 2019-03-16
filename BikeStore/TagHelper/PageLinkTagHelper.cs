@@ -40,7 +40,7 @@ namespace BikeStore.TagHelpers {
       {
         TagBuilder tag = new TagBuilder("a");
         tag.Attributes["href"] = urlHelper.Action(PageAction,
-           new { productPage = i });
+           new { productpage = i });
         if (PageClassesEnabled)
         {
           tag.AddCssClass(PageClass);
