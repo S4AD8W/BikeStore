@@ -1,5 +1,4 @@
 ﻿using BikeStore.core.Domain;
-using DatabaseEntity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,8 +7,8 @@ using System.Text;
 namespace BikeStore.Infrastructure.EF {
 public class BikeStoreContext : DbContext{
 
-    public DbSet<UserEntity> Users { get; set; }
-    public DbSet<ForkNotificationEntity> ForksNotifications { get; set; }
+    public DbSet<User> Users { get; set; }
+    public DbSet<ForkNotification> ForksNotifications { get; set; }
     public DbSet<Product> Product { get; set; }
 
 

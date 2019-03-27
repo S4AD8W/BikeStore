@@ -13,7 +13,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BikeStore.core\BikeStore.core.csproj" />
-    <ProjectReference Include="..\DatabaseEntity\DatabaseEntity.csproj" />
   </ItemGroup>
 
 </Project>

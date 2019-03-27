@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-using AutoMapper;
 using BikeStore.core.Domain;
 using BikeStore.core.Repositories;
 using BikeStore.Infrastructure.EF;
@@ -12,26 +11,24 @@ namespace BikeStore.Infrastructure.Repositories {
   class ForksNotyficationRepository : IForksNotificationRepository {
 
     public readonly BikeStoreContext mDBContext;
-    public readonly IMapper mMapper;
-    public ForksNotyficationRepository(BikeStoreContext xDBContext, IMapper xMapper) {
+    public ForksNotyficationRepository(BikeStoreContext xDBContext) {
       mDBContext = xDBContext;
-      mMapper = xMapper;
     }
 
-    public Task AddForksNotification(ForkNotification xForkNotification) {
-      throw new NotImplementedException();
+    public async Task AddForksNotification(ForkNotification xForkNotification) {
+      await mDBContext.ForksNotifications.AddAsync(xForkNotification);
+      await mDBContext.SaveChangesAsync();
     }
-
     public Task DeleteForksNotyfication(int xId) {
       throw new NotImplementedException();
     }
 
-    public Task DeleteForksNotyfication(ForkNotification xForkNotification) {
-      throw new NotImplementedException();
+    public async Task DeleteForksNotyfication(ForkNotification xForkNotification) {
+      mDBContext.ForksNotifications.Remove(xForkNotification);
+     await mDBContext.SaveChangesAsync();
     }
 
-    public Task<IEnumerable<ForkNotification>> GetAllForksNotyfication() {
-      throw new NotImplementedException();
-    }
+    public async Task<IEnumerable<ForkNotification>> GetAllForksNotyfication()
+      => await mDBContext.ForksNotifications.ToListAsync();
   }
 }
