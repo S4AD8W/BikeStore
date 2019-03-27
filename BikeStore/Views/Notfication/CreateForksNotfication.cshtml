@@ -1,30 +1,37 @@
-﻿@model BikeStore.Infrastructure.Commands.ServiceNotfication.AddForkNotfication
+﻿@model BikeStore.ViewModels.Notfication.ForkNotificationVM
 
-<h4>ForksNotfication</h4>
+@{
+    ViewData["Title"] = "CreateForksNotfication";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>CreateForksNotfication</h2>
+
+<h4>ForkNotificationVM</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="CreateForksNotfication">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Dscr" class="control-label"></label>
-                <input asp-for="Dscr" class="form-control" />
-                <span asp-validation-for="Dscr" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ForksModel" class="control-label"></label>
-                <input asp-for="ForksModel" class="form-control" />
-                <span asp-validation-for="ForksModel" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ForksImage" class="control-label"></label>
-                <input asp-for="ForksImage" class="form-control" />
-                <span asp-validation-for="ForksImage" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </form>
+      <form asp-action="CreateForksNotfication" method="post" enctype="multipart/form-data">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+          <label asp-for="Dscr" class="control-label"></label>
+          <input asp-for="Dscr" class="form-control" />
+          <span asp-validation-for="Dscr" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+          <label asp-for="ForksModel" class="control-label"></label>
+          <input asp-for="ForksModel" class="form-control" />
+          <span asp-validation-for="ForksModel" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+         <label>Zdjecia</label>
+          <input   name="FormFile" type="file" multiple class="form-control" />
+         
+        </div>
+        <div class="form-group">
+          <input type="submit" value="Create" class="btn btn-default" />
+        </div>
+      </form>
     </div>
 </div>
 

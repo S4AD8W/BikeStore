@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using BikeStore.Infrastructure.Commands;
 using BikeStore.Infrastructure.Commands.ServiceNotfication;
+using BikeStore.ViewModels.Notfication;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BikeStore.Controllers {
@@ -21,9 +22,9 @@ namespace BikeStore.Controllers {
     public IActionResult CreateForksNotfication() =>  View();
 
     [HttpPost]
-    public async Task<IActionResult> CreateForksNotfication(AddForkNotfication xForkNotification) {
+    public async Task<IActionResult> CreateForksNotfication(ForkNotificationVM xForkNotification) {
 
-      await DispatchAsync(xForkNotification);
+      //await DispatchAsync(xForkNotification);
 
       return RedirectToAction("CreateForksNotfication");
 

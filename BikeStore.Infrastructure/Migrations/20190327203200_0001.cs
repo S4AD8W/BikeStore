@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace BikeStore.Infrastructure.Migrations
 {
-    public partial class FirstMigration : Migration
+    public partial class _0001 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -12,16 +12,31 @@ namespace BikeStore.Infrastructure.Migrations
                 name: "ForksNotifications",
                 columns: table => new
                 {
-                    ID = table.Column<int>(nullable: false)
+                    IdxForkNotfication = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     Dscr = table.Column<string>(nullable: true),
                     UserId = table.Column<Guid>(nullable: false),
-                    ForksModel = table.Column<string>(nullable: true),
-                    ForksImage = table.Column<byte[]>(nullable: true)
+                    ForksModel = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ForksNotifications", x => x.ID);
+                    table.PrimaryKey("PK_ForksNotifications", x => x.IdxForkNotfication);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Product",
+                columns: table => new
+                {
+                    ProductID = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    Name = table.Column<string>(nullable: true),
+                    Descryption = table.Column<string>(nullable: true),
+                    Price = table.Column<decimal>(nullable: false),
+                    Category = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Product", x => x.ProductID);
                 });
 
             migrationBuilder.CreateTable(
@@ -49,6 +64,9 @@ namespace BikeStore.Infrastructure.Migrations
         {
             migrationBuilder.DropTable(
                 name: "ForksNotifications");
+
+            migrationBuilder.DropTable(
+                name: "Product");
 
             migrationBuilder.DropTable(
                 name: "Users");
