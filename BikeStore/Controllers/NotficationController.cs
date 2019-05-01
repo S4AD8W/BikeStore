@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using BikeStore.Infrastructure.Commands;
-using BikeStore.Infrastructure.Commands.ServiceNotfication;
+using BikeStore.Infrastructure.Notification.Commands;
 using BikeStore.ViewModels.Notfication;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -12,8 +13,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace BikeStore.Controllers {
   public class NotficationController : BikeStoreControllerBaseController {
 
-    public NotficationController(ICommandDispatcher xCommandDispatcher)
-           : base(xCommandDispatcher) {
+    public NotficationController(ICommandDispatcher xCommandDispatcher, IMapper xMapper)
+           : base(xCommandDispatcher, xMapper) {
 
     }
 
@@ -24,13 +25,27 @@ namespace BikeStore.Controllers {
     public IActionResult CreateForksNotfication() => View();
 
     [HttpPost]
-    public async Task<IActionResult> CreateForksNotfication( ForkNotificationVM xNotification, ICollection<IFormFile> xfiles) {
+    public async Task<IActionResult> CreateForksNotfication(ForkNotificationVM xNotification, ICollection<IFormFile> xFiles) {
 
-      using (var memoryStream = new MemoryStream()) {
-        //await  xProfileSystem.FileStream.CopyToAsync(memoryStream);
-        //pProfileSystem.Image = memoryStream.ToArray();
+      CreateForkNotificationCommand pCommand;
+
+      pCommand = mMapper.Map<ForkNotificationVM, CreateForkNotificationCommand>(xNotification);
+
+      if (xFiles != null) {                                 //sprawdzenie czy lista plików niejest pusta i odczytanie zawatość 
+        pCommand.Images = new List<core.Domain.Notification.ForkNotificationImage>();
+        using (var memoryStream = new MemoryStream()) {
+          foreach (var pFile in xFiles) {
+            await pFile.CopyToAsync(memoryStream);
+            pCommand.Images.Add(new core.Domain.Notification.ForkNotificationImage {
+              Content = memoryStream.ToArray(),
+              Name = pFile.Name,
+              Size = pFile.Length
+            });
+          }
+        }
       }
-      //await DispatchAsync(xForkNotification);
+
+      await DispatchAsync(pCommand);
 
       return RedirectToAction("CreateForksNotfication");
 

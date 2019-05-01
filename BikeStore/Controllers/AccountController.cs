@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using BikeStore.Infrastructure.Commands;
 using BikeStore.Infrastructure.Commands.Accounts;
 using BikeStore.Infrastructure.Commands.Users;
@@ -18,8 +19,8 @@ namespace BikeStore.Controllers {
     private readonly IMessage mMessage;
     private readonly IMemoryCache mCache;
 
-    public AccountController(ICommandDispatcher xCommandDispatcher, IMessage xMessage, IMemoryCache xCache)
-           : base(xCommandDispatcher) {
+    public AccountController(ICommandDispatcher xCommandDispatcher, IMessage xMessage, IMemoryCache xCache, IMapper xMapper)
+           : base(xCommandDispatcher, xMapper) {
       mMessage = xMessage;
       mCache = xCache;
     }

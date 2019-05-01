@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using BikeStore.core.Domain;
 using BikeStore.core.Repositories;
 using BikeStore.Infrastructure.Commands;
@@ -16,8 +17,8 @@ namespace BikeStore.Controllers {
     private readonly IProductsRepository mProductsRepository;
    
     public int mPageSize = 3;
-    public ProductController(ICommandDispatcher xCommandDispatcher, IProductsRepository xProductsRepository) 
-      : base(xCommandDispatcher) {
+    public ProductController(ICommandDispatcher xCommandDispatcher, IProductsRepository xProductsRepository, IMapper xMapper) 
+      : base(xCommandDispatcher, xMapper) {
       mProductsRepository = xProductsRepository;
     }
 

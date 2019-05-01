@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using BikeStore.core.Domain;
-using BikeStore.Infrastructure.Commands.ServiceNotfication;
+using BikeStore.Infrastructure.Notification.Commands;
 
 namespace BikeStore.Infrastructure.Mappers{
 
@@ -14,8 +14,9 @@ namespace BikeStore.Infrastructure.Mappers{
     public static IMapper Initialize()
             => new MapperConfiguration(cfg =>
               {
-                cfg.CreateMap<User, cUserDto>();              //Przykładowa konfiguracja mapowania obiektu z UserDto na User
-                cfg.CreateMap<AddForkNotfication, ForkNotification>();
+                cfg.CreateMap<User, cUserDto>();            //Przykładowa konfiguracja mapowania obiektu z UserDto na User
+                cfg.ValidateInlineMaps = false;
+                
             })
             .CreateMapper();
 

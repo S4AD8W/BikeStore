@@ -19,7 +19,7 @@ namespace BikeStore.Infrastructure.Migrations
                 .HasAnnotation("ProductVersion", "2.1.8-servicing-32085")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
-            modelBuilder.Entity("BikeStore.core.Domain.ForkNotification", b =>
+            modelBuilder.Entity("BikeStore.core.Domain.Notification.ForkNotification", b =>
                 {
                     b.Property<int>("IdxForkNotfication")
                         .ValueGeneratedOnAdd();
@@ -30,9 +30,35 @@ namespace BikeStore.Infrastructure.Migrations
 
                     b.Property<Guid>("UserId");
 
+                    b.Property<int?>("UserIdxUser");
+
                     b.HasKey("IdxForkNotfication");
 
+                    b.HasIndex("UserIdxUser");
+
                     b.ToTable("ForksNotifications");
+                });
+
+            modelBuilder.Entity("BikeStore.core.Domain.Notification.ForkNotificationImage", b =>
+                {
+                    b.Property<int>("IdxForkNotoificationImage")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<byte[]>("Content");
+
+                    b.Property<int?>("ForkNotificationIdxForkNotfication");
+
+                    b.Property<int>("IdxForkNotification");
+
+                    b.Property<string>("Name");
+
+                    b.Property<long>("Size");
+
+                    b.HasKey("IdxForkNotoificationImage");
+
+                    b.HasIndex("ForkNotificationIdxForkNotfication");
+
+                    b.ToTable("ForkNotficationImages");
                 });
 
             modelBuilder.Entity("BikeStore.core.Domain.Product", b =>
@@ -55,12 +81,14 @@ namespace BikeStore.Infrastructure.Migrations
 
             modelBuilder.Entity("BikeStore.core.Domain.User", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("IdxUser")
                         .ValueGeneratedOnAdd();
 
                     b.Property<DateTime>("CreatedAt");
 
                     b.Property<string>("Email");
+
+                    b.Property<Guid>("Id");
 
                     b.Property<bool>("IsEmailConfirm");
 
@@ -76,9 +104,23 @@ namespace BikeStore.Infrastructure.Migrations
 
                     b.Property<DateTime>("UpdatedAt");
 
-                    b.HasKey("Id");
+                    b.HasKey("IdxUser");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("BikeStore.core.Domain.Notification.ForkNotification", b =>
+                {
+                    b.HasOne("BikeStore.core.Domain.User")
+                        .WithMany("ForkNotifications")
+                        .HasForeignKey("UserIdxUser");
+                });
+
+            modelBuilder.Entity("BikeStore.core.Domain.Notification.ForkNotificationImage", b =>
+                {
+                    b.HasOne("BikeStore.core.Domain.Notification.ForkNotification")
+                        .WithMany("ForkNotficationImages")
+                        .HasForeignKey("ForkNotificationIdxForkNotfication");
                 });
 #pragma warning restore 612, 618
         }

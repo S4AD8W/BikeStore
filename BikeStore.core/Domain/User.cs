@@ -1,12 +1,15 @@
-﻿using System;
+﻿using BikeStore.core.Domain.Notification;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace BikeStore.core.Domain {
  
 
   public class User {
-
+    [Key]
+    public int IdxUser { get; private set; }
     public DateTime CreatedAt { get; protected set; }
     public string Email { get; protected set; }
     public Guid Id { get; protected set; }
@@ -18,7 +21,7 @@ namespace BikeStore.core.Domain {
     public string Surname { get; protected set; }
     public DateTime UpdatedAt { get; protected set; }
 
-
+    public ICollection<ForkNotification> ForkNotifications { get; set; } 
     protected User() {
 
     }

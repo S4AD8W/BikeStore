@@ -11,8 +11,8 @@ namespace BikeStore.ViewModels.Notfication {
     [DisplayName("Opis")]
     public string Dscr { get; set; }
     [DisplayName("ModelAmrtyzatora")]
-    public string ForksModel { get; set; }
+    public string ForkModel { get; set; }
 
-    Collection<IFormFile> FormFile { get; set; }
+    
   }
 }
