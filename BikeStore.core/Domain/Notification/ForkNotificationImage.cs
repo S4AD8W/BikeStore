@@ -9,8 +9,8 @@ namespace BikeStore.core.Domain.Notification {
   public  class ForkNotificationImage {
     [Key]
     public int IdxForkNotoificationImage { get; set; }
-    [ForeignKey("IdxForkNotification")]
-    public int IdxForkNotification { get; set; }
+    [ForeignKey("IdxForkNotfication")]
+    public int IdxForkNotfication { get; set; }
     public string Name { get; set; }
     public long Size { get; set; }
     public byte[] Content { get; set; }

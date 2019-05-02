@@ -21,7 +21,7 @@ namespace BikeStore.Infrastructure.Notification.Services {
       mMapper = xMapper;
     }
 
-    public async Task<bool> AddForkNotificationAsync(CreateForkNotificationCommand xCommand) {
+    public async Task<(bool IsSucces, Guid ForkNotification_Guid)> AddForkNotificationAsync(CreateForkNotificationCommand xCommand) {
 
       ForkNotification pForkNotyification = mMapper.Map<CreateForkNotificationCommand, ForkNotification>(xCommand);
       pForkNotyification = await mForkNotyificationRepository.AddForksNotificationAsync(pForkNotyification);
@@ -32,14 +32,14 @@ namespace BikeStore.Infrastructure.Notification.Services {
        
       }
 
-      return true;
+      return (IsSucces:true, ForkNotification_Guid: pForkNotyification.Guid);
 
     }
 
     private async Task AddImagesForkNotyfication(IEnumerable<ForkNotificationImage> xImages, int xIdxForkNotification) {
 
       foreach (var pImages in xImages) {
-        pImages.IdxForkNotification = xIdxForkNotification;
+        pImages.IdxForkNotfication = xIdxForkNotification;
         await mForkNotyificationImagesRepository.AddAsync(pImages);
       }
     }

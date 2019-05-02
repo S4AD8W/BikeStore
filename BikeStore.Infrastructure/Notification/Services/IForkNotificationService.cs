@@ -7,6 +7,6 @@ using System.Threading.Tasks;
 
 namespace BikeStore.Infrastructure.Notification.Services {
   public interface IForkNotificationService : IService {
-    Task<bool> AddForkNotificationAsync(CreateForkNotificationCommand xCommand);
+    Task<(bool IsSucces, Guid ForkNotification_Guid)> AddForkNotificationAsync(CreateForkNotificationCommand xCommand);
   }
 }

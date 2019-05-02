@@ -25,10 +25,10 @@ namespace BikeStore.Infrastructure.Handlers.Accounts {
       string pNewPassword;
 
       pNewPassword = await mUserService.ResetPassword(xCommand.Email); //wywołanie serwisu aby zmienić chasło 
-                                                                       //TODO:Zrobić globalne miesce z pulą wąntków żeby dodawać zadanie
+                                                                       
       if (pNewPassword != null) {                           //Sprawdzenie czy serwis zmienił hasło 
 
-        new Thread(() => {                                  //utworzenie nowego wontku aby wysłać emaila z nowym hasłem 
+        new Task(() => {                                  //utworzenie nowego wontku aby wysłać emaila z nowym hasłem 
           Thread.CurrentThread.IsBackground = true;
           mEmailService.SendNewPasswordToUser(xCommand.Email, pNewPassword); //wywołanie serwisu aby wysłać email 
         }).Start();

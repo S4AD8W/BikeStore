@@ -27,7 +27,7 @@ namespace BikeStore.Infrastructure.Services.Emails {
       bool pIsSend;
 
       pIsSend = false;
-      pSubiect = "Oknowid_WebStore Potwierdz adres email";
+      pSubiect = "BikeStore Potwierdz adres email";
       pBody = $"Prosze potwierdż swój adres email <a href='Http://{mHttpContextAccessor.HttpContext.Request.Host.Host}/{xUserGuid}'>link</a> ";
 
       pIsSend = mEmailClient.SendEmail(pSubiect, pBody, xSendTo);
@@ -51,5 +51,19 @@ namespace BikeStore.Infrastructure.Services.Emails {
 
     }
 
+    public async Task SendForkTrackingId(string xSendTo, Guid xForkNotyficationGuid) {
+      string pSubiect;
+      string pBody;
+      bool pIsSend;
+      //TODO: Dodać nazwe kontlolera i akcję 
+      pIsSend = false;
+      pSubiect = "BikeStore nowe zgłoszenie";
+      pBody = $"Twoje zgłoszenie zostało pomyślnie dodane status zgłoszenia możesz siledzić: <a href='Http://{mHttpContextAccessor.HttpContext.Request.Host.Host}/{xForkNotyficationGuid}'>link</a> ";
+
+      pIsSend = mEmailClient.SendEmail(pSubiect, pBody, xSendTo);
+
+      
+     
+    }
   }
 }

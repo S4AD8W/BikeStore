@@ -37,7 +37,7 @@ namespace BikeStore.Infrastructure.Handlers.Accounts {
       pIsLogin = await mUserService.LoginAsync(xCommand.Email, xCommand.Password);
       if (pIsLogin == true) {
         cUserDto pUser = await mUserService.GetUserAsync(xCommand.Email);
-        var pUserPlaimsPrincipal = SetUserClaimsPrincipal(pUser.Role, pUser.Id.ToString(), pUser.Name, pUser.Surname);
+        var pUserPlaimsPrincipal = SetUserClaimsPrincipal(pUser.Role, pUser.Id.ToString(), pUser.Name, pUser.Surname, pUser.IdxUser, pUser.Email);
         mCache.SetUserClaims(pUser.Id, pUserPlaimsPrincipal);
         mMessage.UserId = pUser.Id;
         await Task.CompletedTask;
@@ -49,7 +49,7 @@ namespace BikeStore.Infrastructure.Handlers.Accounts {
       return new CommandResult();
     }
 
-    ClaimsPrincipal SetUserClaimsPrincipal(string xUserRole, string xUserId, string xUserName, string xUserSurname) {
+    ClaimsPrincipal SetUserClaimsPrincipal(string xUserRole, string xUserId, string xUserName, string xUserSurname, int xIdxUser, string xEmail) {
 
 
       var claims = new List<Claim>
@@ -58,6 +58,8 @@ namespace BikeStore.Infrastructure.Handlers.Accounts {
                     new Claim(ClaimTypes.Role, xUserRole),
                     new Claim(ClaimTypes.GivenName, xUserName),
                     new Claim(ClaimTypes.Surname, xUserSurname),
+                    new Claim(ClaimTypes.Email, xEmail),
+                    new Claim(CustomClaim.IdxUser, xIdxUser.ToString())
                 };
 
       var userIdentity = new ClaimsIdentity(claims, "login");

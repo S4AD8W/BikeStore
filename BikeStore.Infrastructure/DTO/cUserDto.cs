@@ -17,7 +17,7 @@ namespace BikeStore.Infrastructure.DTO{
     public string Surname { get; set; }
     public DateTime UpdatedAt { get; set; }
     public string Username { get; set; }
-
+    public int IdxUser { get;  set; }
   }
 
 }

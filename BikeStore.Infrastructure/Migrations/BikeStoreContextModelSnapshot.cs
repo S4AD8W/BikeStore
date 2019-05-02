@@ -24,9 +24,15 @@ namespace BikeStore.Infrastructure.Migrations
                     b.Property<int>("IdxForkNotfication")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<DateTime>("CreateAt");
+
                     b.Property<string>("Dscr");
 
                     b.Property<string>("ForksModel");
+
+                    b.Property<Guid>("Guid");
+
+                    b.Property<DateTime>("UpdateAt");
 
                     b.Property<Guid>("UserId");
 
@@ -46,9 +52,7 @@ namespace BikeStore.Infrastructure.Migrations
 
                     b.Property<byte[]>("Content");
 
-                    b.Property<int?>("ForkNotificationIdxForkNotfication");
-
-                    b.Property<int>("IdxForkNotification");
+                    b.Property<int>("IdxForkNotfication");
 
                     b.Property<string>("Name");
 
@@ -56,7 +60,7 @@ namespace BikeStore.Infrastructure.Migrations
 
                     b.HasKey("IdxForkNotoificationImage");
 
-                    b.HasIndex("ForkNotificationIdxForkNotfication");
+                    b.HasIndex("IdxForkNotfication");
 
                     b.ToTable("ForkNotficationImages");
                 });
@@ -120,7 +124,8 @@ namespace BikeStore.Infrastructure.Migrations
                 {
                     b.HasOne("BikeStore.core.Domain.Notification.ForkNotification")
                         .WithMany("ForkNotficationImages")
-                        .HasForeignKey("ForkNotificationIdxForkNotfication");
+                        .HasForeignKey("IdxForkNotfication")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

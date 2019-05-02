@@ -38,7 +38,7 @@ namespace BikeStore.Controllers {
             await pFile.CopyToAsync(memoryStream);
             pCommand.Images.Add(new core.Domain.Notification.ForkNotificationImage {
               Content = memoryStream.ToArray(),
-              Name = pFile.Name,
+              Name = pFile.FileName,
               Size = pFile.Length
             });
           }

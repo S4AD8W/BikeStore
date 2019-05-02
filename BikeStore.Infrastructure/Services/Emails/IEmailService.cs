@@ -9,5 +9,6 @@ namespace BikeStore.Infrastructure.Services.Emails {
 
     bool SendUserAccountConfirmation(  string xSendTo, Guid xUserGuid);
     Task SendNewPasswordToUser(string xSendTo, string NewPassword);
+    Task SendForkTrackingId(string xSendTo, Guid xForkNotyficationGuid);
   }
 }

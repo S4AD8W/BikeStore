@@ -18,17 +18,16 @@ namespace BikeStore.Infrastructure.Extensions {
   public static  class CacheExtensions {
     //klasa rozszerzająca interfejs zapisu w pamięci aplikacji 
 
-   
-    public static void SetUserClaims(this IMemoryCache xCache, Guid xUserID, ClaimsPrincipal  xUserClaimsPrincipal) //funkcja zapisująca token w pamieci na 10 s
-      => xCache.Set(GetUuserClaims(xUserID), xUserClaimsPrincipal, TimeSpan.FromSeconds(10));
+
+    public static void SetUserClaims(this IMemoryCache xCache, Guid xUserID, ClaimsPrincipal xUserClaimsPrincipal) //funkcja zapisująca token w pamieci na 10 s
+       => xCache.Set(xUserID, xUserClaimsPrincipal, TimeSpan.FromSeconds(10));
 
     public static ClaimsPrincipal GetUserClaimsPrincipal(this IMemoryCache xCache, Guid xUserID)
-      => xCache.Get<ClaimsPrincipal>(GetUuserClaims(xUserID));          //funkcja odczytująca token 
+      => xCache.Get<ClaimsPrincipal>(xUserID);          //funkcja odczytująca token 
 
 
-    private static string GetUuserClaims(Guid xUserID)
-      => $"{xUserID}-jwt";
     
+
 
   }
 }
