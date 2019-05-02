@@ -11,6 +11,7 @@ using BikeStore.Infrastructure.Extensions;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using BikeStore.Infrastructure.Commands.Users;
+using BikeStore.Infrastructure.Types;
 
 namespace BikeStore.Infrastructure.Handlers.Accounts {
   class cLoginHandler : ICommandHandler<LogIn> {
@@ -29,7 +30,7 @@ namespace BikeStore.Infrastructure.Handlers.Accounts {
 
     }
 
-    public async Task HandleAsync(LogIn xCommand) {
+    public async Task<CommandResult> HandleAsync(LogIn xCommand) {
 
       bool pIsLogin;
 
@@ -37,32 +38,33 @@ namespace BikeStore.Infrastructure.Handlers.Accounts {
       if (pIsLogin == true) {
         cUserDto pUser = await mUserService.GetUserAsync(xCommand.Email);
         var pUserPlaimsPrincipal = SetUserClaimsPrincipal(pUser.Role, pUser.Id.ToString(), pUser.Name, pUser.Surname);
-          mCache.SetUserClaims(pUser.Id, pUserPlaimsPrincipal);
+        mCache.SetUserClaims(pUser.Id, pUserPlaimsPrincipal);
         mMessage.UserId = pUser.Id;
         await Task.CompletedTask;
       } else {
         mMessage.SetMesage("invalid credetial");
         await Task.CompletedTask;
+
       }
+      return new CommandResult();
+    }
+
+    ClaimsPrincipal SetUserClaimsPrincipal(string xUserRole, string xUserId, string xUserName, string xUserSurname) {
 
 
-      ClaimsPrincipal SetUserClaimsPrincipal(string xUserRole, string xUserId, string xUserName, string xUserSurname) {
-
-
-        var claims = new List<Claim>
-                {
+      var claims = new List<Claim>
+              {
                     new Claim(ClaimTypes.Name, xUserId),
                     new Claim(ClaimTypes.Role, xUserRole),
                     new Claim(ClaimTypes.GivenName, xUserName),
                     new Claim(ClaimTypes.Surname, xUserSurname),
                 };
 
-        var userIdentity = new ClaimsIdentity(claims, "login");
+      var userIdentity = new ClaimsIdentity(claims, "login");
 
-        return new ClaimsPrincipal(userIdentity);
-
-      }
+      return new ClaimsPrincipal(userIdentity);
 
     }
+
   }
 }

@@ -1,13 +1,14 @@
 ﻿using BikeStore.Infrastructure.Commands;
 using BikeStore.Infrastructure.Notification.Commands;
 using BikeStore.Infrastructure.Notification.Services;
+using BikeStore.Infrastructure.Types;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace BikeStore.Infrastructure.Notification.Handlers {
- public class CreateForkNotificationHandler : ICommandHandler<CreateForkNotificationCommand> {
+  public class CreateForkNotificationHandler : ICommandHandler<CreateForkNotificationCommand> {
 
     private readonly IForkNotificationService mForkNotyificationServices;
 
@@ -15,11 +16,15 @@ namespace BikeStore.Infrastructure.Notification.Handlers {
       mForkNotyificationServices = xForkNotificationService;
     }
 
-    public async Task HandleAsync(CreateForkNotificationCommand xCommand) {
+    public async Task<CommandResult> HandleAsync(CreateForkNotificationCommand xCommand) {
+
 
       await mForkNotyificationServices.AddForkNotificationAsync(xCommand);
+
+      return new CommandResult();
+
     }
-
-
   }
 }
+
+

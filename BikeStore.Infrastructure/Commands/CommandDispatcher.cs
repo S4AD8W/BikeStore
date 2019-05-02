@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using BikeStore.Infrastructure.Types;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -15,7 +16,7 @@ namespace BikeStore.Infrastructure.Commands {
 
     }
 
-    public async Task DispatchAsync<T>(T command) where T : ICommand {
+    public async Task<CommandResult> DispatchAsync<T>(T command) where T : ICommand {
       //funkcja odpowiadajca za wywołanie kommendy 
 
       if (command == null) {                                //sprawdzenie czy komenda nie jest pusta 
@@ -26,8 +27,10 @@ namespace BikeStore.Infrastructure.Commands {
 
       var handler = mContext.Resolve<ICommandHandler<T>>(); //rozpoznanie typu komendy ktura zostąła wstrzyknieta przez IoC
 
-      await handler.HandleAsync(command);                   //wywołanie komendy 
+      return await handler.HandleAsync(command);                   //wywołanie komendy 
 
     }
+
   }
+
 }
