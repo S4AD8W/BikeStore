@@ -1723,8 +1723,4 @@
     <None Include="wwwroot\SbAdmin2\vendor\jquery\jquery.slim.min.map" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="ViewsComponent\Information\" />
-  </ItemGroup>
-
 </Project>
