@@ -1724,7 +1724,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\Admin\prlNotification\" />
+    <Folder Include="Areas\Admin\Data\" />
   </ItemGroup>
 
 </Project>

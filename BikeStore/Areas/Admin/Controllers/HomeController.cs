@@ -4,13 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BikeStore.Controllers {
-  public class AdminController : Controller {
-
+namespace BikeStore.Areas.Admin.Controllers {
+  [Area("Admin")]
+  public class HomeController : Controller {
     public IActionResult Index() {
       return View();
     }
-
-
   }
 }
