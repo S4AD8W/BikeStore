@@ -1723,4 +1723,8 @@
     <None Include="wwwroot\SbAdmin2\vendor\jquery\jquery.slim.min.map" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\Admin\prlNotification\" />
+  </ItemGroup>
+
 </Project>
