@@ -2,12 +2,12 @@
 @model BikeStore.ViewModels.Information.NotificationCartInfoVM;
 <!-- Fork Notywication-->
 <!-- Earnings (Monthly) Card Example -->
-@*<div class="col-xl-3 col-md-6 mb-4">
+<div class="col-xl-3 col-md-6 mb-4">
   <div class="card border-left-primary shadow h-100 py-2">
     <div class="card-body">
       <div class="row no-gutters align-items-center">
         <div class="col mr-2">
-          <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Nowych zgłoszeń artyzatorów</div>
+          <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Nowych zgłoszeń</div>
           <div class="h5 mb-0 font-weight-bold text-gray-800">@Model.ForkNotyficationCount</div>
         </div>
         <div class="col-auto">
@@ -16,8 +16,8 @@
       </div>
     </div>
   </div>
-</div>*@
-<div class="col-xl-3 col-md-6 mb-4">
+</div>
+@*<div class="col-xl-3 col-md-6 mb-4">
   <div class="card card-primary card-inverse">
     <div class="card-header card-primary">
       <div class="row">
@@ -25,20 +25,20 @@
           <i class="fa fa-comments fa-5x"></i>
         </div>
         <div class="col-xs-9 text-xs-right">
-          <div class="huge">26</div>
-          <div>New Comments!</div>
+          <div class="huge">@Model.ForkNotyficationCount</div>
+          <div>Nowych zgłoszeń </div>
         </div>
       </div>
     </div>
     <div class="card-footer card-default">
-      <a href="javascript:;">
-        <span class="pull-xs-left">View Details</span>
+      <a asp-action="Fork" asp-area="Admin" asp-controller="Notification">
+        <span class="pull-xs-left">Szczeguły</span>
         <span class="pull-xs-right"><i class="fa fa-arrow-circle-right"></i></span>
         <div class="clearfix"></div>
       </a>
     </div>
   </div>
-</div>
+</div>*@
 
 <!-- Earnings (Monthly) Card Example -->
 <div class="col-xl-3 col-md-6 mb-4">
