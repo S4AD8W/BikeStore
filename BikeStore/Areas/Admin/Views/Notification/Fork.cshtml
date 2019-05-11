@@ -7,7 +7,48 @@
 
 @model BikeStore.Areas.Admin.ViewModel.AllForkVM;
 
+<ul class="nav">
+  <li class="nav-item">
 
+    <a class="nav-link active" href="#">
+      <i class="fas fa-list"></i>
+      Zgłoszenia
+    </a>
+  </li>
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" id="User-Notification" data-toggle="dropdown"
+       aria-haspopup="true" aria-expanded="false">
+      <i class="fas fa-user"></i>
+    </a>
+    <div class="dropdown-menu dropdown-menu-right dropdown-default"
+         aria-labelledby="User-Notification">
+      <a class="dropdown-item" href="#">
+        <i class="fas fa-list"></i>
+        Zgłoszenia
+      </a>
+    </div>
+  <li class="nav-item">
+    <a class="nav-link" href="#">Link</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#">Link</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link disabled" href="#">Disabled</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link active" href="#">Active</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#">Link</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#">Link</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link disabled" href="#">Disabled</a>
+  </li>
+</ul>
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
   <div class="card-header py-3">
@@ -18,12 +59,12 @@
       <div class="col-sm-12 col-md-6">
         <div class="dropdown">
           <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-           Wybierz status 
+            Wybierz status
           </button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <a class="dropdown-item" asp-action="fork" asp-route-xStatus="@NotificationStatusEnum.AtWork">Realizowane</a>
             <a class="dropdown-item" asp-action="fork" asp-route-xStatus="@NotificationStatusEnum.Finish">Zakończone</a>
-            <a class="dropdown-item" asp-action="fork" asp-route-xStatus="@NotificationStatusEnum.New" >Nowe</a>
+            <a class="dropdown-item" asp-action="fork" asp-route-xStatus="@NotificationStatusEnum.New">Nowe</a>
           </div>
         </div>
 

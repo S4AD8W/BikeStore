@@ -4,7 +4,11 @@
 
 @{
   ViewData["Title"] = "prlUserLogin";
-  
+
 }
 
-<li><a asp-action="LogOut" asp-controller="Account">Logout</a></li>
+<a asp-action="LogOut" asp-controller="Account" class="dropdown-item">Logout</a>
+<a asp-action="UserAccount" asp-controller="User" class="dropdown-item">Konto</a>
+<a class="dropdown-item" href="#">Action</a>
+<a class="dropdown-item" href="#">Another action</a>
+<a class="dropdown-item" href="#">Something else here</a>

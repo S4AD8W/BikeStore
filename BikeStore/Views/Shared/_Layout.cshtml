@@ -4,55 +4,110 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>@ViewData["Title"] - BikeStore</title>
-  <script src="~/lib/jquery/dist/jquery.min.js"></script>
   <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
   <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
-  <script src="~/lib/Jquery/dist/jquery.slim.min.js"></script>
   <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-  <link rel=" stylesheet" href="~/lib/bootstrap/scss/_carousel.scss" />
+   <link rel="stylesheet" href="~/lib/bootstrap/scss/_carousel.scss" />
   <script src="~/lib/popper.js/dist/popper.min.js"></script>
   <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
-
+  <link href="~/SbAdmin2/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-  <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-    <a asp-action="Index" asp-controller="Home">BikeStor</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+  @*<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+      <a asp-action="Index" asp-controller="Home">BikeStor</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a asp-action="CreateForksNotfication" asp-controller="Notfication" class="nav-link">Serwis Amortyzatora</a>
+          </li>
+          <li class="nav-item">
+            <a asp-action="Index" asp-controller="Admin" class="nav-link">Administracja</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Dropdown
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" href="#">Disabled</a>
+          </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+
+        </ul>
+
+      </div>
+    </nav>*@
+
+  <!--Navbar -->
+  <nav class="mb-1 navbar navbar-expand-lg navbar-dark " style="background-color:#2bbbad!important;">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-333"
+            aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent-333">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="#">
+            Home
+            <span class="sr-only">(current)</span>
+          </a>
         </li>
         <li class="nav-item">
-          <a asp-action="CreateForksNotfication" asp-controller="Notfication" class="nav-link">Serwis Amortyzatora</a>
+          <a class="nav-link" href="#">Features</a>
         </li>
         <li class="nav-item">
-          <a asp-action="Index" asp-controller="Admin" class="nav-link">Administracja</a>
+          <a class="nav-link" href="#">Pricing</a>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown"
+             aria-haspopup="true" aria-expanded="false">
             Dropdown
           </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Something else here</a>
+          <div class="dropdown-menu dropdown-default" aria-labelledby="navbarDropdownMenuLink-333">
+
           </div>
         </li>
+      </ul>
+      <ul class="navbar-nav ml-auto nav-flex-icons">
         <li class="nav-item">
-          <a class="nav-link disabled" href="#">Disabled</a>
+          <a class="nav-link waves-effect waves-light" href="https://www.facebook.com/igor.wieczorek.14">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link waves-effect waves-light" href="https://github.com/S4AD8W">
+            <i class="fab fa-github"></i>
+          </a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown"
+             aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-user"></i>
+          </a>
+          <div class="dropdown-menu dropdown-menu-right dropdown-default"
+               aria-labelledby="navbarDropdownMenuLink-333">
+            @await Component.InvokeAsync(nameof(BikeStore.ViewsComponent.UserViewsManager))
+          </div>
         </li>
       </ul>
-      <ul class="nav navbar-nav navbar-right">
-        @await Component.InvokeAsync(nameof(BikeStore.ViewsComponent.UserViewsManager))
-      </ul>
-
     </div>
   </nav>
+  <!--/.Navbar -->
 
   <div class="container body-content">
     @RenderBody()
@@ -63,12 +118,22 @@
     </footer>
   </div>
   <!-- Placed at the end of the document so the pages load faster -->
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-  <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
-  <script src="../../assets/js/vendor/popper.min.js"></script>
-  <script src="../../dist/js/bootstrap.min.js"></script>
-  <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
-  <script src="../../assets/js/vendor/holder.min.js"></script>
+  <!-- Bootstrap core JavaScript-->
+  <script src="~/SbAdmin2/vendor/jquery/jquery.min.js"></script>
+  <script src="~/SbAdmin2/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="~/SbAdmin2/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="~/SbAdmin2/js/sb-admin-2.min.js"></script>
+
+  <!-- Page level plugins -->
+  <script src="~/SbAdmin2/vendor/chart.js/Chart.min.js"></script>
+
+  <!-- Page level custom scripts -->
+  <script src="~/SbAdmin2/js/demo/chart-area-demo.js"></script>
+  <script src="~/SbAdmin2/js/demo/chart-pie-demo.js"></script>
 </body>
 </html>
 
