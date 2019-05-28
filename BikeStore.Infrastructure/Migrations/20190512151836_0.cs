@@ -53,11 +53,13 @@ namespace BikeStore.Infrastructure.Migrations
                     Guid = table.Column<Guid>(nullable: false),
                     CreateAt = table.Column<DateTime>(nullable: false),
                     UpdateAt = table.Column<DateTime>(nullable: false),
+                    NotificationStatus = table.Column<int>(nullable: false),
                     IdxForkNotfication = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     Dscr = table.Column<string>(nullable: true),
                     UserId = table.Column<Guid>(nullable: false),
                     ForksModel = table.Column<string>(nullable: true),
+                    IdxUser = table.Column<int>(nullable: false),
                     UserIdxUser = table.Column<int>(nullable: true)
                 },
                 constraints: table =>

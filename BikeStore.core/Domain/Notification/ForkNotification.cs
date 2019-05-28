@@ -3,6 +3,7 @@ using BikeStore.core.Type;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace BikeStore.core.Domain.Notification {
@@ -13,7 +14,8 @@ namespace BikeStore.core.Domain.Notification {
     public string Dscr { get; set; }
     public Guid UserId { get; set; }
     public string ForksModel { get; set; }
-  
+    [ForeignKey("IdxUser")]
+    public int IdxUser { get; set; }
     
 
 

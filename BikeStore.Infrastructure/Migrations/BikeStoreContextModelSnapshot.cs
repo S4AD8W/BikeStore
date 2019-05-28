@@ -32,6 +32,8 @@ namespace BikeStore.Infrastructure.Migrations
 
                     b.Property<Guid>("Guid");
 
+                    b.Property<int>("IdxUser");
+
                     b.Property<int>("NotificationStatus");
 
                     b.Property<DateTime>("UpdateAt");

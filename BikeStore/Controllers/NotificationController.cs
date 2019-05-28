@@ -11,9 +11,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BikeStore.Controllers {
-  public class NotficationController : BikeStoreControllerBaseController {
+  public class NotificationController : BikeStoreControllerBaseController {
 
-    public NotficationController(ICommandDispatcher xCommandDispatcher, IMapper xMapper)
+    public NotificationController(ICommandDispatcher xCommandDispatcher, IMapper xMapper)
            : base(xCommandDispatcher, xMapper) {
 
     }
@@ -46,7 +46,9 @@ namespace BikeStore.Controllers {
       }
 
       await DispatchAsync(pCommand);
-
+      if (CommandResult.IsSuccess) {
+        return RedirectToAction("Index", "Home");
+      }
       return RedirectToAction("CreateForksNotfication");
 
     }

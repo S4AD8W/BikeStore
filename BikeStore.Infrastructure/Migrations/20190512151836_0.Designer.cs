@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace BikeStore.Infrastructure.Migrations
 {
     [DbContext(typeof(BikeStoreContext))]
-    [Migration("20190502193506_1")]
-    partial class _1
+    [Migration("20190512151836_0")]
+    partial class _0
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -33,6 +33,8 @@ namespace BikeStore.Infrastructure.Migrations
                     b.Property<string>("ForksModel");
 
                     b.Property<Guid>("Guid");
+
+                    b.Property<int>("IdxUser");
 
                     b.Property<int>("NotificationStatus");
 

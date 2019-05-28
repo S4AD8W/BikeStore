@@ -1,11 +1,106 @@
 ﻿
 @{
-    ViewData["Title"] = "UserAccount";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+  ViewData["Title"] = "UserAccount";
+  Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>UserAccount</h2>
+@model BikeStore.ViewModels.Notfication.UserNotificationInfo;
 
 <div class="row">
   @await Html.PartialAsync("prlMenu")
 </div>
+
+@if (Model.Forks.Count() != 0) {
+  <div class="row">
+    <div class="card shadow mb-4 w-100 mt-1">
+      <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+      </div>
+      <div class="card-body">
+        <div class="row mb-4">
+          <div class="col-sm-12 col-md-6">
+            <div class="dropdown">
+              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Wybierz status
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                @*<a class="dropdown-item" asp-action="fork" asp-route-xStatus="@NotificationStatusEnum.AtWork">Realizowane</a>
+                  <a class="dropdown-item" asp-action="fork" asp-route-xStatus="@NotificationStatusEnum.Finish">Zakończone</a>
+                  <a class="dropdown-item" asp-action="fork" asp-route-xStatus="@NotificationStatusEnum.New">Nowe</a>*@
+              </div>
+            </div>
+
+          </div>
+          <div class="col-sm-12 col-md-6">
+            <span>tEST</span>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+              <tr>
+                <th>Opis</th>
+                <th>Model</th>
+                <th>Status</th>
+                <th>Data utworzenia</th>
+              </tr>
+            </thead>
+            <tfoot>
+              <tr>
+                <th>Opis</th>
+                <th>Model</th>
+                <th>Status</th>
+                <th>Data utworzenia</th>
+              </tr>
+            </tfoot>
+            <tbody>
+              @foreach (var pItem in Model.Forks) {
+
+                <tr role="row" class="odd">
+                  <td>@pItem.Dscr</td>
+                  <td>@pItem.ForksModel</td>
+                  <td>@pItem.NotificationStatus</td>
+                  <td>@pItem.CreateAt</td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+
+        <div class="row">
+
+          <div class="col-sm-12 col-md-6">
+            @*<span> Show: @Model.PagingInfo.ItemsPerPage for @Model.PagingInfo.TotalItems</span>*@
+
+          </div>
+          <div class="col-sm-12 col-md-6 ">
+            @*<div page-model="@Model.PagingInfo" page-action="Fork" page-classes-enabled="true"
+                   page-class="btn " page-class-normal="btn-secondary"
+                   page-class-selected="btn-primary" class="btn-group pull-right m-1 float-right  ">
+              </div>*@
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+} else {
+  <div class="row">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-sm-12 col-md-6">
+
+            <img class="img-fluid" src="https://images.unsplash.com/photo-1421429167374-8fc8ab6d0f66?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80" />
+          </div>
+          <div class="col-sm-12 col-md-6 ">
+            <h5>Pierwszy raz unas </h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+}
+
+
