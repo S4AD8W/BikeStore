@@ -105,5 +105,17 @@ namespace BikeStore.Controllers {
 
     public IActionResult RegisterSuccess() => View();
 
+    public async Task<IActionResult> ConfirmEmail(Guid xUid) {
+
+      ConfirmEmail_Command pCommand = new ConfirmEmail_Command(xUid);
+
+      await DispatchAsync(pCommand);
+
+      return RedirectToAction("ConfirmEmailSuccess");
+
+    }
+
+    public async Task<IActionResult> ConfirmEmailSuccess()
+      => View();
   }
 }

@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Linq;
 using System.Security.Claims;
+using BikeStore.Infrastructure.Extensions;
 
 namespace BikeStore.Infrastructure.Notification.Handlers {
   public class CreateForkNotificationHandler : ICommandHandler<CreateForkNotificationCommand> {
@@ -26,7 +27,15 @@ namespace BikeStore.Infrastructure.Notification.Handlers {
     public async Task<CommandResult> HandleAsync(CreateForkNotificationCommand xCommand) {
 
       CommandResult pCommandResult = new CommandResult();
+      Guid pUseruId;
       
+
+      Guid.TryParse(mHttpContextAcessor.HttpContext.User.Identity.Name, out pUseruId);
+      var pIdxUser = mHttpContextAcessor.HttpContext.User.Claims.Where(x => x.Type == CustomClaim.IdxUser)
+              .Select(x => x.Value).SingleOrDefault();
+
+      xCommand.IdxUser = Convert.ToInt32(pIdxUser);
+      xCommand.UserId = pUseruId;
       var pResul = await mForkNotyificationServices.AddForkNotificationAsync(xCommand);
 
       if (pResul.IsSucces) {
@@ -39,8 +48,8 @@ namespace BikeStore.Infrastructure.Notification.Handlers {
         pCommandResult.SetSuccess(String.Empty);
       }
 
-      
-        return pCommandResult;
+
+      return pCommandResult;
 
     }
   }

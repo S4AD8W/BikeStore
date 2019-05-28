@@ -10,16 +10,16 @@ namespace BikeStore.core.Domain {
   public class User {
     [Key]
     public int IdxUser { get; private set; }
-    public DateTime CreatedAt { get; protected set; }
-    public string Email { get; protected set; }
-    public Guid Id { get; protected set; }
+    public DateTime CreatedAt { get; private set; }
+    public string Email { get; private set; }
+    public Guid Id { get; private set; }
     public bool IsEmailConfirm { get; set; }
-    public string Name { get; protected set; }
-    public string Password { get; protected set; }
+    public string Name { get; private set; }
+    public string Password { get; private set; }
     public string Role { get; set; }
-    public string Salt { get; protected set; }
-    public string Surname { get; protected set; }
-    public DateTime UpdatedAt { get; protected set; }
+    public string Salt { get; private set; }
+    public string Surname { get; private set; }
+    public DateTime UpdatedAt { get; private set; }
 
     public ICollection<ForkNotification> ForkNotifications { get; set; } 
     protected User() {

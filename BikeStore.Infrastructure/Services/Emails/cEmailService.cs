@@ -28,7 +28,7 @@ namespace BikeStore.Infrastructure.Services.Emails {
 
       pIsSend = false;
       pSubiect = "BikeStore Potwierdz adres email";
-      pBody = $"Prosze potwierdż swój adres email <a href='Http://{mHttpContextAccessor.HttpContext.Request.Host.Host}/{xUserGuid}'>link</a> ";
+      pBody = $"Prosze potwierdż swój adres email <a href='Http://{mHttpContextAccessor.HttpContext.Request.Host.Host}/Account/ConfirmEmail?xUid={xUserGuid}'>link</a> ";
 
       pIsSend = mEmailClient.SendEmail(pSubiect, pBody, xSendTo);
 
@@ -58,7 +58,7 @@ namespace BikeStore.Infrastructure.Services.Emails {
       //TODO: Dodać nazwe kontlolera i akcję 
       pIsSend = false;
       pSubiect = "BikeStore nowe zgłoszenie";
-      pBody = $"Twoje zgłoszenie zostało pomyślnie dodane status zgłoszenia możesz siledzić: <a href='Http://{mHttpContextAccessor.HttpContext.Request.Host.Host}/{xForkNotyficationGuid}'>link</a> ";
+      pBody = $"Twoje zgłoszenie zostało pomyślnie dodane status zgłoszenia możesz siledzić: <a href='Http://{mHttpContextAccessor.HttpContext.Request.Host.Host}/Notification/ForkNotyficationDetails?xUid={xForkNotyficationGuid}'>link</a> ";
 
       pIsSend = mEmailClient.SendEmail(pSubiect, pBody, xSendTo);
 

@@ -24,12 +24,18 @@ namespace BikeStore.Infrastructure.Repositories {
             new User(new Guid(), "user3@email.com","secret","Jan", "Kwalski", "salt", "User" )
         };
 
-    public async Task<User> Get(Guid id)
-      => await Task.FromResult(mUsers.SingleOrDefault(x => x.Id == id));
+    public async Task<User> Get(Guid xid) {
+
+      var pUser = mBikeStoreContext.Users.SingleOrDefault(c => c.Id == xid);
+
+      return pUser;
+
+    }
+
 
 
     public async Task<User> Get(string xEmail)
-      => await Task.FromResult(mBikeStoreContext.Users.SingleOrDefault(x => x.Email == xEmail));
+      => await Task.FromResult(mBikeStoreContext.Users.SingleOrDefault(x => x.Email == xEmail.ToLower()));
 
     public Task<IEnumerable<User>> GetAll() {
       throw new NotImplementedException();
@@ -49,8 +55,8 @@ namespace BikeStore.Infrastructure.Repositories {
       throw new NotImplementedException();
     }
 
-   
+
 
   }
 
-} 
+}

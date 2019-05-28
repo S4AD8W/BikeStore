@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using BikeStore.core.Domain.Notification;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -12,7 +13,18 @@ namespace BikeStore.ViewModels.Notfication {
     public string Dscr { get; set; }
     [DisplayName("ModelAmrtyzatora")]
     public string ForkModel { get; set; }
+    public IEnumerable<ForkNotificationImage> ForkNotificationImages { get; set; }
 
-    
+
+    public ForkNotificationVM(ForkNotification xForknotification) {
+      this.Dscr = xForknotification.Dscr;
+      this.ForkModel = xForknotification.ForksModel;
+      
+    }
+
+    public ForkNotificationVM() {
+        
+    }
+
   }
 }

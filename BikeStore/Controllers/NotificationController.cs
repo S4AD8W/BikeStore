@@ -4,18 +4,23 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using BikeStore.core.Domain.Notification;
 using BikeStore.Infrastructure.Commands;
+using BikeStore.Infrastructure.EF;
 using BikeStore.Infrastructure.Notification.Commands;
 using BikeStore.ViewModels.Notfication;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace BikeStore.Controllers {
   public class NotificationController : BikeStoreControllerBaseController {
 
-    public NotificationController(ICommandDispatcher xCommandDispatcher, IMapper xMapper)
-           : base(xCommandDispatcher, xMapper) {
+    private readonly BikeStoreContext mDB;
 
+    public NotificationController(ICommandDispatcher xCommandDispatcher, IMapper xMapper, BikeStoreContext xDB)
+           : base(xCommandDispatcher, xMapper) {
+      mDB = xDB;
     }
 
     public IActionResult Index() {
@@ -53,5 +58,17 @@ namespace BikeStore.Controllers {
 
     }
 
+    public async Task<IActionResult> ForkNotyficationDetails(Guid xUid) {
+
+      ForkNotification pForkNotification = mDB.ForksNotifications.SingleOrDefault(x => x.Guid == xUid);
+      ForkNotificationVM pVM = new ForkNotificationVM(pForkNotification);
+
+      pVM.ForkNotificationImages = await mDB.ForkNotficationImages.Where(x => x.IdxForkNotfication == pForkNotification.IdxForkNotfication).ToListAsync();
+
+
+
+      return View(pVM);
+
+    }
   }
 }

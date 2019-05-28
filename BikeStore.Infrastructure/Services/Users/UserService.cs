@@ -75,7 +75,7 @@ namespace BikeStore.Infrastructure.Services {
 
     }
 
-    public async Task<bool> ConfirmEmail(Guid xUserId) {
+    public async Task<bool> ConfirmEmailAsync(Guid xUserId) {
       //funkcja potwierdzająca email 
       User pUser;
 
@@ -84,6 +84,8 @@ namespace BikeStore.Infrastructure.Services {
       if (!pUser.IsEmailConfirm) {                          //sprawdzenie czy email jest już potwierdzony 
         pUser.IsEmailConfirm = true;
         await mUserRepository.Update(pUser);                // zapis zaktualizowanego użytkownika
+      } else {
+        return false;
       }
 
       return true;

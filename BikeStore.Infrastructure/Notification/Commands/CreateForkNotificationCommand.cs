@@ -10,5 +10,9 @@ namespace BikeStore.Infrastructure.Notification.Commands {
     public string Dscr { get; set; }
     public string ForkModel { get; set; }
     public List<ForkNotificationImage> Images { get; set; }
+    public Guid UserId { get; set; }
+    public string ForksModel { get; set; }
+    public int IdxUser { get; set; }
+
   }
 }

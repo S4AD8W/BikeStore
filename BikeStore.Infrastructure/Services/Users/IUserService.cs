@@ -16,7 +16,7 @@ namespace BikeStore.Infrastructure.Services{
 
     Task<bool> LoginAsync(string xEmail, string xPassword);
 
-    Task<bool> ConfirmEmail(Guid xUserId);
+    Task<bool> ConfirmEmailAsync(Guid xUserId);
 
     Task<string> ResetPassword(string xEmail);
 
