@@ -21,7 +21,9 @@ namespace BikeStore.core.Domain {
     public string Surname { get; private set; }
     public DateTime UpdatedAt { get; private set; }
 
-    public ICollection<ForkNotification> ForkNotifications { get; set; } 
+    public ICollection<ForkNotification> ForkNotifications { get; set; }
+    public ICollection<ForkNotificationMessage> ForkNotificationMessages { get; set; }
+
     protected User() {
 
     }

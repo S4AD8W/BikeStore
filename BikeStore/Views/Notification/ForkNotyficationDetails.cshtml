@@ -1,31 +1,129 @@
 ﻿@model BikeStore.ViewModels.Notfication.ForkNotificationVM
 
 @{
-    ViewData["Title"] = "ForkNotyficationDetails";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+  ViewData["Title"] = "ForkNotyficationDetails";
+  Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<style>
+  .chatBox {
+    position: relative;
+    margin: 1%;
+    padding: 10px 10px;
+    border: 1px solid #ececec;
+    border-radius: 1px;
+    max-height: 80vh;
+    min-height: 50vh;
+    overflow: scroll;
+  }
 
-<h2>ForkNotyficationDetails</h2>
 
-<div>
-    <h4>ForkNotificationVM</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Dscr)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Dscr)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.ForkModel)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.ForkModel)
-        </dd>
-    </dl>
+  .inputum {
+    background-color: #ececec;
+    padding: 2%;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+  }
+
+
+  .w3-input {
+    padding: 10px;
+    display: block;
+    border: 1px solid #ccc;
+    width: 100%;
+    margin: 1px auto !important;
+  }
+
+  .response {
+    border: 1px solid #007AFF;
+    background: #007AFF;
+    padding: 2%;
+    width: 40%;
+    color: #fff;
+    border-radius: 20px;
+  }
+
+  .request {
+    background: #00CC47;
+    border: 1px solid #00CC47;
+    padding: 2%;
+    width: 40%;
+    color: #fff;
+    border-radius: 20px;
+    float: right;
+  }
+
+  .btun {
+    position: absolute;
+    right: 2.5%;
+    bottom: 22%;
+  }
+</style>
+
+<div class="row">
+  <div class="card shadow mb-4 w-100 mt-1">
+    <div class="card-header py-3">
+      <h6 class="m-0 font-weight-bold text-primary">Detale zgłoszenia</h6>
+    </div>
+    <div class="card-body">
+      <div class="row mb-4">
+        <div>
+          <dl class="dl-horizontal">
+            <dt>
+              @Html.DisplayNameFor(model => model.Dscr)
+            </dt>
+            <dd>
+              @Html.DisplayFor(model => model.Dscr)
+            </dd>
+            <dt>
+              @Html.DisplayNameFor(model => model.ForkModel)
+            </dt>
+            <dd>
+              @Html.DisplayFor(model => model.ForkModel)
+            </dd>
+          </dl>
+        </div>
+        <div>
+          @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+          <a asp-action="Index">Back to List</a>
+
+        </div>
+
+      </div>
+
+      <div class="row">
+
+        <div class="col-sm-12 col-md-6">
+          @*<span> Show: @Model.PagingInfo.ItemsPerPage for @Model.PagingInfo.TotalItems</span>*@
+
+        </div>
+        <div class="col-sm-12 col-md-6 ">
+          @*<div page-model="@Model.PagingInfo" page-action="Fork" page-classes-enabled="true"
+                 page-class="btn " page-class-normal="btn-secondary"
+                 page-class-selected="btn-primary" class="btn-group pull-right m-1 float-right  ">
+            </div>*@
+        </div>
+
+      </div>
+    </div>
+  </div>
 </div>
-<div>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    <a asp-action="Index">Back to List</a>
+
+
+<div class="row">
+  <div class="card shadow mb-4 w-100 mt-1">
+    <div class="card-header py-3">
+      <h6 class="m-0 font-weight-bold text-primary">Wiadomość</h6>
+    </div>
+    <div class="card-body">
+
+      <div class="container">
+        @await Component.InvokeAsync(nameof(BikeStore.ViewsComponent.Notification.NotificationMessage))
+
+        <input class="w3-input" id="mesbox" type="text" placeholder="input here...">
+      </div>
+
+    </div>
+  </div>
 </div>
+

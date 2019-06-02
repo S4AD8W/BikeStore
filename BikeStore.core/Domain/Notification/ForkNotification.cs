@@ -20,6 +20,6 @@ namespace BikeStore.core.Domain.Notification {
 
 
     public ICollection<ForkNotificationImage> ForkNotficationImages { get; set; }
-
+    public ICollection<ForkNotificationMessage> ForkNotificationMessages { get; set; }
   }
 }
