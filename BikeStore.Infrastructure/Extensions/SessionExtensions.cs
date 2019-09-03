@@ -4,8 +4,7 @@ using Newtonsoft.Json;
 namespace BikeStore.Infrastructure.Extensions {
 
   public enum SessionEnum {
-
-    WindowProject = 1,
+    CntAppLanguage,
 
   }
 
