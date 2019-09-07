@@ -1,45 +1,100 @@
 ﻿@model BikeStore.Infrastructure.Commands.Users.CreateUser
 
 @{
-  ViewData["Title"] = "View";
-  Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "View";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <hr />
 <div class="row">
-  <div class="col-md-4">
-    <form asp-action="Register">
-      <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-      <div class="form-group">
-        <label asp-for="Name" class="control-label"></label>
-        <input asp-for="Name" class="form-control" />
-        <span asp-validation-for="Name" class="text-danger"></span>
-      </div>
-      <div class="form-group">
-        <label asp-for="Surname" class="control-label"></label>
-        <input asp-for="Surname" class="form-control" />
-        <span asp-validation-for="Surname" class="text-danger"></span>
-      </div>
-      <div class="form-group">
-        <label asp-for="Email" class="control-label"></label>
-        <input asp-for="Email" class="form-control" />
-        <span asp-validation-for="Email" class="text-danger"></span>
-      </div>
-      <div class="form-group">
-        <label asp-for="Password" class="control-label"></label>
-        <input asp-for="Password" class="form-control" />
-        <span asp-validation-for="Password" class="text-danger"></span>
-      </div>
-      <div class="form-group">
-        <label asp-for="ConfirmPassword" class="control-label"></label>
-        <input asp-for="ConfirmPassword" class="form-control" />
-        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-      </div>
-      <div class="form-group">
-        <input type="submit" value="Register" class="btn btn-default" />
-      </div>
-    </form>
-  </div>
+    <div class="col-md-4">
+        <form asp-action="Register" id="RegisterForm">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label name="Name" class="control-label">@Languages.GetText(TextEnum.Name)</label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label name="Surname" class="control-label">@Languages.GetText(TextEnum.SurName)</label>
+                <input asp-for="Surname" class="form-control" />
+                <span asp-validation-for="Surname" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label name="Email" class="control-label">@Languages.GetText(TextEnum.Email)</label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label name="Password" class="control-label">@Languages.GetText(TextEnum.Password)</label>
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ConfirmPassword" class="control-label">@Languages.GetText(TextEnum.ConfirmPassword)</label>
+                <input asp-for="ConfirmPassword" class="form-control" />
+                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="@Languages.GetText(TextEnum.SignUp)" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
 </div>
 
+<script>
+    let RegisterForm = $("#RegisterForm");
 
+    RegisterForm.validate({
+        rules: {
+            Name: {
+                required: true
+            },
+            Surname: {
+                required: true
+            },
+            Email: {
+                required: true,
+                email: true,
+                remote: {
+                    url: "Account/CheckEmailIfAlreadyExist",
+                    type: "post"
+                }
+            },
+            Password: {
+                required: true,
+                minlenght: 8,
+                equalTo: "#ConfirmPassword"
+            },
+            ConfirmPassword: {
+                required: true,
+                minlenght: 8,
+                
+            }
+        },
+
+        messages: {
+
+            Name: {
+              required:"@Html.Raw(Languages.GetText(TextEnum.ThisFieldIsRequired))"
+            },
+            Surname: {
+                required:"@Html.Raw(Languages.GetText(TextEnum.ThisFieldIsRequired))"
+            },
+            Email: {
+                required: "@Html.Raw(Languages.GetText(TextEnum.ThisFieldIsRequired))",
+                remote: "@Html.Raw(Languages.GetText(TextEnum.ThisEmailAddressAlreadyExist))"
+            },
+            Password: {
+                required: "@Html.Raw(Languages.GetText(TextEnum.ThisFieldIsRequired))",
+                minlenght: "@Html.Raw(Languages.GetText(TextEnum.YoursPasswordMustByMinLenghtEightCharacters))",
+                equalTo: "@Html.Raw(Languages.GetText(TextEnum.YoursPasswordDoesntMatchConfirmPasswordField))"
+            },
+            ConfirmPassword: {
+                required: "@Html.Raw(Languages.GetText(TextEnum.ThisFieldIsRequired))",
+                minlenght: "@Html.Raw(Languages.GetText(TextEnum.YoursPasswordMustByMinLenghtEightCharacters))"
+            }
+        },
+    })
+
+</script>

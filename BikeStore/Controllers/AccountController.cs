@@ -7,6 +7,7 @@ using BikeStore.Infrastructure.Commands;
 using BikeStore.Infrastructure.Commands.Accounts;
 using BikeStore.Infrastructure.Commands.Users;
 using BikeStore.Infrastructure.Extensions;
+using BikeStore.Infrastructure.Services.Account;
 using BikeStore.Infrastructure.Services.Messages;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -18,11 +19,13 @@ namespace BikeStore.Controllers {
   public class AccountController : BikeStoreControllerBaseController {
     private readonly IMessage mMessage;
     private readonly IMemoryCache mCache;
+    private readonly AccountService mAccountService;
 
-    public AccountController(ICommandDispatcher xCommandDispatcher, IMessage xMessage, IMemoryCache xCache, IMapper xMapper)
+    public AccountController(ICommandDispatcher xCommandDispatcher, IMessage xMessage, IMemoryCache xCache, IMapper xMapper, AccountService xAccountService)
            : base(xCommandDispatcher, xMapper) {
       mMessage = xMessage;
       mCache = xCache;
+      mAccountService = xAccountService;
     }
 
 
@@ -117,5 +120,10 @@ namespace BikeStore.Controllers {
 
     public async Task<IActionResult> ConfirmEmailSuccess()
       => View();
+
+    [HttpPost]
+    public async Task<bool> CheckEmailIfAlreadyExist(string Email)
+      => await mAccountService.CheckEmailIfAlreadyExistAsync(Email);
+    
   }
 }

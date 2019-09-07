@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BikeStore.Infrastructure;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -45,7 +46,7 @@ namespace BikeStore.Extensions {
       //funkcja tłumacząca bład dla pola
       //xMessage - string z treścią błędu
 
-      return cConfigurationLanguages.GetText(CntTextTranslate);
+      return Languages.GetText(CntTextTranslate);
 
     }
   }
