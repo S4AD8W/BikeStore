@@ -99,19 +99,19 @@ namespace BikeStore.Infrastructure.Services {
       string pNewPassword;
       cUserDto pUserDto;
 
-      pUser = await mUserRepository.Get(xEmail);            //pbranie użytkownika z bazy 
+      pUser = await mUserRepository.Get(xEmail);            
 
-      if (pUser != null) {                                  //sprawdzenie czy istnieje taki użytkownik
+      if (pUser != null) {                                  
         pUserDto = mMapper.Map<User, cUserDto>(pUser);
 
         pNewPassword = Guid.NewGuid().ToString("N").ToLower()
                        .Replace("1", "").Replace("o", "").Replace("0", "")
-                       .Substring(0, 10);                   //wygenerowanie nowego losowego chasła 
+                       .Substring(0, 10);                   
 
-        pUserDto.Password = mEncrypter.GetHash(pNewPassword, pUser.Salt);//utworzenie hasza z nowego hasła 
-        await mUserRepository.Update(mMapper.Map<cUserDto, User>(pUserDto)); //TODO: Do przemyślenia te mapowanie 
+        pUser.SetPassword(mEncrypter.GetHash(pNewPassword, pUser.Salt)); 
+        await mUserRepository.Update(pUser); 
 
-        return pNewPassword;                                //zwrucenie nowego hasła 
+        return pNewPassword;                                
       }
 
       mMessage.SetMesage("This email doesn't exist");       //Komunikat błędu 

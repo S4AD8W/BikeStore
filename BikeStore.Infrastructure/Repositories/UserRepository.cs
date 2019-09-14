@@ -44,11 +44,10 @@ namespace BikeStore.Infrastructure.Repositories {
 
     }
 
-    public async Task Update(User xUser) {
+    public async Task Update(User xUser)  {
+     
 
-      var Update = mBikeStoreContext.Users.Update(xUser);
-      Update.State = EntityState.Modified;
-      
+      await mBikeStoreContext.SaveChangesAsync();
 
     }
 
