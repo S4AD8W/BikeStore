@@ -55,9 +55,9 @@ namespace BikeStore.Controllers {
       //TODO:Zmienić TokenID na UserID 
 
       await DispatchAsync(xLogin);                         //wywołanie Komendy 
-
+    
       if (mMessage.IsMessage) {                             //sprawdzenie czy serwis nie zwrucił informacji
-        ViewBag.Error = mMessage.IsMessage;
+        ModelState.AddModelError(string.Empty, mMessage.Message);
         return View();                                      //zwrucenie widoku z informacją 
       } else {
         var pToken = mCache.GetUserClaimsPrincipal(mMessage.UserId); //Odczytanie uprawnień użytkownika z pamięci serwera

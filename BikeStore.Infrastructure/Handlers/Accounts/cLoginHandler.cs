@@ -42,7 +42,7 @@ namespace BikeStore.Infrastructure.Handlers.Accounts {
         mMessage.UserId = pUser.Id;
         await Task.CompletedTask;
       } else {
-        mMessage.SetMesage("invalid credetial");
+        mMessage.SetMesage(Languages.GetText(TextEnum.TheUsernameordidnotmatchPleaseTryAgain));
         await Task.CompletedTask;
 
       }

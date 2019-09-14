@@ -22,6 +22,11 @@ namespace BikeStore.Infrastructure {
     ThisEmailAddressAlreadyExist = 8,
     YoursPasswordMustByMinLenghtEightCharacters =9,
     YoursPasswordDoesntMatchConfirmPasswordField =10,
+    LogIn = 11,
+    ForGotYourPassword = 12,
+    TheUsernameordidnotmatchPleaseTryAgain = 13,
+    EnterYourEmailAddressBelowAndWellSendYouANewPassword = 14,
+    Submit = 15,
   }
 
   public class Languages {
@@ -92,6 +97,11 @@ namespace BikeStore.Infrastructure {
       AddText(TextEnum.YoursPasswordDoesntMatchConfirmPasswordField, "Yours password doesn't match confirm password field", "Twoje chasła nie są takie same");
       AddText(TextEnum.Password, "Password", "Hasło");
       AddText(TextEnum.ConfirmPassword, "Confirm password", "Potwierdź hasło");
+      AddText(TextEnum.LogIn, "Log In", "Logowanie");
+      AddText(TextEnum.ForGotYourPassword, "Forgot your password?", "Zapomniałeś hasła");
+      AddText(TextEnum.TheUsernameordidnotmatchPleaseTryAgain, "The username or password did not match, Please try again", "Twoje nazwa urzytkownika i hasło nie pasują, spróbuj ponownie");
+      AddText(TextEnum.EnterYourEmailAddressBelowAndWellSendYouANewPassword, "Enter your email address below and we'll send you a new password", "Wpisz poniżej swój adres e-mail, a my wyślemy Ci nowe hasło");
+      AddText(TextEnum.Submit, "Submit", "Prześlij");
     }
 
     private void AddText(TextEnum xCntText, string xEN, string xPL) {

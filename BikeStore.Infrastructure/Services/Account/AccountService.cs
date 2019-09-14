@@ -16,8 +16,8 @@ namespace BikeStore.Infrastructure.Services.Account {
     public async Task<bool> CheckEmailIfAlreadyExistAsync(string xEmail) {
 
       User pUser = await mUserRepository.Get(xEmail);
-      var test = pUser == null ? false : true;
-      return test;
+      return pUser == null ? false : true;
+
     }
   }
 }
