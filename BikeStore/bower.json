@@ -9,7 +9,10 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "Jquery": "3.4.1",
+    "jquery": "3.4.1",
+    "jquery-validation": "1.19.1",
+    "jquery-validation-unobtrusive": "3.2.6",
+    "font-awesome": "5.7.2",
     "popper.js": "1.15.0"
   }
 }

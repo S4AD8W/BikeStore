@@ -90,6 +90,8 @@ namespace BikeStore.Infrastructure {
       AddText(TextEnum.ThisEmailAddressAlreadyExist, "This email address already exist", "Ten ades e-mail już istnieje");
       AddText(TextEnum.YoursPasswordMustByMinLenghtEightCharacters, "Yours password must by min lenght eight characters", "Twoje chasło musi mieć conajmiej osiem znaków");
       AddText(TextEnum.YoursPasswordDoesntMatchConfirmPasswordField, "Yours password doesn't match confirm password field", "Twoje chasła nie są takie same");
+      AddText(TextEnum.Password, "Password", "Hasło");
+      AddText(TextEnum.ConfirmPassword, "Confirm password", "Potwierdź hasło");
     }
 
     private void AddText(TextEnum xCntText, string xEN, string xPL) {

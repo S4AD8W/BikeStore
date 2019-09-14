@@ -19,9 +19,9 @@ namespace BikeStore.Controllers {
   public class AccountController : BikeStoreControllerBaseController {
     private readonly IMessage mMessage;
     private readonly IMemoryCache mCache;
-    private readonly AccountService mAccountService;
+    private readonly IAccountService mAccountService;
 
-    public AccountController(ICommandDispatcher xCommandDispatcher, IMessage xMessage, IMemoryCache xCache, IMapper xMapper, AccountService xAccountService)
+    public AccountController(ICommandDispatcher xCommandDispatcher, IMessage xMessage, IMemoryCache xCache, IMapper xMapper, IAccountService xAccountService)
            : base(xCommandDispatcher, xMapper) {
       mMessage = xMessage;
       mCache = xCache;
@@ -35,11 +35,7 @@ namespace BikeStore.Controllers {
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Register(CreateUser xCreateUser) {
-
-      if (!ModelState.IsValid) {
-        return View(xCreateUser);
-      }
-
+        
       await DispatchAsync(xCreateUser);
       if (mMessage.IsMessage) {
         ViewBag.Error = mMessage.Message;
@@ -122,8 +118,10 @@ namespace BikeStore.Controllers {
       => View();
 
     [HttpPost]
-    public async Task<bool> CheckEmailIfAlreadyExist(string Email)
-      => await mAccountService.CheckEmailIfAlreadyExistAsync(Email);
-    
+    public async Task<bool> CheckEmailIfAlreadyExist(string Email) { 
+      var pt = !await mAccountService.CheckEmailIfAlreadyExistAsync(Email);
+
+      return pt;
+    }
   }
 }

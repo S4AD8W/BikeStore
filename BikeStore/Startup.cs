@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using BikeStore.Infrastructure.IoC;
 using BikeStore.Infrastructure.EF;
+using BikeStore.Infrastructure;
 
 namespace BikeStore {
   public class Startup {
@@ -30,11 +31,11 @@ namespace BikeStore {
 
 
     // This method gets called by the runtime. Use this method to add services to the container.
-    public IServiceProvider ConfigureServices(IServiceCollection services) {
+    public IServiceProvider ConfigureServices(IServiceCollection xServices) {
 
-    
+      xServices.AddSingleton<Languages>(new Languages(new HttpContextAccessor()));
 
-      services.AddAuthentication(o => {
+      xServices.AddAuthentication(o => {
         o.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
         o.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
         o.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
@@ -43,13 +44,13 @@ namespace BikeStore {
         options.LoginPath = new PathString("/Account/Login");
       });
 
-      services.AddAuthorization(options => {
+      xServices.AddAuthorization(options => {
         options.AddPolicy("RequiresAdmin", policy => policy.RequireClaim("HasAdminRights"));
 
 
       });
 
-      services.AddMvc().AddJsonOptions(options => {
+      xServices.AddMvc().AddJsonOptions(options => {
         // options.SerializerSettings.ContractResolver = new Newtonsoft.Json.Serialization.DefaultContractResolver();
 
         options.SerializerSettings.Converters.Add(new Newtonsoft.Json.Converters.StringEnumConverter());
@@ -58,15 +59,15 @@ namespace BikeStore {
 
      
 
-      services.AddMemoryCache();
-      services.AddSession();
+      xServices.AddMemoryCache();
+      xServices.AddSession();
      
-     services.AddEntityFrameworkNpgsql()
+     xServices.AddEntityFrameworkNpgsql()
                .AddDbContext<BikeStoreContext>()
                .BuildServiceProvider();
 
       var builder = new ContainerBuilder();
-      builder.Populate(services);
+      builder.Populate(xServices);
       builder.RegisterModule(new ContainerModule(Configuration));
       ApplicationContainer = builder.Build();
 
