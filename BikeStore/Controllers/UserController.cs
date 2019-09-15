@@ -23,7 +23,7 @@ namespace BikeStore.Controllers {
     
     public IActionResult UserAccount() {
 
-      return RedirectToAction("ForkNotification");
+      return View("UserAccount");
     }
 
     

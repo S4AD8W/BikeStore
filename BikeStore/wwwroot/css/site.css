@@ -1,5 +1,12 @@
-﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification\ 
-for details on configuring this project to bundle and minify static web assets. */
+﻿
+body:not(.user-is-tabbing) button:focus,
+body:not(.user-is-tabbing) input:focus,
+body:not(.user-is-tabbing) select:focus,
+body:not(.user-is-tabbing) a:focus,
+body:not(.user-is-tabbing) textarea:focus {
+    outline: none;
+}
+
 body {
     padding-top: 50px;
     padding-bottom: 20px;
@@ -18,20 +25,20 @@ body {
     line-height: 1.4;
 }
 
-/* Make .svg files in the carousel display properly in older browsers */
+/*/* Make .svg files in the carousel display properly in older browsers 
 .carousel-inner .item img[src$=".svg"] {
     width: 100%;
 }
 
-/* QR code generator */
+
 #qrCode {
     margin: 15px;
 }
 
-/* Hide/rearrange for smaller screens */
+Hide/rearrange for smaller screens 
 @media screen and (max-width: 767px) {
-    /* Hide captions */
+    /* Hide captions 
     .carousel-caption {
         display: none;
     }
-}
+}*/

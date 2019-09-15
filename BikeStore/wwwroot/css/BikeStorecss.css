@@ -1,0 +1,25 @@
+﻿
+/* BODY*/
+body:not(.user-is-tabbing) button:focus,
+body:not(.user-is-tabbing) input:focus,
+body:not(.user-is-tabbing) select:focus,
+body:not(.user-is-tabbing) a:focus,
+body:not(.user-is-tabbing) textarea:focus {
+    outline: none;
+}
+
+
+/*================ END ==================*/
+
+.Test112 {
+    background-color: whitesmoke;
+}
+
+    .Test112 .active a,
+    .Test112 .active a:hover {
+        background-color: blue;
+    }
+
+.nav-pills > .active > a, .nav-pills > .active > a:hover {
+    background-color: blue;
+}

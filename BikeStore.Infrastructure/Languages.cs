@@ -27,6 +27,7 @@ namespace BikeStore.Infrastructure {
     TheUsernameordidnotmatchPleaseTryAgain = 13,
     EnterYourEmailAddressBelowAndWellSendYouANewPassword = 14,
     Submit = 15,
+    MyAccount =16,
   }
 
   public class Languages {
@@ -102,6 +103,7 @@ namespace BikeStore.Infrastructure {
       AddText(TextEnum.TheUsernameordidnotmatchPleaseTryAgain, "The username or password did not match, Please try again", "Twoje nazwa urzytkownika i hasło nie pasują, spróbuj ponownie");
       AddText(TextEnum.EnterYourEmailAddressBelowAndWellSendYouANewPassword, "Enter your email address below and we'll send you a new password", "Wpisz poniżej swój adres e-mail, a my wyślemy Ci nowe hasło");
       AddText(TextEnum.Submit, "Submit", "Prześlij");
+      AddText(TextEnum.MyAccount, "MyAccount", "Moje konto"); 
     }
 
     private void AddText(TextEnum xCntText, string xEN, string xPL) {
