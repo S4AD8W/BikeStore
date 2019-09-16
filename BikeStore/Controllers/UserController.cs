@@ -38,6 +38,13 @@ namespace BikeStore.Controllers {
       pVM.Forks = mDB.ForksNotifications.Where(x => x.UserId == pUserId);
 
       return View("UserAccount",pVM);
+
     }
+
+    [HttpGet]
+    public IActionResult AccountDetails()
+    => View();
+
   }
+
 }

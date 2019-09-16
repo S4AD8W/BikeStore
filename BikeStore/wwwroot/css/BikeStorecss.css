@@ -9,10 +9,16 @@ body:not(.user-is-tabbing) textarea:focus {
 }
 
 
+.BsNavbar .nav-item {
+    color: black !important;
+}
 /*================ END ==================*/
+body {
+    background-color: #f5f5fa;
+}
 
 .Test112 {
-    background-color: whitesmoke;
+    background-color: white;
 }
 
     .Test112 .active a,
@@ -22,4 +28,13 @@ body:not(.user-is-tabbing) textarea:focus {
 
 .nav-pills > .active > a, .nav-pills > .active > a:hover {
     background-color: blue;
+}
+
+.Card_MenuItem {
+    min-width: 220px
+}
+
+.AccountSetingsBorder {
+   
+    /*border-top: 1px solid #0000002e;*/
 }

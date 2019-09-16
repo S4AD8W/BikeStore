@@ -35,7 +35,7 @@ namespace BikeStore.Controllers {
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Register(CreateUser xCreateUser) {
-        
+
       await DispatchAsync(xCreateUser);
       if (mMessage.IsMessage) {
         ViewBag.Error = mMessage.Message;
@@ -55,7 +55,7 @@ namespace BikeStore.Controllers {
       //TODO:Zmienić TokenID na UserID 
 
       await DispatchAsync(xLogin);                         //wywołanie Komendy 
-    
+
       if (mMessage.IsMessage) {                             //sprawdzenie czy serwis nie zwrucił informacji
         ModelState.AddModelError(string.Empty, mMessage.Message);
         return View();                                      //zwrucenie widoku z informacją 
@@ -118,10 +118,10 @@ namespace BikeStore.Controllers {
       => View();
 
     [HttpPost]
-    public async Task<bool> CheckEmailIfAlreadyExist(string Email) { 
-      var pt = !await mAccountService.CheckEmailIfAlreadyExistAsync(Email);
+    public async Task<bool> CheckEmailIfAlreadyExist(string Email)
+       => !await mAccountService.CheckEmailIfAlreadyExistAsync(Email);
 
-      return pt;
-    }
+  
+
   }
 }

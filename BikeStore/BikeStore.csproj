@@ -2056,6 +2056,7 @@
 
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Views\User\Settings\" />
   </ItemGroup>
 
 </Project>

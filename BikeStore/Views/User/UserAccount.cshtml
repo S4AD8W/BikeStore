@@ -6,62 +6,67 @@
 
 @model BikeStore.ViewModels.Notfication.UserNotificationInfo;
 
-
-
 <div class="row">
+    <div class="col">
+        <div class="card">
+            <div class="card-body">
+                <span>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Quisque vel finibus velit. Aenean porta diam dolor, non auctor nunc porttitor sed.
+                    Vivamus tincidunt volutpat purus, nec eleifend magna consectetur eu. Duis id lacus vitae eros bibendum
+                    tincidunt at vel nisi. Cras sodales fermentum libero, vitae scelerisque risus semper non. Etiam viverra ultrices ornare.
+                    Aenean varius varius quam a tincidunt. Vivamus nisi quam, fringilla sodales tempor sit amet, malesuada pellentesque nisi.
+                    Vestibulum ultrices leo eget nisi interdum laoreet. Praesent porta dui blandit, porta magna ac, blandit metus. Aenean ante leo,
+                    pretium eu blandit eget, feugiat ac lacus.
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-3">
     <div class="col-sm-3 col-md-3">
         @await Html.PartialAsync("prlMenu")
     </div>
     <div class="col-sm-9 col-md-9">
-        <div class="row mt-3">
-            <span>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Quisque vel finibus velit. Aenean porta diam dolor, non auctor nunc porttitor sed.
-                Vivamus tincidunt volutpat purus, nec eleifend magna consectetur eu. Duis id lacus vitae eros bibendum
-                tincidunt at vel nisi. Cras sodales fermentum libero, vitae scelerisque risus semper non. Etiam viverra ultrices ornare.
-                Aenean varius varius quam a tincidunt. Vivamus nisi quam, fringilla sodales tempor sit amet, malesuada pellentesque nisi.
-                Vestibulum ultrices leo eget nisi interdum laoreet. Praesent porta dui blandit, porta magna ac, blandit metus. Aenean ante leo,
-                pretium eu blandit eget, feugiat ac lacus.
-            </span>
-        </div>
 
-        <div class="row mt-3">
-            <div class="card-deck-wrapper">
-                <div class="card-deck">
-                    <div class="card p-2">
-                        <span class="text-center"> <i class="fas fa-list fa-5x"></i></span>
-                        <a class="card-block stretched-link text-decoration-none text-center " href>
-                            zamówienia
-                        </a>
+        <div class="row ">
 
-                    </div>
-                    <div class="card p-2">
-                        <span class="text-center"> <i class="fas fa-list fa-5x"></i></span>
-                        <a class="card-block stretched-link text-decoration-none text-center " href>
-                            zamówienia
-                        </a>
+            <div class="card p-2 Card_MenuItem ml-4 mb-4 ">
+                <span class="text-center"> <i class="fas fa-list fa-5x"></i></span>
+                <a class="card-block stretched-link text-decoration-none text-center " asp-controller="User" asp-action="AccountDetails">
+                    @Languages.GetText(TextEnum.AccountDetails)
+                </a>
 
-                    </div>
-                    <div class="card p-2">
-                        <span class="text-center"> <i class="fas fa-list fa-5x"></i></span>
-                        <a class="card-block stretched-link text-decoration-none text-center " href>
-                            zamówienia
-                        </a>
+            </div>
+            <div class="card p-2 Card_MenuItem ml-4 mb-4">
+                <span class="text-center"> <i class="fas fa-list fa-5x"></i></span>
+                <a class="card-block stretched-link text-decoration-none text-center " href>
+                    zamówienia
+                </a>
 
-                    </div>
-                    <div class="card p-2">
-                        <span class="text-center"> <i class="fas fa-list fa-5x"></i></span>
-                        <a class="card-block stretched-link text-decoration-none text-center " href>
-                            zamówienia
-                        </a>
+            </div>
 
-                    </div>
-                </div>
+            <div class="card p-2 Card_MenuItem ml-4 mb-4">
+                <span class="text-center"> <i class="fas fa-list fa-5x"></i></span>
+                <a class="card-block stretched-link text-decoration-none text-center " href>
+                    zamówienia
+                </a>
+
+            </div>
+            <div class="card p-2 Card_MenuItem ml-4 mb-4 ">
+                <span class="text-center"> <i class="fas fa-list fa-5x"></i></span>
+                <a class="card-block stretched-link text-decoration-none text-center " href>
+                    zamówienia
+                </a>
+
             </div>
         </div>
 
-
     </div>
 
+
 </div>
+
+
 

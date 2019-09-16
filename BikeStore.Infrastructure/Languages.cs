@@ -20,14 +20,19 @@ namespace BikeStore.Infrastructure {
     SignUp = 6,
     ThisFieldIsRequired = 7,
     ThisEmailAddressAlreadyExist = 8,
-    YoursPasswordMustByMinLenghtEightCharacters =9,
-    YoursPasswordDoesntMatchConfirmPasswordField =10,
+    YoursPasswordMustByMinLenghtEightCharacters = 9,
+    YoursPasswordDoesntMatchConfirmPasswordField = 10,
     LogIn = 11,
     ForGotYourPassword = 12,
     TheUsernameordidnotmatchPleaseTryAgain = 13,
     EnterYourEmailAddressBelowAndWellSendYouANewPassword = 14,
     Submit = 15,
-    MyAccount =16,
+    MyAccount = 16,
+    AccountDetails = 17,
+    Since = 18,
+    LoginDetails = 19,
+    ChangePassword = 20,
+    ChangeEmail = 21,
   }
 
   public class Languages {
@@ -103,7 +108,12 @@ namespace BikeStore.Infrastructure {
       AddText(TextEnum.TheUsernameordidnotmatchPleaseTryAgain, "The username or password did not match, Please try again", "Twoje nazwa urzytkownika i hasło nie pasują, spróbuj ponownie");
       AddText(TextEnum.EnterYourEmailAddressBelowAndWellSendYouANewPassword, "Enter your email address below and we'll send you a new password", "Wpisz poniżej swój adres e-mail, a my wyślemy Ci nowe hasło");
       AddText(TextEnum.Submit, "Submit", "Prześlij");
-      AddText(TextEnum.MyAccount, "MyAccount", "Moje konto"); 
+      AddText(TextEnum.MyAccount, "MyAccount", "Moje konto");
+      AddText(TextEnum.AccountDetails, "Account details", "Szczeguły konta");
+      AddText(TextEnum.Since, "Since", "Od kiedy");
+      AddText(TextEnum.LoginDetails, "Login details", "Dane logowania");
+      AddText(TextEnum.ChangeEmail, "Change email", "Zmień email");
+      AddText(TextEnum.ChangePassword, "Change password", "zmień hasło");
     }
 
     private void AddText(TextEnum xCntText, string xEN, string xPL) {
