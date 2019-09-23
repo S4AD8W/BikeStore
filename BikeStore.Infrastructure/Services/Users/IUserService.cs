@@ -19,6 +19,6 @@ namespace BikeStore.Infrastructure.Services{
     Task<bool> ConfirmEmailAsync(Guid xUserId);
 
     Task<string> ResetPassword(string xEmail);
-
+    Task<bool> ChecPasswordIsValidAsync(string xPassword, int xIdxUser);
   }
 }

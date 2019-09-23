@@ -33,6 +33,10 @@ namespace BikeStore.Infrastructure {
     LoginDetails = 19,
     ChangePassword = 20,
     ChangeEmail = 21,
+    OldPassword = 22,
+    NewPassword = 23,
+    ConfirmNewPassword = 24,
+
   }
 
   public class Languages {
@@ -114,6 +118,9 @@ namespace BikeStore.Infrastructure {
       AddText(TextEnum.LoginDetails, "Login details", "Dane logowania");
       AddText(TextEnum.ChangeEmail, "Change email", "Zmień email");
       AddText(TextEnum.ChangePassword, "Change password", "zmień hasło");
+      AddText(TextEnum.OldPassword, "Old password", "Stare hasło");
+      AddText(TextEnum.NewPassword, "New password", "Nowe hasło");
+      AddText(TextEnum.ConfirmNewPassword, "Confirm new password", "Potwierdź nowe hasło");
     }
 
     private void AddText(TextEnum xCntText, string xEN, string xPL) {

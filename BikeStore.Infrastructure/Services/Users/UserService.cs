@@ -32,7 +32,7 @@ namespace BikeStore.Infrastructure.Services {
       //funkcja zwracająca użytkownika
       //xEmail - email użytkownika 
 
-      var pUser = await mUserRepository.Get(xEmail);
+      var pUser = await mUserRepository.GetAsync(xEmail);
 
       return mMapper.Map<User, cUserDto>(pUser);
 
@@ -41,7 +41,7 @@ namespace BikeStore.Infrastructure.Services {
     public async Task<bool> LoginAsync(string xEmail, string xPassword) {
       //funkcja logująca użytkownika
 
-      User pUser = await mUserRepository.Get(xEmail);       //pobranie użytkownika z bazy
+      User pUser = await mUserRepository.GetAsync(xEmail);       //pobranie użytkownika z bazy
 
       if (pUser == null) {                                  //sprawdzenie czy użytkownik istnieje 
         return false;
@@ -60,7 +60,7 @@ namespace BikeStore.Infrastructure.Services {
     public async Task<bool> RegisterAsync(Guid xUserId, string xEmail, string xUsername, string xUserSurname, string xPassword, string xRole) {
       //funkcja rejestrująca nowego użytkownika
 
-      User pUser = await mUserRepository.Get(xEmail);       //pobranie użytkownika z bazy danych  
+      User pUser = await mUserRepository.GetAsync(xEmail);       //pobranie użytkownika z bazy danych  
 
       if (pUser != null) {
         mMessage.SetMesage("The user's e-mail address exists"); // zwrucenie komunikatu 
@@ -69,7 +69,7 @@ namespace BikeStore.Infrastructure.Services {
         string pSalt = mEncrypter.GetSalt(xPassword);       //wygenerowanie soli dla hasła 
         string pHash = mEncrypter.GetHash(xPassword, pSalt);//wygenerowanie nowego hasła 
         pUser = new User(xUserId, xEmail, pHash, xUsername, xUserSurname, pSalt, xRole);
-        await mUserRepository.Add(pUser);                   //dodanie użytkownika do bazy danych 
+        await mUserRepository.AddAsync(pUser);                   //dodanie użytkownika do bazy danych 
         return true;
       }
 
@@ -79,11 +79,11 @@ namespace BikeStore.Infrastructure.Services {
       //funkcja potwierdzająca email 
       User pUser;
 
-      pUser = await mUserRepository.Get(xUserId);           // pobranie użytkownika z repozytorium 
+      pUser = await mUserRepository.GetAsync(xUserId);           // pobranie użytkownika z repozytorium 
 
       if (!pUser.IsEmailConfirm) {                          //sprawdzenie czy email jest już potwierdzony 
         pUser.IsEmailConfirm = true;
-        await mUserRepository.Update(pUser);                // zapis zaktualizowanego użytkownika
+        await mUserRepository.UpdateAsync(pUser);                // zapis zaktualizowanego użytkownika
       } else {
         return false;
       }
@@ -99,24 +99,38 @@ namespace BikeStore.Infrastructure.Services {
       string pNewPassword;
       cUserDto pUserDto;
 
-      pUser = await mUserRepository.Get(xEmail);            
+      pUser = await mUserRepository.GetAsync(xEmail);
 
-      if (pUser != null) {                                  
+      if (pUser != null) {
         pUserDto = mMapper.Map<User, cUserDto>(pUser);
 
         pNewPassword = Guid.NewGuid().ToString("N").ToLower()
                        .Replace("1", "").Replace("o", "").Replace("0", "")
-                       .Substring(0, 10);                   
+                       .Substring(0, 10);
 
-        pUser.SetPassword(mEncrypter.GetHash(pNewPassword, pUser.Salt)); 
-        await mUserRepository.Update(pUser); 
+        pUser.SetPassword(mEncrypter.GetHash(pNewPassword, pUser.Salt));
+        await mUserRepository.UpdateAsync(pUser);
 
-        return pNewPassword;                                
+        return pNewPassword;
       }
 
       mMessage.SetMesage("This email doesn't exist");       //Komunikat błędu 
 
       return pNewPassword = null;                           //zwrucenie nulla jeżeli wystopił błąd 
+
+    }
+
+    public async Task<bool> ChecPasswordIsValidAsync(string xPassword, int xIdxUser) {
+
+      User pUser = await mUserRepository.GetAsync(xIdxUser);
+
+      if (pUser == null) return false;
+
+      string pHash = mEncrypter.GetHash(xPassword, pUser.Salt);
+
+      if (pHash != pUser.Password) return false;
+
+      return true;
 
     }
   }
