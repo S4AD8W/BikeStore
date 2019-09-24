@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using BikeStore.Extensions;
 using BikeStore.Infrastructure.Commands;
+using BikeStore.Infrastructure.Commands.Users;
 using BikeStore.Infrastructure.EF;
 using BikeStore.Infrastructure.Services;
 using BikeStore.ViewModels.Notfication;
@@ -64,15 +65,26 @@ namespace BikeStore.Controllers {
     }
 
     [HttpPost]
-    public async Task<bool> CheckOldPassword(string Password) {
+    [Authorize]
+    public async Task<bool> CheckOldPassword(string OldPassowrd) {
 
       var pUserIdetities = HttpContext.User.GetUserIdentities();
 
-      if (!await mUserService.ChecPasswordIsValidAsync(Password, pUserIdetities.IdxUser))
+      if (!await mUserService.CheckPasswordIsValidAsync(OldPassowrd, pUserIdetities.IdxUser))
         return false;
 
       return true;
 
+
+    }
+
+    [HttpPost]
+    [Authorize]
+    public async Task<string> ChangeOldPassword(ChangePasswordCommand xCommand) {
+
+
+      //TODO:W widoku przerobić na ajxa i dorobić alerty w stylu botstapowym 
+      return "Success";
     }
 
   }

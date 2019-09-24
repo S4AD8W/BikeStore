@@ -10,15 +10,12 @@ namespace BikeStore.Infrastructure.Services{
     //interfejs serwisu użytkownika 
 
     Task<cUserDto> GetUserAsync(string xEmail);
-
     Task<bool> RegisterAsync(Guid xUserId, string xEmail,
             string xUserName, string xUserSurname, string xPassword, string xRole);
-
     Task<bool> LoginAsync(string xEmail, string xPassword);
-
     Task<bool> ConfirmEmailAsync(Guid xUserId);
-
     Task<string> ResetPassword(string xEmail);
-    Task<bool> ChecPasswordIsValidAsync(string xPassword, int xIdxUser);
+    Task<bool> CheckPasswordIsValidAsync(string xPassword, int xIdxUser);
+    Task<bool> ChangePassword(string xNewPassword, Guid xUserUuId);
   }
 }

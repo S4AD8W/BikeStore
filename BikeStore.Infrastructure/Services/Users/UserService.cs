@@ -120,7 +120,7 @@ namespace BikeStore.Infrastructure.Services {
 
     }
 
-    public async Task<bool> ChecPasswordIsValidAsync(string xPassword, int xIdxUser) {
+    public async Task<bool> CheckPasswordIsValidAsync(string xPassword, int xIdxUser) {
 
       User pUser = await mUserRepository.GetAsync(xIdxUser);
 
@@ -131,6 +131,25 @@ namespace BikeStore.Infrastructure.Services {
       if (pHash != pUser.Password) return false;
 
       return true;
+
+    }
+
+    public async Task<bool> ChangePassword(string xNewPassword, Guid xUserUuId) {
+
+      User pUser;
+      string pNewPassword;
+      
+
+      pUser = await mUserRepository.GetAsync(xUserUuId);
+
+      if (pUser == null) {
+        return false;
+      }
+
+      pUser.SetPassword(mEncrypter.GetHash(xNewPassword, pUser.Salt));
+        await mUserRepository.UpdateAsync(pUser);
+        return true;
+
 
     }
   }
