@@ -7,5 +7,6 @@ namespace BikeStore.Infrastructure.Commands.Users {
 
     public string OldPassword { get; set; }
     public Guid UserUuid { get; set; }
+    public string xEmail { get; set; }
   }
 }

@@ -82,6 +82,10 @@ namespace BikeStore.Controllers {
     [Authorize]
     public async Task<string> ChangeOldPassword(ChangePasswordCommand xCommand) {
 
+      var pUserIdetities = HttpContext.User.GetUserIdentities();
+
+      xCommand.xEmail = pUserIdetities.Email;
+      await DispatchAsync(xCommand);
 
       //TODO:W widoku przerobić na ajxa i dorobić alerty w stylu botstapowym 
       return "Success";

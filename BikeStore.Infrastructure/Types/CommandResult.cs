@@ -13,9 +13,19 @@ namespace BikeStore.Infrastructure.Types {
       this.Message = xMessage;
     }
 
+    public void SetSuccess() {
+      this.IsSuccess = true;
+      this.Message = string.Empty;
+    }
+
     public void SetFailure(string xMessage) {
       this.IsSuccess = false;
       this.Message = xMessage;
+    }
+
+    public void SetFailure() {
+      this.IsSuccess = false;
+      this.Message = string.Empty;
     }
 
   }

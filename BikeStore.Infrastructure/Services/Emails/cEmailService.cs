@@ -65,5 +65,9 @@ namespace BikeStore.Infrastructure.Services.Emails {
       
      
     }
+
+    public  Task SendEmail(string xSendTo, string xMessage, string xSubiect) {
+      return Task.FromResult(mEmailClient.SendEmail(xSubiect, xMessage, xSendTo));
+    }
   }
 }
