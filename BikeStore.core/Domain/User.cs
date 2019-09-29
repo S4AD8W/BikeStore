@@ -100,5 +100,10 @@ namespace BikeStore.core.Domain {
       this.Salt = xSalt;
 
     }
+
+    public void UpdateAt() {
+      UpdatedAt = DateTime.UtcNow;
+    }
+
   }
 }

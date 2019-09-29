@@ -28,13 +28,23 @@ namespace BikeStore.Infrastructure.Services {
     }
 
 
-    public async Task<cUserDto> GetUserAsync(string xEmail) {
+    private bool CheckValidPassord (string xPassword, string xSalt, string xPasswordHash) {
+
+      string pHash = mEncrypter.GetHash(xPassword, xSalt);
+
+     if(pHash != xPasswordHash) return false;
+
+      return true;
+
+    }
+
+    public async Task<UserDTO> GetUserDTOAsync(string xEmail) {
       //funkcja zwracająca użytkownika
       //xEmail - email użytkownika 
 
       var pUser = await mUserRepository.GetAsync(xEmail);
 
-      return mMapper.Map<User, cUserDto>(pUser);
+      return mMapper.Map<User, UserDTO>(pUser);
 
     }
 
@@ -50,6 +60,8 @@ namespace BikeStore.Infrastructure.Services {
       string pHash = mEncrypter.GetHash(xPassword, pUser.Salt); //wygenerowanie Hasza z wprowadzonego chasła przez użytkownika
 
       if (pUser.Password == pHash) {                        //Porównanie z haszem z bazy danych czy się zgadza 
+        pUser.UpdateAt();
+        await mUserRepository.UpdateAsync(pUser);
         return true;
       }
 
@@ -97,12 +109,12 @@ namespace BikeStore.Infrastructure.Services {
 
       User pUser;
       string pNewPassword;
-      cUserDto pUserDto;
+      UserDTO pUserDto;
 
       pUser = await mUserRepository.GetAsync(xEmail);
 
       if (pUser != null) {
-        pUserDto = mMapper.Map<User, cUserDto>(pUser);
+        pUserDto = mMapper.Map<User, UserDTO>(pUser);
 
         pNewPassword = Guid.NewGuid().ToString("N").ToLower()
                        .Replace("1", "").Replace("o", "").Replace("0", "")
@@ -152,6 +164,25 @@ namespace BikeStore.Infrastructure.Services {
 
 
     }
+
+    public async Task<bool> ChangeEmailAsync(string xEmail, string xPassword, Guid xUserUuid)  {
+
+      User pUser = await mUserRepository.GetAsync(xUserUuid);
+
+      if(!this.CheckValidPassord(xPassword, pUser.Salt,pUser.Password)) {
+        return false;
+      }
+
+      pUser.SetEmail(xEmail);
+      await mUserRepository.UpdateAsync(pUser);
+
+      return true;
+
+    }
+
+
+
+    
   }
 
 }

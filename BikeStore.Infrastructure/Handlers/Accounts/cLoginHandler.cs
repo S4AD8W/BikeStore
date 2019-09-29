@@ -36,7 +36,7 @@ namespace BikeStore.Infrastructure.Handlers.Accounts {
 
       pIsLogin = await mUserService.LoginAsync(xCommand.Email, xCommand.Password);
       if (pIsLogin == true) {
-        cUserDto pUser = await mUserService.GetUserAsync(xCommand.Email);
+        UserDTO pUser = await mUserService.GetUserDTOAsync(xCommand.Email);
         var pUserPlaimsPrincipal = SetUserClaimsPrincipal(pUser.Role, pUser.Id.ToString(), pUser.Name, pUser.Surname, pUser.IdxUser, pUser.Email);
         mCache.SetUserClaims(pUser.Id, pUserPlaimsPrincipal);
         mMessage.UserId = pUser.Id;

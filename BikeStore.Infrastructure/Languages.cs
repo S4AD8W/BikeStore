@@ -37,7 +37,9 @@ namespace BikeStore.Infrastructure {
     NewPassword = 23,
     ConfirmNewPassword = 24,
     IncorrectPassword = 25,
-
+    Account = 26,
+    LastLogIn = 27,
+   
   }
 
   public class Languages {
@@ -123,6 +125,8 @@ namespace BikeStore.Infrastructure {
       AddText(TextEnum.NewPassword, "New password", "Nowe hasło");
       AddText(TextEnum.ConfirmNewPassword, "Confirm new password", "Potwierdź nowe hasło");
       AddText(TextEnum.IncorrectPassword, "Incorrect password", "Niepoprawne hasło");
+      AddText(TextEnum.Account, "Account", "Konto");
+      AddText(TextEnum.LastLogIn, "Last Log-in", "Ostatnie logowanie");
     }
 
     private void AddText(TextEnum xCntText, string xEN, string xPL) {

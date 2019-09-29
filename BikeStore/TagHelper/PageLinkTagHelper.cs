@@ -1,4 +1,4 @@
-﻿using BikeStore.ViewsModels;
+﻿using BikeStore.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.Routing;

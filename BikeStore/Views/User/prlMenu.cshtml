@@ -5,8 +5,8 @@
 </style>
 
 <div class="Test112 nav flex-column nav-pills " id="v-pills-tab" role="tablist" aria-orientation="vertical">
-    <a class="nav-link active">Home</a>
-    <a class="nav-link">Profile</a>
+    <a class="nav-link  @Html.IsSelected("User","UserAccount","active")" asp-action="UserAccount" asp-controller="User">@Languages.GetText(TextEnum.Account)</a>
+    <a class="nav-link  @Html.IsSelected("User","AccountDetails","active")" asp-action="AccountDetails" asp-controller="User">@Languages.GetText(TextEnum.AccountDetails)</a>
     <a class="nav-link">Messages</a>
     <a class="nav-link">Settings</a>
 </div>

@@ -7,7 +7,6 @@ using BikeStore.core.Domain;
 using BikeStore.core.Repositories;
 using BikeStore.Infrastructure.Commands;
 using BikeStore.ViewModels;
-using BikeStore.ViewsModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 

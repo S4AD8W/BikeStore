@@ -9,7 +9,7 @@ namespace BikeStore.Infrastructure.Services{
  public interface IUserService : IService  {
     //interfejs serwisu użytkownika 
 
-    Task<cUserDto> GetUserAsync(string xEmail);
+    Task<UserDTO> GetUserDTOAsync(string xEmail);
     Task<bool> RegisterAsync(Guid xUserId, string xEmail,
             string xUserName, string xUserSurname, string xPassword, string xRole);
     Task<bool> LoginAsync(string xEmail, string xPassword);
@@ -17,5 +17,6 @@ namespace BikeStore.Infrastructure.Services{
     Task<string> ResetPassword(string xEmail);
     Task<bool> CheckPasswordIsValidAsync(string xPassword, int xIdxUser);
     Task<bool> ChangePassword(string xNewPassword, Guid xUserUuId);
+    Task<bool> ChangeEmailAsync(string xEmail, string xPassword, Guid xUserUuid);
   }
 }

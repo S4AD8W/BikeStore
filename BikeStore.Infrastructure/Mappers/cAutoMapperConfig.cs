@@ -14,7 +14,7 @@ namespace BikeStore.Infrastructure.Mappers{
     public static IMapper Initialize()
             => new MapperConfiguration(cfg =>
               {
-                cfg.CreateMap<User, cUserDto>();            //Przykładowa konfiguracja mapowania obiektu z UserDto na User
+                cfg.CreateMap<User, UserDTO>();            //Przykładowa konfiguracja mapowania obiektu z UserDto na User
                 cfg.ValidateInlineMaps = false;
                 
             })

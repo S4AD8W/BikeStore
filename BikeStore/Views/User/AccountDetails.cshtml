@@ -3,6 +3,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@model BikeStore.ViewModels.Account.AccountDetailsVM
 
 <div class="row mt-3">
     <div class="col-sm-3 col-md-3">
@@ -17,19 +18,19 @@
             <div class="card-body">
                 <div class="row  p-2 mb-2 AccountSetingsBorder">
                     <div class="col-4 "><span class="ml-4" >@Languages.GetText(TextEnum.Name): </span></div>
-                    <div class="col-8 text-left">Foo</div>
+                    <div class="col-8 text-left">@Model.Name</div>
                 </div>
                 <div class="row AccountSetingsBorder mb-2 p-2">
                     <div class="col-4 "> <span class="ml-4">@Languages.GetText(TextEnum.SurName): </span></div>
-                    <div class="col-8 text-left">Foo</div>
+                    <div class="col-8 text-left">@Model.Surname</div>
                 </div>
                 <div class="row AccountSetingsBorder mb-2 p-2">
-                    <div class="col-4 "><span class="ml-4"> @Languages.GetText(TextEnum.SurName):</span> </div>
-                    <div class="col-8 text-left">Foo</div>
+                    <div class="col-4 "><span class="ml-4"> @Languages.GetText(TextEnum.LastLogIn):</span> </div>
+                    <div class="col-8 text-left">@Model.UpdatedAt.ToLocalTime()</div>
                 </div>
                 <div class="row AccountSetingsBorder mb-2 p-2">
                     <div class="col-4 "><span class="ml-4"> @Languages.GetText(TextEnum.Since): </span></div>
-                    <div class="col-8 text-left">Foo</div>
+                    <div class="col-8 text-left">@Model.CreatedAt.ToLocalTime()</div>
                 </div>
             </div>
         </div>
@@ -44,7 +45,7 @@
                     <span class="ml-4"><a asp-action="ChangePassword" asp-controller="User">@Languages.GetText(TextEnum.ChangePassword)</a></span>
                 </div>
                 <div class="row mb-3  AccountSetingsBorder">
-                    <span class="ml-4"><a>@Languages.GetText(TextEnum.ChangeEmail)</a></span>
+                    <span class="ml-4"><a asp-action="ChangeEmail" asp-controller="User">@Languages.GetText(TextEnum.ChangeEmail)</a></span>
                 </div>
             </div>
         </div>

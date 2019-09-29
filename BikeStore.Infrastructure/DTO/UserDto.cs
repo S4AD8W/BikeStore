@@ -4,7 +4,7 @@ using System.Text;
 
 namespace BikeStore.Infrastructure.DTO{
 
- public class cUserDto  {
+ public class UserDTO  {
 
     public DateTime CreatedAt { get; set; }
     public string Email { get; set; }

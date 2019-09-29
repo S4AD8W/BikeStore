@@ -8,7 +8,7 @@ using BikeStore.Controllers;
 using BikeStore.core.Domain.Notification;
 using BikeStore.Infrastructure.Commands;
 using BikeStore.Infrastructure.EF;
-using BikeStore.ViewsModels;
+using BikeStore.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 

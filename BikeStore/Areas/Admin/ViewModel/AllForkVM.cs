@@ -1,5 +1,5 @@
 ﻿using BikeStore.core.Domain.Notification;
-using BikeStore.ViewsModels;
+using BikeStore.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;

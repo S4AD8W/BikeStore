@@ -6,8 +6,10 @@ using AutoMapper;
 using BikeStore.Extensions;
 using BikeStore.Infrastructure.Commands;
 using BikeStore.Infrastructure.Commands.Users;
+using BikeStore.Infrastructure.DTO;
 using BikeStore.Infrastructure.EF;
 using BikeStore.Infrastructure.Services;
+using BikeStore.ViewModels.Account;
 using BikeStore.ViewModels.Notfication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -47,8 +49,17 @@ namespace BikeStore.Controllers {
     }
 
     [HttpGet]
-    public IActionResult AccountDetails()
-    => View();
+    [Authorize]
+    public async Task<IActionResult> AccountDetails() {
+
+      var pUserIdentiti = HttpContext.User.GetUserIdentities();
+      UserDTO pUserDTO = await mUserService.GetUserDTOAsync(pUserIdentiti.Email);
+      AccountDetailsVM pVM = mMapper.Map<UserDTO, AccountDetailsVM>(pUserDTO);
+
+      return View(pVM);
+
+    }
+    
 
     [HttpGet]
     public IActionResult ChangePassword() {
@@ -58,6 +69,7 @@ namespace BikeStore.Controllers {
     }
 
     [HttpGet]
+    [Authorize]
     public IActionResult ChangeEmail() {
 
       return View();
@@ -70,7 +82,7 @@ namespace BikeStore.Controllers {
 
       var pUserIdetities = HttpContext.User.GetUserIdentities();
 
-      if (!await mUserService.CheckPasswordIsValidAsync(OldPassowrd, pUserIdetities.IdxUser))
+      if(!await mUserService.CheckPasswordIsValidAsync(OldPassowrd, pUserIdetities.IdxUser))
         return false;
 
       return true;
@@ -85,11 +97,30 @@ namespace BikeStore.Controllers {
       var pUserIdetities = HttpContext.User.GetUserIdentities();
 
       xCommand.xEmail = pUserIdetities.Email;
+      xCommand.UserUuid = pUserIdetities.UserUuid;
       await DispatchAsync(xCommand);
 
-      //TODO:W widoku przerobić na ajxa i dorobić alerty w stylu botstapowym 
+      //TODO:W widoku przerobić na ajxa i dorobić alerty w stylu stravy
       return "Success";
+
     }
 
+    [HttpPost]
+    [Authorize]
+
+    public async Task<IActionResult> ChangeEmail(ChangeEmailComman xCommand) {
+
+      var pUserIdetities = HttpContext.User.GetUserIdentities();
+      xCommand.UserUuId = pUserIdetities.UserUuid;
+
+      await DispatchAsync(xCommand);
+
+      if(!CommandResult.IsSuccess) {
+        ModelState.AddModelError(string.Empty, CommandResult.Message);
+        return View();
+      }
+
+      return RedirectToAction("AccountDetails");
+    }
   }
 }

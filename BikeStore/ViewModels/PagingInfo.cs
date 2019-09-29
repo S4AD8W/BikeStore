@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BikeStore.ViewsModels {
+namespace BikeStore.ViewModels {
   public class PagingInfo {
 
     public int TotalItems { get; set; }
