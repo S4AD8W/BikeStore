@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using BikeStore.core.Domain.Product;
 
 namespace BikeStore.core.Domain {
   public class Cart {
 
     private List<CartLine> lineCollection = new List<CartLine>();
 
-    public virtual void AddItem(Product product, int quantity) {
+    public virtual void AddItem(BikeStore.core.Domain.Product.Product product, int quantity) {
       CartLine line = lineCollection
-          .Where(p => p.Product.ProductID == product.ProductID)
+          .Where(p => p.Product.IdxProduct == product.IdxProduct)
           .FirstOrDefault();
 
       if (line == null) {
@@ -23,9 +24,9 @@ namespace BikeStore.core.Domain {
       }
     }
 
-    public virtual void RemoveLine(Product product) =>
-        lineCollection.RemoveAll(l => l.Product.ProductID ==
-            product.ProductID);
+    public virtual void RemoveLine(BikeStore.core.Domain.Product.Product product) =>
+        lineCollection.RemoveAll(l => l.Product.IdxProduct ==
+            product.IdxProduct);
 
     public virtual decimal ComputeTotalValue() =>
         lineCollection.Sum(e => e.Product.Price * e.Quantity);

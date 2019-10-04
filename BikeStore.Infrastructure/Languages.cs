@@ -40,6 +40,8 @@ namespace BikeStore.Infrastructure {
     Account = 26,
     LastLogIn = 27,
     Notifications = 28,
+    Shop= 29,
+    AddProduct = 30,
 
   }
 
@@ -129,6 +131,8 @@ namespace BikeStore.Infrastructure {
       AddText(TextEnum.Account, "Account", "Konto");
       AddText(TextEnum.LastLogIn, "Last Log-in", "Ostatnie logowanie");
       AddText(TextEnum.Notifications, "Notifications", "Zgłoszenia");
+      AddText(TextEnum.Shop, "Shop", "Sklep");
+      AddText(TextEnum.AddProduct, "Add product", "Dodaj produkt");
     }
 
     private void AddText(TextEnum xCntText, string xEN, string xPL) {

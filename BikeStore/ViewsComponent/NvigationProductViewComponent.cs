@@ -18,7 +18,7 @@ namespace BikeStore.Component {
     public IViewComponentResult Invoke() {
       ViewBag.SelectedCategory = RouteData?.Values["category"];
       return View(mProductRepository.Product
-          .Select(x => x.Category)
+          .Select(x => x.IdxCategory)
           .Distinct()
           .OrderBy(x => x));
     }

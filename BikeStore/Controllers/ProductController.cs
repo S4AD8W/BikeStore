@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using BikeStore.core.Domain;
+using BikeStore.core.Domain.Product;
 using BikeStore.core.Repositories;
 using BikeStore.Infrastructure.Commands;
 using BikeStore.ViewModels;
@@ -22,22 +23,22 @@ namespace BikeStore.Controllers {
     }
 
     public async Task<IActionResult> ListProduct(string category, int productpage = 1) 
-      => View(new ProductsListVM {
-        Products = mProductsRepository.Product
-                    .Where(p => category == null || p.Category == category)
-                    .OrderBy(p => p.ProductID)
-                    .Skip((productpage - 1) * mPageSize)
-                    .Take(mPageSize),
-        PagingInfo = new PagingInfo {
-          CurrentPage = productpage,
-          ItemsPerPage = mPageSize,
-          TotalItems = category == null ?
-                        mProductsRepository.Product.Count() :
-                        mProductsRepository.Product.Where(e =>
-                            e.Category == category).Count()
-        },
-        CurrentCategory = category
-      });
+      => View(//new ProductsListVM {
+      //  Products = mProductsRepository.Product
+      //              .Where(p => category == null || p.Category == category)
+      //              .OrderBy(p => p.IdxProduct)
+      //              .Skip((productpage - 1) * mPageSize)
+      //              .Take(mPageSize),
+      //  PagingInfo = new PagingInfo {
+      //    CurrentPage = productpage,
+      //    ItemsPerPage = mPageSize,
+      //    TotalItems = category == null ?
+      //                  mProductsRepository.Product.Count() :
+      //                  mProductsRepository.Product.Where(e =>
+      //                      e.Category == category).Count()
+      //  },
+      //  CurrentCategory = category
+      );
     [HttpGet]
     public IActionResult AddProduct()
       => View();
@@ -53,7 +54,7 @@ namespace BikeStore.Controllers {
     [HttpGet]
     public async Task<IActionResult> EditProduct(int xId) {
 
-      Product pProduct = await mProductsRepository.Product.SingleOrDefaultAsync(x => x.ProductID == xId);
+      Product pProduct = await mProductsRepository.Product.SingleOrDefaultAsync(x => x.IdxProduct == xId);
 
       return View(pProduct);
 
@@ -70,7 +71,7 @@ namespace BikeStore.Controllers {
     [HttpGet]
     public async Task<IActionResult>DeleteProduct(int xId)    {
 
-      Product pProduct = await mProductsRepository.Product.SingleOrDefaultAsync(x => x.ProductID == xId);
+      Product pProduct = await mProductsRepository.Product.SingleOrDefaultAsync(x => x.IdxProduct == xId);
        await mProductsRepository.DeleteProductAsync(pProduct);
 
       return RedirectToAction("ListProduct");

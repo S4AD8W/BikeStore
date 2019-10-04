@@ -39,12 +39,12 @@
           @item.Price.ToString("c")
         </td>
         <td>
-          @Html.DisplayFor(modelItem => item.Category)
+          @Html.DisplayFor(modelItem => item.IdxCategory)
         </td>
         <td>
-          <a asp-action="EditProduct" asp-route-xId="@item.ProductID">Edit</a> |
+          <a asp-action="EditProduct" asp-route-xId="@item.IdxProduct">Edit</a> |
           @*<a asp-action="Details" asp-route-id="@item.ProductID">Details</a> |*@
-          <a asp-action="DeleteProduct" asp-route-xId="@item.ProductID">Delete</a>
+          <a asp-action="DeleteProduct" asp-route-xId="@item.IdxProduct">Delete</a>
         </td>
       </tr>
 

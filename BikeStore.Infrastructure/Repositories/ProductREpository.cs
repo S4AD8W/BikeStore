@@ -1,4 +1,5 @@
 ﻿using BikeStore.core.Domain;
+using BikeStore.core.Domain.Product;
 using BikeStore.core.Repositories;
 using BikeStore.Infrastructure.EF;
 using Microsoft.EntityFrameworkCore;
@@ -31,7 +32,7 @@ namespace BikeStore.Infrastructure.Repositories {
 
     public async Task DeleteProductAsync(int xId) {
 
-      Product pProduct = await mDB.Product.SingleOrDefaultAsync(x => x.ProductID ==xId);
+      Product pProduct = await mDB.Product.SingleOrDefaultAsync(x => x.IdxProduct ==xId);
 
       if (pProduct != null) {
         mDB.Remove(pProduct);

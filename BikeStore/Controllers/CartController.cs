@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BikeStore.core.Domain;
+using BikeStore.core.Domain.Product;
 using BikeStore.core.Repositories;
 using BikeStore.Infrastructure.Extensions;
 using BikeStore.ViewModels;
@@ -26,7 +27,7 @@ namespace BikeStore.Controllers
 
     public RedirectToActionResult AddToCart(int productId, string returnUrl) {
       Product product = mProductRepository.Product
-          .FirstOrDefault(p => p.ProductID == productId);
+          .FirstOrDefault(p => p.IdxProduct == productId);
 
       if (product != null) {
         Cart cart = GetCart();
@@ -40,7 +41,7 @@ namespace BikeStore.Controllers
     public RedirectToActionResult RemoveFromCart(int productId,
             string returnUrl) {
       Product product = mProductRepository.Product
-          .FirstOrDefault(p => p.ProductID == productId);
+          .FirstOrDefault(p => p.IdxProduct == productId);
 
       if (product != null) {
         Cart cart = GetCart();

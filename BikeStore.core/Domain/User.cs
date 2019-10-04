@@ -22,7 +22,7 @@ namespace BikeStore.core.Domain {
     public DateTime UpdatedAt { get; private set; }
 
     public ICollection<ForkNotification> ForkNotifications { get; set; }
-    public ICollection<ForkNotificationMessage> ForkNotificationMessages { get; set; }
+   
 
     protected User() {
 
