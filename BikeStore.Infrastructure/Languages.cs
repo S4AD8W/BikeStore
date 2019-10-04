@@ -42,7 +42,11 @@ namespace BikeStore.Infrastructure {
     Notifications = 28,
     Shop= 29,
     AddProduct = 30,
-
+    Name_Product = 31,
+    Description = 32,
+    Price = 33,
+    Category = 34,
+    Images = 35,
   }
 
   public class Languages {
@@ -133,6 +137,11 @@ namespace BikeStore.Infrastructure {
       AddText(TextEnum.Notifications, "Notifications", "Zgłoszenia");
       AddText(TextEnum.Shop, "Shop", "Sklep");
       AddText(TextEnum.AddProduct, "Add product", "Dodaj produkt");
+      AddText(TextEnum.Name_Product, "Name", "Nazwa");
+      AddText(TextEnum.Description, "Description", "Opis");
+      AddText(TextEnum.Price, "Price", "Cena");
+      AddText(TextEnum.Images, "Images", "Zdjęcia");
+      AddText(TextEnum.Category, "Category", "Kategoria");
     }
 
     private void AddText(TextEnum xCntText, string xEN, string xPL) {

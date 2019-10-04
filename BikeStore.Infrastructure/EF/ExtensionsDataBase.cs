@@ -148,7 +148,7 @@ CREATE TABLE IF NOT EXISTS {DB_TABLE.DBInfo} (
         CREATE TABLE IF NOT EXISTS {DB_TABLE.Product}(
           {nameof(core.Domain.Product.Product.IdxProduct)} SERIAL PRIMARY KEY,
           {nameof(core.Domain.Product.Product.Name)} TEXT,
-          {nameof(core.Domain.Product.Product.Descryption)} TEXT,
+          {nameof(core.Domain.Product.Product.Description)} TEXT,
           {nameof(core.Domain.Product.Product.Price)} DECIMAL DEFAULT 0.0,
           {nameof(core.Domain.Product.Product.IdxCategory)} INTEGER REFERENCES {DB_TABLE.ProductCategory} ({nameof(BikeStore.core.Domain.Product.ProductCategory.IdxProductCategory)}) ON DELETE SET NULL,
           {nameof(core.Domain.Product.Product.CreateAt)} timestamp,
