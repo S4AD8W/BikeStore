@@ -13,6 +13,8 @@ public class BikeStoreContext : DbContext{
     public DbSet<ForkNotification> ForksNotifications { get; set; }
     public DbSet<Product> Product { get; set; }
     public DbSet<ForkNotificationImage> ForkNotficationImages { get; set; }
+    public DbSet<ProductCategory> ProductCategories { get; set; }
+    public DbSet<ProductImage> ProductImages { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             => optionsBuilder.UseNpgsql("Server=127.0.0.1;Port=5432;Database=BikeStore;Username=postgres;Password=testt");

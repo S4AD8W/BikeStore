@@ -13,11 +13,12 @@ namespace BikeStore.Infrastructure.EF {
     public const string DBInfo = "dbinfo";
     public const string Product = "product";
     public const string ProductCategory = "productcategory";
+    public const string ProductImages = "productimages";
   }
 
   public static class ExtensionsDataBase {
 
-    private const int DB_VERSION = (1);
+    private const int DB_VERSION = (2);
 
     public static IWebHost UpdateDatabase(this IWebHost xIWebHost) {
       // funkcja jako rozszrzenie, aktualizująca bazę danych
@@ -79,6 +80,9 @@ namespace BikeStore.Infrastructure.EF {
         yield return pSql;
       }
 
+      foreach (string pSql in GetSqlToCreateTableProductImages()) {
+        yield return pSql;
+      }
 
     }
     private static int GetDBVersion(DatabaseFacade xDatabase) {
@@ -138,17 +142,17 @@ CREATE TABLE IF NOT EXISTS {DB_TABLE.DBInfo} (
 
     }
 
-    private static IEnumerable<string>GetSqlToCreateTableProduct() {
+    private static IEnumerable<string> GetSqlToCreateTableProduct() {
 
       yield return $@"
         CREATE TABLE IF NOT EXISTS {DB_TABLE.Product}(
-        IdxProductCategory SERIAL PRIMARY KEY,
-        Name TEXT,
-        Descryption TEXT,
-        Price DECIMAL DEFAULT 0.0,
-        IdxCategory INTEGER REFERENCES {DB_TABLE.ProductCategory} ({nameof(BikeStore.core.Domain.Product.ProductCategory.IdxProductCategory)}) ON DELETE SET NULL,
-        CreateAt timestamp,
-        EditAt   timestamp
+          {nameof(core.Domain.Product.Product.IdxProduct)} SERIAL PRIMARY KEY,
+          {nameof(core.Domain.Product.Product.Name)} TEXT,
+          {nameof(core.Domain.Product.Product.Descryption)} TEXT,
+          {nameof(core.Domain.Product.Product.Price)} DECIMAL DEFAULT 0.0,
+          {nameof(core.Domain.Product.Product.IdxCategory)} INTEGER REFERENCES {DB_TABLE.ProductCategory} ({nameof(BikeStore.core.Domain.Product.ProductCategory.IdxProductCategory)}) ON DELETE SET NULL,
+          {nameof(core.Domain.Product.Product.CreateAt)} timestamp,
+          {nameof(core.Domain.Product.Product.EditAt)}   timestamp
         )";
     }
 
@@ -160,6 +164,18 @@ CREATE TABLE IF NOT EXISTS {DB_TABLE.DBInfo} (
             Name TEXT
 
           )";
+    }
+
+    private static IEnumerable<string> GetSqlToCreateTableProductImages() {
+
+      yield return $@"
+        CREATE TABLE IF NOT EXISTS {DB_TABLE.ProductImages}(
+          {nameof(core.Domain.Product.ProductImage.IdxProductImage)} SERIAL PRIMARY KEY, 
+          {nameof(core.Domain.Product.ProductImage.IdxProduct)}  INTEGER REFERENCES {DB_TABLE.Product} ({nameof(BikeStore.core.Domain.Product.Product.IdxProduct)}) ON DELETE CASCADE,
+          {nameof(core.Domain.Product.ProductImage.Name)} TEXT,
+          {nameof(core.Domain.Product.ProductImage.Size)} INTEGER,
+          {nameof(core.Domain.Product.ProductImage.Content)} BYTEA
+      )";
     }
 
   }
