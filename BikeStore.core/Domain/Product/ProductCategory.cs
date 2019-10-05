@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace BikeStore.core.Domain.Product {
+namespace BikeStore.core.Domain.Product_NS {
   public class ProductCategory {
 
     [Key]

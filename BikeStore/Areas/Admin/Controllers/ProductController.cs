@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using BikeStore.Areas.Admin.ViewModel.Product;
 using BikeStore.Controllers;
-using BikeStore.core.Domain.Product;
+using BikeStore.core.Domain.Product_NS;
 using BikeStore.Infrastructure.Commands;
 using BikeStore.Infrastructure.Commands.Product;
 using BikeStore.Infrastructure.EF;

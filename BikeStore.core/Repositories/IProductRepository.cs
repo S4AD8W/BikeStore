@@ -1,5 +1,5 @@
 ﻿using BikeStore.core.Domain;
-using BikeStore.core.Domain.Product;
+using BikeStore.core.Domain.Product_NS;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -1,5 +1,5 @@
 ﻿using BikeStore.core.Domain;
-using BikeStore.core.Domain.Product;
+using BikeStore.core.Domain.Product_NS;
 using BikeStore.core.Repositories;
 using BikeStore.Infrastructure.EF;
 using Microsoft.EntityFrameworkCore;

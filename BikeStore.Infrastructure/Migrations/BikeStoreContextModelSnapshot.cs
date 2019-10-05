@@ -69,7 +69,7 @@ namespace BikeStore.Infrastructure.Migrations
                     b.ToTable("ForkNotficationImages");
                 });
 
-            modelBuilder.Entity("BikeStore.core.Domain.Product", b =>
+            modelBuilder.Entity("BikeStore.core.Domain.Product_NS", b =>
                 {
                     b.Property<int>("ProductID")
                         .ValueGeneratedOnAdd();

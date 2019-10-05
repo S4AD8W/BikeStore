@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using BikeStore.core.Domain;
-using BikeStore.core.Domain.Product;
+using BikeStore.core.Domain.Product_NS;
 using BikeStore.core.Repositories;
 using BikeStore.Infrastructure.Commands;
 using BikeStore.ViewModels;
