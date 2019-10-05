@@ -10,5 +10,15 @@ namespace BikeStore.core.Domain.Product {
     [Key]
     public int IdxProductCategory { get; private set; }
     public string Name { get; private set; }
+
+
+    public ProductCategory() {
+
+    }
+
+    public ProductCategory(string xName) {
+      this.Name = xName;
+    }
+   
   }
 }

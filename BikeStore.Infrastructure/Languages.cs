@@ -47,6 +47,8 @@ namespace BikeStore.Infrastructure {
     Price = 33,
     Category = 34,
     Images = 35,
+    AddCategory = 36,
+    Confirm = 37,
   }
 
   public class Languages {
@@ -142,6 +144,8 @@ namespace BikeStore.Infrastructure {
       AddText(TextEnum.Price, "Price", "Cena");
       AddText(TextEnum.Images, "Images", "Zdjęcia");
       AddText(TextEnum.Category, "Category", "Kategoria");
+      AddText(TextEnum.AddCategory, "Add category", "Dodaj kategorie");
+      AddText(TextEnum.Confirm, "Confirm", "Zatwierdź");
     }
 
     private void AddText(TextEnum xCntText, string xEN, string xPL) {
