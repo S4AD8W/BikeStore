@@ -5,13 +5,7 @@ using System.Text;
 
 namespace BikeStore.core.Domain.Product_NS {
   public class Product {
-    public Product(int xIdxProduct, string xNe, string xDescription, decimal xPrice, int xIdxCategory) {
-      IdxProduct = xIdxProduct;
-      Name = xNe;
-      Description = xDescription;
-      Price = xPrice;
-      IdxCategory = xIdxCategory;
-    }
+    
 
     [Key]
     public int IdxProduct { get; private set; }
@@ -21,6 +15,16 @@ namespace BikeStore.core.Domain.Product_NS {
     public int IdxCategory { get; private set; }
     public DateTime CreateAt { get; private set; }
     public DateTime EditAt { get; private set; }
+
+
+    public Product(string xNe, string xDescription, decimal xPrice, int xIdxCategory) {
+      Name = xNe;
+      Description = xDescription;
+      Price = xPrice;
+      IdxCategory = xIdxCategory;
+      this.CreateAt = DateTime.UtcNow;
+      this.EditAt = DateTime.UtcNow;
+    } 
 
   }
 

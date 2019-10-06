@@ -1,5 +1,5 @@
 define( [
-	"../../core",
+	"../../core"
 	"../../selector"
 ], function( jQuery ) {
 	"use strict";

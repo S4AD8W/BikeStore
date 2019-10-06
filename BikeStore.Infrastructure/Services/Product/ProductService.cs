@@ -15,10 +15,11 @@ namespace BikeStore.Infrastructure.Services.Product_NS {
       mProductRepository = xProductRepository;
     }
 
-    public Task<bool> AddNewProduct(AddProductCommand xCommand) {
+    public async Task<bool> AddNewProduct(AddProductCommand xCommand) {
 
-      Product pProduct = new Product();
-      
+      Product pProduct = new Product(xCommand.Name, xCommand.Description, xCommand.Price, xCommand.IdxCategory);
+      await mProductRepository.AddProductAsync(pProduct);  
+
       throw new NotImplementedException();
     }
   }
