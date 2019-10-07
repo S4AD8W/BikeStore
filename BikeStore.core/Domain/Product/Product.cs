@@ -17,6 +17,10 @@ namespace BikeStore.core.Domain.Product_NS {
     public DateTime EditAt { get; private set; }
 
 
+    public Product() {
+
+    }
+
     public Product(string xNe, string xDescription, decimal xPrice, int xIdxCategory) {
       Name = xNe;
       Description = xDescription;

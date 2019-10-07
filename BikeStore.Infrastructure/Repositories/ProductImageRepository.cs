@@ -36,16 +36,21 @@ namespace BikeStore.Infrastructure.Repositories {
 
     }
 
-    public Task<IEnumerable<ProductImage>> GetAllAsync() {
-      throw new NotImplementedException();
+    public async Task<IEnumerable<ProductImage>> GetAllAsync() {
+      return await mDB.ProductImages.ToListAsync();
     }
 
-    public Task<ProductImage> GetProductImage(int xIdxProductImage) {
-      throw new NotImplementedException();
+    public async Task<ProductImage> GetProductImage(int xIdxProductImage) {
+      return await mDB.ProductImages.FirstOrDefaultAsync(x => x.IdxProductImage == xIdxProductImage);
     }
 
-    public Task UpdateAsync(ProductImage xProductImage) {
-      throw new NotImplementedException();
+    public async Task UpdateAsync(ProductImage xProductImage) {
+
+      using (BikeStoreContext pDB = new BikeStoreContext()) {
+        pDB.ProductImages.Update(xProductImage);
+       await pDB.SaveChangesAsync();
+      }
+
     }
   }
 }

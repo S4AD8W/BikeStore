@@ -19,9 +19,10 @@ namespace BikeStore.Infrastructure.Repositories {
 
     public IQueryable<Product> Product => mDB.Product;
 
-    public async Task AddProductAsync(Product xProduct) {
+    public async Task<int> AddProductAsync(Product xProduct) {
       await mDB.Product.AddAsync(xProduct);
       await mDB.SaveChangesAsync();
+      return xProduct.IdxProduct;
     }
 
     public async Task DeleteProductAsync(Product xProduct) {

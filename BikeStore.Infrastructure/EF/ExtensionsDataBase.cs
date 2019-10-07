@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Text;
-
+using BikeStore.core.Domain.Product_NS;
 namespace BikeStore.Infrastructure.EF {
 
   public abstract class DB_TABLE {
@@ -146,13 +146,13 @@ CREATE TABLE IF NOT EXISTS {DB_TABLE.DBInfo} (
 
       yield return $@"
         CREATE TABLE IF NOT EXISTS {DB_TABLE.Product}(
-          {nameof(core.Domain.Product.Product.IdxProduct)} SERIAL PRIMARY KEY,
-          {nameof(core.Domain.Product.Product.Name)} TEXT,
-          {nameof(core.Domain.Product.Product.Description)} TEXT,
-          {nameof(core.Domain.Product.Product.Price)} DECIMAL DEFAULT 0.0,
-          {nameof(core.Domain.Product.Product.IdxCategory)} INTEGER REFERENCES {DB_TABLE.ProductCategory} ({nameof(BikeStore.core.Domain.Product_NS.ProductCategory.IdxProductCategory)}) ON DELETE SET NULL,
-          {nameof(core.Domain.Product.Product.CreateAt)} timestamp,
-          {nameof(core.Domain.Product.Product.EditAt)}   timestamp
+          {nameof(Product.IdxProduct)} SERIAL PRIMARY KEY,
+          {nameof(Product.Name)} TEXT,
+          {nameof(Product.Description)} TEXT,
+          {nameof(Product.Price)} DECIMAL DEFAULT 0.0,
+          {nameof(Product.IdxCategory)} INTEGER REFERENCES {DB_TABLE.ProductCategory} ({nameof(BikeStore.core.Domain.Product_NS.ProductCategory.IdxProductCategory)}) ON DELETE SET NULL,
+          {nameof(Product.CreateAt)} timestamp,
+          {nameof(Product.EditAt)}   timestamp
         )";
     }
 
@@ -170,11 +170,11 @@ CREATE TABLE IF NOT EXISTS {DB_TABLE.DBInfo} (
 
       yield return $@"
         CREATE TABLE IF NOT EXISTS {DB_TABLE.ProductImages}(
-          {nameof(core.Domain.Product.ProductImage.IdxProductImage)} SERIAL PRIMARY KEY, 
-          {nameof(core.Domain.Product.ProductImage.IdxProduct)}  INTEGER REFERENCES {DB_TABLE.Product} ({nameof(BikeStore.core.Domain.Product_NS.Product.IdxProduct)}) ON DELETE CASCADE,
-          {nameof(core.Domain.Product.ProductImage.Name)} TEXT,
-          {nameof(core.Domain.Product.ProductImage.Size)} INTEGER,
-          {nameof(core.Domain.Product.ProductImage.Content)} BYTEA
+          {nameof(ProductImage.IdxProductImage)} SERIAL PRIMARY KEY, 
+          {nameof(ProductImage.IdxProduct)}  INTEGER REFERENCES {DB_TABLE.Product} ({nameof(BikeStore.core.Domain.Product_NS.Product.IdxProduct)}) ON DELETE CASCADE,
+          {nameof(ProductImage.Name)} TEXT,
+          {nameof(ProductImage.Size)} INTEGER,
+          {nameof(ProductImage.Content)} BYTEA
       )";
     }
 

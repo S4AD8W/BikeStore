@@ -7,6 +7,6 @@ using System.Threading.Tasks;
 namespace BikeStore.Infrastructure.Services.Product_NS {
   public interface IProductService : IService {
 
-    Task<bool> AddNewProduct(AddProductCommand xCommand);
+    Task<bool> AddNewProductAsync(AddProductCommand xCommand);
   }
 }

@@ -57,7 +57,7 @@ namespace BikeStore.Areas.Admin.Controllers {
 
       await DispatchAsync(pCommand);
 
-      return View();
+      return RedirectToAction("AddProduct");
 
     }
 

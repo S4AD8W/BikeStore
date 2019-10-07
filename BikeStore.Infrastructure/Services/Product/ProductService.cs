@@ -10,17 +10,27 @@ namespace BikeStore.Infrastructure.Services.Product_NS {
   public class ProductService : IProductService {
 
     private readonly IProductsRepository mProductRepository;
+    private readonly IProductImageRepository mProductImageRepository;
 
-    public ProductService(IProductsRepository xProductRepository) {
+    public ProductService(IProductsRepository xProductRepository, IProductImageRepository xProductImageRepository) {
       mProductRepository = xProductRepository;
+      mProductImageRepository = xProductImageRepository;
     }
 
-    public async Task<bool> AddNewProduct(AddProductCommand xCommand) {
+    public async Task<bool> AddNewProductAsync(AddProductCommand xCommand) {
 
       Product pProduct = new Product(xCommand.Name, xCommand.Description, xCommand.Price, xCommand.IdxCategory);
-      await mProductRepository.AddProductAsync(pProduct);  
 
-      throw new NotImplementedException();
+      if (await mProductRepository.AddProductAsync(pProduct) ==0) return false;
+
+      foreach (var pItem in xCommand.Images) {
+        pItem.IdxProduct = pProduct.IdxProduct;
+        await mProductImageRepository.AddAsync(pItem);
+      }
+
+      return true;
+
     }
+
   }
 }
