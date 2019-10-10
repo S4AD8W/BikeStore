@@ -7,22 +7,32 @@ using AutoMapper;
 using BikeStore.Areas.Admin.ViewModel.Product;
 using BikeStore.Controllers;
 using BikeStore.core.Domain.Product_NS;
+using BikeStore.core.Repositories;
 using BikeStore.Infrastructure.Commands;
 using BikeStore.Infrastructure.Commands.Product;
 using BikeStore.Infrastructure.EF;
+using BikeStore.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace BikeStore.Areas.Admin.Controllers {
   [Area("Admin")]
   public class ProductController : BikeStoreControllerBaseController {
 
     private readonly BikeStoreContext mDB;
+    private readonly IProductsRepository mProductsRepository;
+    private readonly IProductsCategoryRepository mProductsCategoryRepository;
+    private int mPageSize = 15;
 
-    public ProductController(BikeStoreContext xDB, IMapper xMapper, ICommandDispatcher xCommandDispatcher)
+    public ProductController(BikeStoreContext xDB, IMapper xMapper, ICommandDispatcher xCommandDispatcher, IProductsRepository xProductsRepository,
+      IProductsCategoryRepository xProductsCategoryRepository)
            : base(xCommandDispatcher, xMapper) {
       mDB = xDB;
+      mProductsRepository = xProductsRepository;
+      mProductsCategoryRepository = xProductsCategoryRepository;
     }
+
     [HttpGet]
     public async Task<IActionResult> AddProduct() {
 
@@ -35,7 +45,7 @@ namespace BikeStore.Areas.Admin.Controllers {
     }
 
     [HttpPost]
-    public async Task<IActionResult> AddProduct( ProductVM xVM, ICollection<IFormFile> xFiles) {
+    public async Task<IActionResult> AddProduct(ProductVM xVM, ICollection<IFormFile> xFiles) {
 
       AddProductCommand pCommand;
 
@@ -72,5 +82,30 @@ namespace BikeStore.Areas.Admin.Controllers {
       //TODO:Dorobić ajaxem sprawdzanie czy kategoria produktu już istnieje 
     }
 
+
+    [HttpGet]
+    public async Task<IActionResult> List(int xIdxCategory = 0, int xProductPerPage = 1) {
+
+      string pCurrentCategory = string.Empty;
+      if (xIdxCategory != 0) pCurrentCategory = mProductsCategoryRepository.ProductsCategory.FirstOrDefault(x => x.IdxProductCategory == xIdxCategory).Name;
+
+      return View(new ProductsListVM {
+        Products = mProductsRepository.Products
+                            .Where(p => xIdxCategory == 0 || p.IdxCategory == xIdxCategory)
+                            .OrderBy(p => p.IdxProduct)
+                            .Skip((xProductPerPage - 1) * mPageSize)
+                            .Take(mPageSize),
+        PagingInfo = new PagingInfo {
+          CurrentPage = xProductPerPage,
+          ItemsPerPage = mPageSize,
+          TotalItems = xIdxCategory == 0 ?
+                                mProductsRepository.Products.Count() :
+                                mProductsRepository.Products.Where(e =>
+                                    e.IdxCategory == xIdxCategory).Count()
+        },
+        CurrentCategory = pCurrentCategory
+      });
+
+    }
   }
 }

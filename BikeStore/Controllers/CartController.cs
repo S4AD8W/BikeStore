@@ -26,7 +26,7 @@ namespace BikeStore.Controllers
     }
 
     public RedirectToActionResult AddToCart(int productId, string returnUrl) {
-      Product product = mProductRepository.Product
+      Product product = mProductRepository.Products
           .FirstOrDefault(p => p.IdxProduct == productId);
 
       if (product != null) {
@@ -40,7 +40,7 @@ namespace BikeStore.Controllers
 
     public RedirectToActionResult RemoveFromCart(int productId,
             string returnUrl) {
-      Product product = mProductRepository.Product
+      Product product = mProductRepository.Products
           .FirstOrDefault(p => p.IdxProduct == productId);
 
       if (product != null) {

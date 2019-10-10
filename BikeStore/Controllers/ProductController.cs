@@ -54,7 +54,7 @@ namespace BikeStore.Controllers {
     [HttpGet]
     public async Task<IActionResult> EditProduct(int xId) {
 
-      Product pProduct = await mProductsRepository.Product.SingleOrDefaultAsync(x => x.IdxProduct == xId);
+      Product pProduct = await mProductsRepository.Products.SingleOrDefaultAsync(x => x.IdxProduct == xId);
 
       return View(pProduct);
 
@@ -71,7 +71,7 @@ namespace BikeStore.Controllers {
     [HttpGet]
     public async Task<IActionResult>DeleteProduct(int xId)    {
 
-      Product pProduct = await mProductsRepository.Product.SingleOrDefaultAsync(x => x.IdxProduct == xId);
+      Product pProduct = await mProductsRepository.Products.SingleOrDefaultAsync(x => x.IdxProduct == xId);
        await mProductsRepository.DeleteProductAsync(pProduct);
 
       return RedirectToAction("ListProduct");

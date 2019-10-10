@@ -9,11 +9,12 @@ using System.Threading.Tasks;
 namespace BikeStore.core.Repositories {
  public interface IProductsRepository : IRepository {
 
+    
     Task<int> AddProductAsync(Product xProduct);
     Task DeleteProductAsync(Product xProduct);
     Task DeleteProductAsync(int xId);
     Task<IEnumerable<Product>> GetAllProductAsync();
-    IQueryable<Product> Product { get; }
+    IQueryable<Product> Products { get; }
     Task EditProductAsync(Product xProduct);
   }
 }
