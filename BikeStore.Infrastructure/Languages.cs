@@ -49,6 +49,10 @@ namespace BikeStore.Infrastructure {
     Images = 35,
     AddCategory = 36,
     Confirm = 37,
+    ProductsList = 38,
+    SelectCategory = 39,
+    Delete = 40,
+    Edit = 41,
   }
 
   public class Languages {
@@ -146,6 +150,10 @@ namespace BikeStore.Infrastructure {
       AddText(TextEnum.Category, "Category", "Kategoria");
       AddText(TextEnum.AddCategory, "Add category", "Dodaj kategorie");
       AddText(TextEnum.Confirm, "Confirm", "Zatwierdź");
+      AddText(TextEnum.ProductsList, "Product list", "Lista produktów");
+      AddText(TextEnum.SelectCategory, "Select category", "Wybirz kategorię");
+      AddText(TextEnum.Edit, "Edit", "Edytuj");
+      AddText(TextEnum.Delete, "Delete", "Usuń");
     }
 
     private void AddText(TextEnum xCntText, string xEN, string xPL) {

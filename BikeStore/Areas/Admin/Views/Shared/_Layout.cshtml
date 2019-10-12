@@ -80,7 +80,7 @@
           <div class="bg-white py-2 collapse-inner rounded">
             @*<h6 class="collapse-header">Custom Utilities:</h6>*@
             <a class="collapse-item" asp-action="AddProduct" asp-area="Admin" asp-controller="Product">@Languages.GetText(TextEnum.AddProduct)</a>
-            <a class="collapse-item" href="utilities-border.html">Borders</a>
+            <a class="collapse-item" asp-action="List" asp-controller="Product" asp-area="Admin">@Languages.GetText(TextEnum.ProductsList)</a>
             <a class="collapse-item" href="utilities-animation.html">Animations</a>
             <a class="collapse-item" href="utilities-other.html">Other</a>
           </div>

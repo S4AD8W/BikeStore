@@ -34,7 +34,7 @@ namespace BikeStore.Infrastructure.Repositories {
 
     public async Task DeleteProductAsync(int xId) {
 
-      Product pProduct = await mDB.Product.SingleOrDefaultAsync(x => x.IdxProduct ==xId);
+      Product pProduct = await mDB.Product.SingleOrDefaultAsync(x => x.IdxProduct == xId);
 
       if (pProduct != null) {
         mDB.Remove(pProduct);
@@ -50,5 +50,9 @@ namespace BikeStore.Infrastructure.Repositories {
 
     public async Task<IEnumerable<Product>> GetAllProductAsync()
       => await mDB.Product.ToListAsync();
+
+    public async Task<Product> GetAsync(int xidxProduct)
+    => await mDB.Product.FirstOrDefaultAsync(x => x.IdxProduct == xidxProduct);
+
   }
 }

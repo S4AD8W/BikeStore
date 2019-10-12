@@ -103,9 +103,24 @@ namespace BikeStore.Areas.Admin.Controllers {
                                 mProductsRepository.Products.Where(e =>
                                     e.IdxCategory == xIdxCategory).Count()
         },
-        CurrentCategory = pCurrentCategory
+        CurrentCategory = pCurrentCategory,
+        ProductCategories = await mProductsCategoryRepository.ProductsCategory.ToListAsync()
+
       });
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> Edit(int xIdxProduct) {
+
+      Product pProduct = await mProductsRepository.GetAsync(xIdxProduct);
+      ProductCategory pCategory = await mProductsCategoryRepository.GetAsync(pProduct.IdxCategory);
+
+      EditProductVM pVM = new EditProductVM();
+
+      return View();
 
     }
+
+
   }
 }

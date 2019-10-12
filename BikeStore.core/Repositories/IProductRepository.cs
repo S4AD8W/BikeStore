@@ -16,5 +16,6 @@ namespace BikeStore.core.Repositories {
     Task<IEnumerable<Product>> GetAllProductAsync();
     IQueryable<Product> Products { get; }
     Task EditProductAsync(Product xProduct);
+    Task<Product> GetAsync(int xIdxProduct);
   }
 }
