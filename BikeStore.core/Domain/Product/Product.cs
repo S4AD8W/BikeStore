@@ -28,8 +28,16 @@ namespace BikeStore.core.Domain.Product_NS {
       IdxCategory = xIdxCategory;
       this.CreateAt = DateTime.UtcNow;
       this.EditAt = DateTime.UtcNow;
-    } 
+    }
 
+    public Product(int xIdxProduct, string xName, string xDescription, decimal xPrice, int xIdxCategory) {
+      this.IdxProduct = xIdxProduct;
+      this.Name = xName;
+      this.Description = xDescription;
+      this.Price = xPrice;
+      this.IdxCategory = xIdxCategory;
+      this.EditAt = DateTime.UtcNow;
+    }
   }
 
 

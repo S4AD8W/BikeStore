@@ -10,10 +10,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace BikeStore.Infrastructure.Repositories {
-  public class ProductsRpository : IProductsRepository {
+  public class ProductsRepository : IProductsRepository {
 
     private readonly BikeStoreContext mDB;
-    public ProductsRpository(BikeStoreContext xDB) {
+    public ProductsRepository(BikeStoreContext xDB) {
       mDB = xDB;
     }
 
@@ -44,8 +44,13 @@ namespace BikeStore.Infrastructure.Repositories {
     }
 
     public async Task EditProductAsync(Product xProduct) {
-      mDB.Entry(xProduct).State = EntityState.Modified; // edycja systemu profilowego w kontekscie bazy danych 
-      await mDB.SaveChangesAsync();
+
+     // mDB.Update(xProduct);
+      //mDB.SaveChanges();
+      using (BikeStoreContext xDB = new BikeStoreContext()) {
+        xDB.Update(xProduct);
+        xDB.SaveChanges();
+      }
     }
 
     public async Task<IEnumerable<Product>> GetAllProductAsync()

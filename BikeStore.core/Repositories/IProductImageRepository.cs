@@ -13,5 +13,6 @@ namespace BikeStore.core.Repositories {
     Task DeleteAsync(int xIdxProducImage);
     Task<IEnumerable<ProductImage>> GetAllAsync();
     Task<ProductImage> GetProductImage(int xIdxProductImage);
+    Task<IEnumerable<ProductImage>> GetAllImageForIdxProduct(int xIdxProduct);
   }
 }

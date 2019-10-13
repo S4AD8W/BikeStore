@@ -23,14 +23,16 @@ namespace BikeStore.Areas.Admin.Controllers {
     private readonly BikeStoreContext mDB;
     private readonly IProductsRepository mProductsRepository;
     private readonly IProductsCategoryRepository mProductsCategoryRepository;
+    private readonly IProductImageRepository mProductImageRepository;
     private int mPageSize = 15;
 
     public ProductController(BikeStoreContext xDB, IMapper xMapper, ICommandDispatcher xCommandDispatcher, IProductsRepository xProductsRepository,
-      IProductsCategoryRepository xProductsCategoryRepository)
+      IProductsCategoryRepository xProductsCategoryRepository, IProductImageRepository xProductImageRepository)
            : base(xCommandDispatcher, xMapper) {
       mDB = xDB;
       mProductsRepository = xProductsRepository;
       mProductsCategoryRepository = xProductsCategoryRepository;
+      mProductImageRepository = xProductImageRepository;
     }
 
     [HttpGet]
@@ -113,14 +115,46 @@ namespace BikeStore.Areas.Admin.Controllers {
     public async Task<IActionResult> Edit(int xIdxProduct) {
 
       Product pProduct = await mProductsRepository.GetAsync(xIdxProduct);
-      ProductCategory pCategory = await mProductsCategoryRepository.GetAsync(pProduct.IdxCategory);
+      IEnumerable<ProductImage> pProductImages = await mProductImageRepository.GetAllImageForIdxProduct(pProduct.IdxProduct);
 
-      EditProductVM pVM = new EditProductVM();
+      EditProductVM pVM = new EditProductVM(pProduct, pProductImages, await mProductsCategoryRepository.ProductsCategory.ToListAsync());
 
-      return View();
+      return View(pVM);
 
     }
 
+    [HttpPost]
+    public async Task<IActionResult>Edit(EditProductVM xVM, ICollection<IFormFile> xFiles) {
+      EditProductCommand pCommand;
+
+      pCommand = mMapper.Map<EditProductVM, EditProductCommand>(xVM);
+
+      if (xFiles != null) {                                 //sprawdzenie czy lista plików niejest pusta i odczytanie zawatość 
+        pCommand.Images = new List<ProductImage>();
+        using (var memoryStream = new MemoryStream()) {
+          foreach (var pFile in xFiles) {
+            await pFile.CopyToAsync(memoryStream);
+            pCommand.Images.Add(new ProductImage {
+              Content = memoryStream.ToArray(),
+              Name = pFile.FileName,
+              Size = pFile.Length
+            });
+          }
+        }
+      }
+
+      await DispatchAsync(pCommand);
+
+      return RedirectToAction("List");
+
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> DelePhotos(int xIdxPhoto, int xIdxProduct) {
+      await mProductImageRepository.DeleteAsync(xIdxPhoto);
+      return RedirectToAction("Edit", new { xIdxProduct = xIdxProduct });
+
+    }
 
   }
 }

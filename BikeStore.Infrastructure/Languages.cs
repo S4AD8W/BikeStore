@@ -53,6 +53,8 @@ namespace BikeStore.Infrastructure {
     SelectCategory = 39,
     Delete = 40,
     Edit = 41,
+    BackToList = 42,
+    Close =43,
   }
 
   public class Languages {
@@ -154,6 +156,8 @@ namespace BikeStore.Infrastructure {
       AddText(TextEnum.SelectCategory, "Select category", "Wybirz kategorię");
       AddText(TextEnum.Edit, "Edit", "Edytuj");
       AddText(TextEnum.Delete, "Delete", "Usuń");
+      AddText(TextEnum.BackToList, "Back to list", "Powrót do listy");
+      AddText(TextEnum.Close, "Close", "Zamknij");
     }
 
     private void AddText(TextEnum xCntText, string xEN, string xPL) {

@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace BikeStore.Infrastructure.Repositories {
   public class ProductImageRepository : IProductImageRepository {
@@ -38,6 +39,10 @@ namespace BikeStore.Infrastructure.Repositories {
 
     public async Task<IEnumerable<ProductImage>> GetAllAsync() {
       return await mDB.ProductImages.ToListAsync();
+    }
+
+    public async Task<IEnumerable<ProductImage>> GetAllImageForIdxProduct(int xIdxProduct) {
+      return await mDB.ProductImages.Where(x => x.IdxProduct == xIdxProduct).ToListAsync();
     }
 
     public async Task<ProductImage> GetProductImage(int xIdxProductImage) {

@@ -8,5 +8,7 @@ namespace BikeStore.Infrastructure.Services.Product_NS {
   public interface IProductService : IService {
 
     Task<bool> AddNewProductAsync(AddProductCommand xCommand);
+    Task<bool> EditProductAsync(EditProductCommand xCommand);
+
   }
 }

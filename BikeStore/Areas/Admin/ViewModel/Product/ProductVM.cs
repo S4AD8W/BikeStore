@@ -16,6 +16,8 @@ namespace BikeStore.Areas.Admin.ViewModel.Product {
     public string Description { get; set; }
     public decimal Price { get; set; }
     public int IdxCategory { get; set; }
+    public int IdxProduct { get; set; }
+
 
     public List<SelectListItem> ProductCategories { get; set; }
 

@@ -9,5 +9,6 @@ namespace BikeStore.Infrastructure.Commands {
 
     Task<CommandResult> HandleAsync(T xCommand);
 
+    
   }
 }

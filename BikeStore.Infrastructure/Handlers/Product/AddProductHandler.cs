@@ -25,7 +25,7 @@ namespace BikeStore.Infrastructure.Handlers.Product {
       } else {
         pResult.SetFailure(string.Empty);
       }
-
+      
       return pResult;
     }
   }
