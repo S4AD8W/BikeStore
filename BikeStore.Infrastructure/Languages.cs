@@ -55,6 +55,8 @@ namespace BikeStore.Infrastructure {
     Edit = 41,
     BackToList = 42,
     Close =43,
+    Quantity = 44,
+    CreationDate = 45,
   }
 
   public class Languages {
@@ -158,6 +160,8 @@ namespace BikeStore.Infrastructure {
       AddText(TextEnum.Delete, "Delete", "Usuń");
       AddText(TextEnum.BackToList, "Back to list", "Powrót do listy");
       AddText(TextEnum.Close, "Close", "Zamknij");
+      AddText(TextEnum.Quantity, "Quantity", "Ilość");
+      AddText(TextEnum.CreationDate, "Creation date", "Data utworzenia");
     }
 
     private void AddText(TextEnum xCntText, string xEN, string xPL) {

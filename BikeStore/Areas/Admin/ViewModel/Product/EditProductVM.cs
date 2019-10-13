@@ -16,8 +16,9 @@ namespace BikeStore.Areas.Admin.ViewModel.Product {
     public decimal Price { get;  set; }
     public int IdxCategory { get;  set; }
     public DateTime CreateAt { get;  set; }
-
+    public int Quantity { get;  set; }
     public List<SelectListItem> ProductCategories_SLI { get; set; }
+
     public EditProductVM() {
 
     }
@@ -30,6 +31,7 @@ namespace BikeStore.Areas.Admin.ViewModel.Product {
       this.Description = xProduct.Description;
       this.Price = xProduct.Price;
       this.CreateAt = xProduct.CreateAt;
+      this.Quantity = xProduct.Quantity;
       this.ProductCategories_SLI =  xCategories.Select(x => new SelectListItem {
         Text = x.Name,
         Value = x.IdxProductCategory.ToString()

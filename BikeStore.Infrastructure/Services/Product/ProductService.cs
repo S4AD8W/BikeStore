@@ -20,7 +20,7 @@ namespace BikeStore.Infrastructure.Services.Product_NS {
 
     public async Task<bool> AddNewProductAsync(AddProductCommand xCommand) {
 
-      Product pProduct = new Product(xCommand.Name, xCommand.Description, xCommand.Price, xCommand.IdxCategory);
+      Product pProduct = new Product(xCommand.Name, xCommand.Description, xCommand.Price, xCommand.IdxCategory,xCommand.Quantity);
 
       if (await mProductRepository.AddProductAsync(pProduct) ==0) return false;
 
@@ -35,7 +35,7 @@ namespace BikeStore.Infrastructure.Services.Product_NS {
 
     public async Task<bool> EditProductAsync(EditProductCommand xCommand) {
 
-      Product pProduct = new Product(xCommand.IdxProduct, xCommand.Name, xCommand.Description, xCommand.Price, xCommand.IdxCategory);
+      Product pProduct = new Product(xCommand.IdxProduct, xCommand.Name, xCommand.Description, xCommand.Price, xCommand.IdxCategory,xCommand.Quantity,xCommand.CreateAt);
 
       await mProductRepository.EditProductAsync(pProduct);
 

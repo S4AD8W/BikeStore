@@ -11,7 +11,7 @@ namespace BikeStore.Infrastructure.Commands.Product {
     public decimal Price { get; set; }
     public int IdxCategory { get; set; }
     public List<ProductImage> Images { get; set; }
-    
+    public int Quantity { get;  set; }
 
   }
 }

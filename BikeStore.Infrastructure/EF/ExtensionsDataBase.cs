@@ -11,14 +11,14 @@ namespace BikeStore.Infrastructure.EF {
   public abstract class DB_TABLE {
 
     public const string DBInfo = "dbinfo";
-    public const string Product = "product";
+    public const string Products = "product";
     public const string ProductCategory = "productcategory";
     public const string ProductImages = "productimages";
   }
 
   public static class ExtensionsDataBase {
 
-    private const int DB_VERSION = (2);
+    private const int DB_VERSION = (3);
 
     public static IWebHost UpdateDatabase(this IWebHost xIWebHost) {
       // funkcja jako rozszrzenie, aktualizująca bazę danych
@@ -145,7 +145,7 @@ CREATE TABLE IF NOT EXISTS {DB_TABLE.DBInfo} (
     private static IEnumerable<string> GetSqlToCreateTableProduct() {
 
       yield return $@"
-        CREATE TABLE IF NOT EXISTS {DB_TABLE.Product}(
+        CREATE TABLE IF NOT EXISTS {DB_TABLE.Products}(
           {nameof(Product.IdxProduct)} SERIAL PRIMARY KEY,
           {nameof(Product.Name)} TEXT,
           {nameof(Product.Description)} TEXT,
@@ -154,6 +154,10 @@ CREATE TABLE IF NOT EXISTS {DB_TABLE.DBInfo} (
           {nameof(Product.CreateAt)} timestamp,
           {nameof(Product.EditAt)}   timestamp
         )";
+
+      yield return $@"
+       ALTER TABLE {DB_TABLE.Products}
+              ADD COLUMN IF NOT EXISTS {nameof(BikeStore.core.Domain.Product_NS.Product.Quantity)} INTEGER DEFAULT 0";
     }
 
     private static IEnumerable<string> GetSqlToCreateTableProductCategory() {
@@ -171,7 +175,7 @@ CREATE TABLE IF NOT EXISTS {DB_TABLE.DBInfo} (
       yield return $@"
         CREATE TABLE IF NOT EXISTS {DB_TABLE.ProductImages}(
           {nameof(ProductImage.IdxProductImage)} SERIAL PRIMARY KEY, 
-          {nameof(ProductImage.IdxProduct)}  INTEGER REFERENCES {DB_TABLE.Product} ({nameof(BikeStore.core.Domain.Product_NS.Product.IdxProduct)}) ON DELETE CASCADE,
+          {nameof(ProductImage.IdxProduct)}  INTEGER REFERENCES {DB_TABLE.Products} ({nameof(BikeStore.core.Domain.Product_NS.Product.IdxProduct)}) ON DELETE CASCADE,
           {nameof(ProductImage.Name)} TEXT,
           {nameof(ProductImage.Size)} INTEGER,
           {nameof(ProductImage.Content)} BYTEA

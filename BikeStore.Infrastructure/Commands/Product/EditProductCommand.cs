@@ -12,6 +12,7 @@ namespace BikeStore.Infrastructure.Commands.Product {
     public int IdxCategory { get; set; }
     public List<ProductImage> Images { get; set; }
     public int IdxProduct { get; set; }
-
+    public int Quantity { get;  set; }
+    public DateTime CreateAt { get;  set; }
   }
 }

@@ -29,11 +29,13 @@
         <select asp-for="IdxCategory" asp-items="Model.ProductCategories" class="form-control"></select>
         <span asp-validation-for="IdxCategory" class="text-danger"></span>
       </div>
-      
+      <div class="form-group">
+        <label for="Quantity" class="control-label">@Languages.GetText(TextEnum.Quantity)</label>
+        <input type="number" asp-for="Quantity" class="form-control" />
+      </div>
       <div class="form-group">
         <label for="File" class="control-label">@Languages.GetText(TextEnum.Images)</label>
         <input type="file" multiple name="xFiles"  class="form-control" />
-        <span asp-validation-for="IdxCategory" class="text-danger"></span>
       </div>
       <div class="form-group">
         <input type="submit" value="@Languages.GetText(TextEnum.Confirm)" class="btn btn-default" />

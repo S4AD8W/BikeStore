@@ -74,19 +74,19 @@
       <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
         <thead>
           <tr>
-            <th>Opis</th>
-            <th>Model</th>
-            <th>Status</th>
-            <th>Data utworzenia</th>
+            <th>@Languages.GetText(TextEnum.Name)</th>
+            <th>@Languages.GetText(TextEnum.Description)</th>
+            <th>@Languages.GetText(TextEnum.Quantity)</th>
+            <th>@Languages.GetText(TextEnum.CreationDate)</th>
             <th></th>
           </tr>
         </thead>
         <tfoot>
           <tr>
-            <th>Opis</th>
-            <th>Model</th>
-            <th>Status</th>
-            <th>Data utworzenia</th>
+            <th>@Languages.GetText(TextEnum.Name)</th>
+            <th>@Languages.GetText(TextEnum.Description)</th>
+            <th>@Languages.GetText(TextEnum.Quantity)</th>
+            <th>@Languages.GetText(TextEnum.CreationDate)</th>
             <th></th>
           </tr>
         </tfoot>
@@ -96,7 +96,7 @@
             <tr role="row" class="odd">
               <td>@pItem.Name</td>
               <td>@pItem.Description</td>
-              <td>test</td>
+              <td>@pItem.Quantity</td>
               <td>@pItem.CreateAt</td>
               <td>
                 <a asp-action="Edit" asp-controller="Product" asp-area="Admin" asp-route-xIdxProduct="@pItem.IdxProduct">@Languages.GetText(TextEnum.Edit)</a>
