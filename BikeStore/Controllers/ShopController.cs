@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using static BikeStore.ViewModels.Shop.ProductsListVM;
 
 namespace BikeStore.Controllers {
-  public class ShopController  : BikeStoreControllerBaseController {
+  public class ShopController : BikeStoreControllerBaseController {
 
     private readonly IProductsRepository mProductsRepository;
     private readonly IProductsCategoryRepository mProductsCategoryRepository;
@@ -28,8 +28,8 @@ namespace BikeStore.Controllers {
     }
 
 
-
-    public async Task< IActionResult> ListOfProduct(int xIdxCategory = 0, int xProductPerPage = 1) {
+    [HttpGet]
+    public async Task<IActionResult> ListOfProduct(int xIdxCategory = 0, int xProductPerPage = 1) {
 
       string pCurrentCategory = string.Empty;
       if (xIdxCategory != 0) pCurrentCategory = mProductsCategoryRepository.ProductsCategory.FirstOrDefault(x => x.IdxProductCategory == xIdxCategory).Name;
@@ -58,5 +58,17 @@ namespace BikeStore.Controllers {
       });
 
     }
+    [HttpGet]
+    public async Task<IActionResult> DetailProduct(int xIdxProduct) {
+
+      DetailProductVM pDetailProduct = new DetailProductVM {
+        Product = await mProductsRepository.GetAsync(xIdxProduct),
+        ProductImages = await mProductImageRepository.GetAllImageForIdxProduct(xIdxProduct)
+      };
+
+      return View(pDetailProduct);
+    }
+
+
   }
 }
