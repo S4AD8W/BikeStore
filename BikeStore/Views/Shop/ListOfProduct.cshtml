@@ -1,0 +1,23 @@
+﻿
+@model BikeStore.ViewModels.Shop.ProductsListVM
+
+
+<div class="row">
+
+  <div class="col-2">
+    @await Html.PartialAsync("prlProductCategories.cshtml", Model.ProductCategories)
+  </div>
+
+  <div class="col-8">
+    <div class="row">
+
+
+      @foreach (var pProduct in Model.Products) {
+        @await Html.PartialAsync("prlProductItem", pProduct)
+      }
+
+    </div>
+
+  </div>
+
+</div>

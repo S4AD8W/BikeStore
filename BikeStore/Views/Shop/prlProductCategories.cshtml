@@ -1,0 +1,13 @@
+﻿@model IEnumerable<BikeStore.core.Domain.Product_NS.ProductCategory>
+
+<div class="row">
+  <div class="col">
+    <nav class="nav flex-column">
+      @foreach (var pCategory in Model) {
+      <a class="nav-link" asp-action="ListOfProduct" 
+         asp-controller="Shop"
+         asp-route-xIdxCategory="@pCategory.IdxProductCategory">@pCategory.Name</a>
+      }
+    </nav>
+  </div>
+</div>

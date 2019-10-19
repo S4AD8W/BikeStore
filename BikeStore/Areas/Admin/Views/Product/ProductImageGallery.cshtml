@@ -21,7 +21,7 @@
         <div class="modal-body mb-0 p-0">
 
           <div class="embed-responsive embed-responsive-16by9 z-depth-1-half">
-            <img class="embed-responsive-item" src="data:image/jpeg;base64,@(pImage)" alt="video"
+            <img class="embed-responsive-item" src="data:image/jpeg;base64,@(Convert.ToBase64String(pItem.Content))" alt="video"
                  data-toggle="modal" >     
           </div>
 
@@ -52,7 +52,7 @@
   <!--Modal: Name-->
 
   <a>
-    <img class="img-fluid z-depth-1" src="data:image/jpeg;base64,@(pImage)" alt="video"
+    <img class="img-fluid z-depth-1" src="data:image/jpeg;base64,@(Convert.ToBase64String(pItem.Content))" alt="video"
          data-toggle="modal" data-target="#Modal@(pItem.IdxProduct)">
   </a>
 

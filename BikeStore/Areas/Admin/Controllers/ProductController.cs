@@ -50,13 +50,13 @@ namespace BikeStore.Areas.Admin.Controllers {
     public async Task<IActionResult> AddProduct(ProductVM xVM, ICollection<IFormFile> xFiles) {
 
       AddProductCommand pCommand;
-
+      //TODO:Dodać walidację plików po roszerzeniu 
       pCommand = mMapper.Map<ProductVM, AddProductCommand>(xVM);
 
       if (xFiles != null) {                                 //sprawdzenie czy lista plików niejest pusta i odczytanie zawatość 
         pCommand.Images = new List<ProductImage>();
-        using (var memoryStream = new MemoryStream()) {
-          foreach (var pFile in xFiles) {
+        foreach (var pFile in xFiles) {
+          using (var memoryStream = new MemoryStream()) {
             await pFile.CopyToAsync(memoryStream);
             pCommand.Images.Add(new ProductImage {
               Content = memoryStream.ToArray(),
@@ -67,6 +67,7 @@ namespace BikeStore.Areas.Admin.Controllers {
         }
       }
 
+     
       await DispatchAsync(pCommand);
 
       return RedirectToAction("AddProduct");
@@ -91,7 +92,7 @@ namespace BikeStore.Areas.Admin.Controllers {
       string pCurrentCategory = string.Empty;
       if (xIdxCategory != 0) pCurrentCategory = mProductsCategoryRepository.ProductsCategory.FirstOrDefault(x => x.IdxProductCategory == xIdxCategory).Name;
 
-      return View(new ProductsListVM {
+      return View(new BikeStore.Areas.Admin.ViewModel.Product.ProductListVM {
         Products = mProductsRepository.Products
                             .Where(p => xIdxCategory == 0 || p.IdxCategory == xIdxCategory)
                             .OrderBy(p => p.IdxProduct)
@@ -118,13 +119,13 @@ namespace BikeStore.Areas.Admin.Controllers {
       IEnumerable<ProductImage> pProductImages = await mProductImageRepository.GetAllImageForIdxProduct(pProduct.IdxProduct);
 
       EditProductVM pVM = new EditProductVM(pProduct, pProductImages, await mProductsCategoryRepository.ProductsCategory.ToListAsync());
-
+     
       return View(pVM);
 
     }
 
     [HttpPost]
-    public async Task<IActionResult>Edit(EditProductVM xVM, ICollection<IFormFile> xFiles) {
+    public async Task<IActionResult> Edit(EditProductVM xVM, ICollection<IFormFile> xFiles) {
       EditProductCommand pCommand;
 
       pCommand = mMapper.Map<EditProductVM, EditProductCommand>(xVM);
@@ -156,5 +157,11 @@ namespace BikeStore.Areas.Admin.Controllers {
 
     }
 
+    [HttpGet]
+    public async Task<IActionResult> Delete(int xIdxProduct) {
+      await mProductsRepository.DeleteProductAsync(xIdxProduct);
+
+      return RedirectToAction("List");
+    }
   }
 }

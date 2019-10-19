@@ -1,11 +1,10 @@
-﻿@model BikeStore.ViewModels.ProductsListVM
-
+﻿
 @{
   ViewData["Title"] = "ListProduct";
   Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2>ListProduct</h2>
+@*<h2>ListProduct</h2>
 
 <p>
   <a asp-action="AddProduct">Create New</a>
@@ -41,9 +40,8 @@
         <td>
           @Html.DisplayFor(modelItem => item.IdxCategory)
         </td>
-        <td>
-          <a asp-action="EditProduct" asp-route-xId="@item.IdxProduct">Edit</a> |
-          @*<a asp-action="Details" asp-route-id="@item.ProductID">Details</a> |*@
+        <td>*@
+          @*<a asp-action="EditProduct" asp-route-xId="@item.IdxProduct">Edit</a> |
           <a asp-action="DeleteProduct" asp-route-xId="@item.IdxProduct">Delete</a>
         </td>
       </tr>
@@ -55,4 +53,4 @@
 <div page-model="@Model.PagingInfo" page-action="ListProduct" page-classes-enabled="true"
        page-class="btn" page-class-normal="btn-secondary"
        page-class-selected="btn-primary" class="btn-group pull-right m-1">
-  </div>
+  </div>*@

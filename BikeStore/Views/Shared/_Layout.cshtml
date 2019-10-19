@@ -1,139 +1,140 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - BikeStore</title>
-    @*<script src="~/lib/jquery/dist/jquery.min.js"></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>@ViewData["Title"] - BikeStore</title>
+  @*<script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>*@
-    @*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+  @*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/lib/bootstrap/scss/_carousel.scss" />
     <script src="~/lib/popper.js/dist/popper.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>*@
-    <link href="~/SbAdmin2/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="~/SbAdmin2/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-    <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" />
-    <link rel="stylesheet" href="~/css/BikeStorecss.css" />
-    @*<script src="~/js/jquery-3.3.1.min.js"></script>*@
-    <script src="~/lib/jquery/dist/jquery.js"></script>
-    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
-    <script src="~/lib/Microsoft.jQuery.Unobtrusive.Ajax/jquery.unobtrusive-ajax.min.js"></script>
-    <script src="~/js/Popper.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+  <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+  <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" />
+  <link rel="stylesheet" href="~/css/BikeStorecss.css" />
+  @*<script src="~/js/jquery-3.3.1.min.js"></script>*@
+  <script src="~/lib/jquery/dist/jquery.js"></script>
+  <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+  <script src="~/lib/Microsoft.jQuery.Unobtrusive.Ajax/jquery.unobtrusive-ajax.min.js"></script>
+  <script src="~/js/Popper.js"></script>
+  <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
 
 
 </head>
 <body>
-    @*<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-          <a asp-action="Index" asp-controller="Home">BikeStor</a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
+  @*<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+      <a asp-action="Index" asp-controller="Home">BikeStor</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-              <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-              </li>
-              <li class="nav-item">
-                <a asp-action="CreateForksNotfication" asp-controller="Notfication" class="nav-link">Serwis Amortyzatora</a>
-              </li>
-              <li class="nav-item">
-                <a asp-action="Index" asp-controller="Admin" class="nav-link">Administracja</a>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Dropdown
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="#">Action</a>
-                  <a class="dropdown-item" href="#">Another action</a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#">Something else here</a>
-                </div>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link disabled" href="#">Disabled</a>
-              </li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a asp-action="CreateForksNotfication" asp-controller="Notfication" class="nav-link">Serwis Amortyzatora</a>
+          </li>
+          <li class="nav-item">
+            <a asp-action="Index" asp-controller="Admin" class="nav-link">Administracja</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Dropdown
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" href="#">Disabled</a>
+          </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
 
-            </ul>
+        </ul>
 
-          </div>
-        </nav>*@
+      </div>
+    </nav>*@
 
-    <!--Navbar -->
-    @*<nav class="mb-1 navbar navbar-expand-lg navbar-dark " style="background-color:#2bbbad!important;">*@
-        <nav class="mb-1 navbar navbar-expand-lg BsNavbar " style="background-color:white!important; >
+  <!--Navbar -->
+  @*<nav class="mb-1 navbar navbar-expand-lg navbar-dark " style="background-color:#2bbbad!important;">*@
+  <nav class="mb-1 navbar navbar-expand-lg BsNavbar " style="background-color:white!important; >
     <a class="navbar-brand" href="#">Navbar</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-333"
             aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+      <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent-333">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">
-                    Home
-                    <span class="sr-only">(current)</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Features</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Pricing</a>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown"
-                   aria-haspopup="true" aria-expanded="false">
-                    Serwis
-                </a>
-                <div class="dropdown-menu dropdown-default" aria-labelledby="navbarDropdownMenuLink-333">
-                    <a asp-action="CreateForksNotfication" asp-controller="Notification">Amortyzator</a>
-                </div>
-            </li>
-        </ul>
-        <ul class="navbar-nav ml-auto nav-flex-icons">
-            <li class="nav-item">
-                <a class="nav-link waves-effect waves-light" href="https://www.facebook.com/igor.wieczorek.14">
-                    <i class="fab fa-facebook-f"></i>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link waves-effect waves-light" href="https://github.com/S4AD8W">
-                    <i class="fab fa-github"></i>
-                </a>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown"
-                   aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-user"></i>
-                </a>
-                <div class="dropdown-menu dropdown-menu-right dropdown-default"
-                     aria-labelledby="navbarDropdownMenuLink-333">
-                    @await Component.InvokeAsync(nameof(BikeStore.ViewsComponent.UserViewsManager))
-                </div>
-            </li>
-        </ul>
-    </div>
-</nav>
-    <!--/.Navbar -->
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">
+            Home
+            <span class="sr-only">(current)</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Features</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" asp-action="ListOfProduct" asp-controller="Shop">@Languages.GetText(TextEnum.Shop)</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown"
+             aria-haspopup="true" aria-expanded="false">
+            Serwis
+          </a>
+          <div class="dropdown-menu dropdown-default" aria-labelledby="navbarDropdownMenuLink-333">
+            <a asp-action="CreateForksNotfication" asp-controller="Notification">Amortyzator</a>
+          </div>
+        </li>
+      </ul>
 
-    <div class="container body-content">
-        @RenderBody()
-
-        <hr />
-        <footer>
-            <p>&copy; 2018 - BikeStore</p>
-        </footer>
+      <ul class="navbar-nav ml-auto nav-flex-icons">
+        <li class="nav-item">
+          <a class="nav-link waves-effect waves-light" href="https://www.facebook.com/igor.wieczorek.14">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link waves-effect waves-light" href="https://github.com/S4AD8W">
+            <i class="fab fa-github"></i>
+          </a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown"
+             aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-user"></i>
+          </a>
+          <div class="dropdown-menu dropdown-menu-right dropdown-default"
+               aria-labelledby="navbarDropdownMenuLink-333">
+            @await Component.InvokeAsync(nameof(BikeStore.ViewsComponent.UserViewsManager))
+          </div>
+        </li>
+      </ul>
     </div>
-    <!-- Placed at the end of the document so the pages load faster -->
-    <!-- Bootstrap core JavaScript-->
-    @*<script src="~/SbAdmin2/vendor/jquery/jquery.min.js"></script>
+  </nav>
+  <!--/.Navbar -->
+
+  <div class="container body-content">
+    @RenderBody()
+
+    <hr />
+    <footer>
+      <p>&copy; 2018 - BikeStore</p>
+    </footer>
+  </div>
+  <!-- Placed at the end of the document so the pages load faster -->
+  <!-- Bootstrap core JavaScript-->
+  @*<script src="~/SbAdmin2/vendor/jquery/jquery.min.js"></script>
     <script src="~/SbAdmin2/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->

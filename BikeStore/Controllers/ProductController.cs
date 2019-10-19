@@ -16,6 +16,8 @@ namespace BikeStore.Controllers {
 
     private readonly IProductsRepository mProductsRepository;
    
+
+    //TODO:Prawdopodobnie do usuniecia kontlorel
     public int mPageSize = 3;
     public ProductController(ICommandDispatcher xCommandDispatcher, IProductsRepository xProductsRepository, IMapper xMapper) 
       : base(xCommandDispatcher, xMapper) {
