@@ -11,6 +11,8 @@ using Microsoft.AspNetCore.Http;
 using BikeStore.Infrastructure.IoC;
 using BikeStore.Infrastructure.EF;
 using BikeStore.Infrastructure;
+using BikeStore.core.Domain;
+using BikeStore.Infrastructure.Services;
 
 namespace BikeStore {
   public class Startup {
@@ -46,25 +48,22 @@ namespace BikeStore {
 
       xServices.AddAuthorization(options => {
         options.AddPolicy("RequiresAdmin", policy => policy.RequireClaim("HasAdminRights"));
-
-
       });
 
       xServices.AddMvc().AddJsonOptions(options => {
         // options.SerializerSettings.ContractResolver = new Newtonsoft.Json.Serialization.DefaultContractResolver();
-
         options.SerializerSettings.Converters.Add(new Newtonsoft.Json.Converters.StringEnumConverter());
         options.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
       });
 
-     
+      xServices.AddScoped<Cart>(x => SessionCart.GetCart(x));
 
       xServices.AddMemoryCache();
       xServices.AddSession();
-     
-     xServices.AddEntityFrameworkNpgsql()
-               .AddDbContext<BikeStoreContext>()
-               .BuildServiceProvider();
+
+      xServices.AddEntityFrameworkNpgsql()
+                .AddDbContext<BikeStoreContext>()
+                .BuildServiceProvider();
 
       var builder = new ContainerBuilder();
       builder.Populate(xServices);
@@ -77,10 +76,6 @@ namespace BikeStore {
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
     public void Configure(IApplicationBuilder app, IHostingEnvironment env) {
 
-
-
-
-
       if (env.IsDevelopment()) {
         app.UseBrowserLink();
         app.UseDeveloperExceptionPage();
@@ -88,13 +83,10 @@ namespace BikeStore {
         app.UseExceptionHandler("/Home/Error");
       }
 
-
-
       app.UseAuthentication();
       app.UseStaticFiles();
       app.UseSession();
-      app.UseMvc(routes =>
-      {
+      app.UseMvc(routes => {
         routes.MapAreaRoute(
             name: "Admin",
             areaName: "Admin",
@@ -105,7 +97,7 @@ namespace BikeStore {
             template: "{controller=Home}/{action=Index}/{id?}");
 
       });
-      
+
 
     }
   }

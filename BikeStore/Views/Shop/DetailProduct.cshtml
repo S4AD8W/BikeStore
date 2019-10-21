@@ -1,7 +1,7 @@
-﻿
+﻿@model BikeStore.ViewModels.Shop.DetailProductVM
 <div class="row">
   <div class="col-6">
-    @Html.PartialAsync("prlProductGalery")
+    @await Html.PartialAsync("prlDetailProductGallery.cshtml", Model.ProductImages)
   </div>
   <div class="col-3">
 

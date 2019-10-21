@@ -1,6 +1,7 @@
 ﻿@model BikeStore.ViewModels.Shop.ProductsListVM.ProductRowItem
 
-  <div class="col-5 mt-4">
+<div class="col-5 mt-4">
+  <a asp-action="DetailProduct" asp-controller="Shop" asp-route-xIdxProduct="@Model.Product.IdxProduct">
     <div class="card">
       <div class="card-body">
         <img style="max-width:50px" src="data:image/jpeg;base64,@(Convert.ToBase64String(Model.ProductImage.Content))" class="" />
@@ -9,4 +10,5 @@
         @Model.Product.Name
       </div>
     </div>
-  </div>
+  </a>
+</div>
