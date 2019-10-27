@@ -1,12 +1,38 @@
 ﻿@model BikeStore.ViewModels.Shop.DetailProductVM
 <div class="row">
-  <div class="col-6">
-    @await Html.PartialAsync("prlDetailProductGallery.cshtml", Model.ProductImages)
-  </div>
-  <div class="col-3">
+  <form asp-action="Add" asp-controller="Cart">
+    <input name="IdxProduct" value="@Model.Product.IdxProduct" />
+    <input name="UuIdUser" value="@User.Identity.Name" />
+    <div class="col-6">
+      <div class="card">
+        <div class="card-body">
+          @await Html.PartialAsync("prlDetailProductGallery.cshtml", Model.ProductImages)
+        </div>
+      </div>
+    </div>
+    <div class="col-3">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <span>@Languages.GetText(TextEnum.Name_Product):  @Model.Product.Name</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-3">
+      <div class="card">
+        <div class="card-body">
+          <div class="d-flex flex-column">
+            <div class="p-2 align-self-end"><span>@Languages.GetText(TextEnum.Price):</span> @Model.Product.Price.ToString("c")</div>
+            <div class="p-2">
+              <input type="number" name="Quantity" value="1" class="text-center" style="width:35px; border-radius:11px;" />
+              <button type="submit" class="btn btn-outline-success">@Languages.GetText(TextEnum.AddToShopCart)</button>
+            </div>
 
-  </div>
-  <div class="col-3">
+          </div>
+        </div>
+      </div>
 
-  </div>
+    </div>
+  </form>
 </div>

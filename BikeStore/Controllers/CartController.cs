@@ -25,7 +25,7 @@ namespace BikeStore.Controllers
       });
     }
 
-    public RedirectToActionResult AddToCart(int productId, string returnUrl) {
+    public async Task< RedirectToActionResult> Add(int productId, string returnUrl) {
       Product product = mProductRepository.Products
           .FirstOrDefault(p => p.IdxProduct == productId);
 
@@ -34,7 +34,7 @@ namespace BikeStore.Controllers
         cart.AddItem(product, 1);
         SaveCart(cart);
       }
-      return RedirectToAction("Index", new { returnUrl });
+      return RedirectToAction("Index");
     }
 
 

@@ -57,6 +57,7 @@ namespace BikeStore.Infrastructure {
     Close =43,
     Quantity = 44,
     CreationDate = 45,
+    AddToShopCart =46,
   }
 
   public class Languages {
@@ -162,6 +163,7 @@ namespace BikeStore.Infrastructure {
       AddText(TextEnum.Close, "Close", "Zamknij");
       AddText(TextEnum.Quantity, "Quantity", "Ilość");
       AddText(TextEnum.CreationDate, "Creation date", "Data utworzenia");
+      AddText(TextEnum.AddToShopCart, "Add to shop cart", "Dodaj to koszyka");
     }
 
     private void AddText(TextEnum xCntText, string xEN, string xPL) {

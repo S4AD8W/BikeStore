@@ -38,3 +38,12 @@ body {
    
     /*border-top: 1px solid #0000002e;*/
 }
+/*Disable input tupe number arrow*/
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}

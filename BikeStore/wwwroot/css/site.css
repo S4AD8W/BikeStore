@@ -25,20 +25,12 @@ body {
     line-height: 1.4;
 }
 
-/*/* Make .svg files in the carousel display properly in older browsers 
-.carousel-inner .item img[src$=".svg"] {
-    width: 100%;
+/*Disable input tupe number arrow*/
+input[type='number'] {
+  -moz-appearance: textfield;
 }
 
-
-#qrCode {
-    margin: 15px;
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
 }
-
-Hide/rearrange for smaller screens 
-@media screen and (max-width: 767px) {
-    /* Hide captions 
-    .carousel-caption {
-        display: none;
-    }
-}*/
