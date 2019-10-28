@@ -10,7 +10,7 @@ namespace BikeStore.Infrastructure.IoC {
     //Klasa zawierająca moduły które rejestruje w aplikacji
 
     private readonly IConfiguration mConfiguration;         //interfejs konfiguracji aplikacji 
-
+    
     public ContainerModule(IConfiguration configuration) {
       mConfiguration = configuration;
 

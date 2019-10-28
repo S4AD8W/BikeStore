@@ -2,19 +2,23 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using BikeStore.core.Domain;
 using BikeStore.core.Domain.Product_NS;
 using BikeStore.core.Repositories;
+using BikeStore.Infrastructure.Commands;
+using BikeStore.Infrastructure.Commands.Cart;
 using BikeStore.Infrastructure.Extensions;
 using BikeStore.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BikeStore.Controllers
 {
-  public class CartController : Controller {
+  public class CartController : BikeStoreControllerBaseController {
     private IProductsRepository mProductRepository;
 
-    public CartController(IProductsRepository xProductRepository) {
+    public CartController(IProductsRepository xProductRepository,ICommandDispatcher xCommandDispatcher, IMapper xMapper)
+           : base(xCommandDispatcher, xMapper) {
       mProductRepository = xProductRepository;
     }
 
@@ -25,15 +29,14 @@ namespace BikeStore.Controllers
       });
     }
 
-    public async Task< RedirectToActionResult> Add(int productId, string returnUrl) {
-      Product product = mProductRepository.Products
-          .FirstOrDefault(p => p.IdxProduct == productId);
+    public async Task< RedirectToActionResult> Add(AddProductCommand xCommand) {
 
-      if (product != null) {
-        Cart cart = GetCart();
-        cart.AddItem(product, 1);
-        SaveCart(cart);
+      await DispatchAsync(xCommand);
+
+      if (!CommandResult.IsSuccess) {
+
       }
+
       return RedirectToAction("Index");
     }
 

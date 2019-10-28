@@ -10,14 +10,14 @@ using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Http;
 
 namespace BikeStore.Infrastructure.Services.Cart {
-  public class CardtService : ICartService {
+  public class CartService : ICartService {
 
     private readonly SessionCart mSessionCart;
     private readonly IHttpContextAccessor mHttpContext;
     private readonly IProductsRepository mProductRepository;
 
-    public CardtService(SessionCart xSessionCart, IHttpContextAccessor xHttpContent, IProductsRepository xProductsRepository) {
-      mSessionCart = xSessionCart;
+    public CartService(IHttpContextAccessor xHttpContent, IProductsRepository xProductsRepository) {
+    //  mSessionCart = xSessionCart;
       mHttpContext = xHttpContent;
       mProductRepository = xProductsRepository;
 

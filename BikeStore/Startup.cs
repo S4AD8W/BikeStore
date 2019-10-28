@@ -36,7 +36,8 @@ namespace BikeStore {
     public IServiceProvider ConfigureServices(IServiceCollection xServices) {
 
       xServices.AddSingleton<Languages>(new Languages(new HttpContextAccessor()));
-
+      xServices.AddScoped<Cart>(x => SessionCart.GetCart(x));
+      
       xServices.AddAuthentication(o => {
         o.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
         o.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
@@ -56,7 +57,7 @@ namespace BikeStore {
         options.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
       });
 
-      xServices.AddScoped<Cart>(x => SessionCart.GetCart(x));
+      
 
       xServices.AddMemoryCache();
       xServices.AddSession();

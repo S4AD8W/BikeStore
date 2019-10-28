@@ -31,7 +31,9 @@ namespace BikeStore.Infrastructure.IoC.Modules {
 
       builder.RegisterType<cMessage>()
              .As<IMessage>()
-             .InstancePerLifetimeScope(); 
+             .InstancePerLifetimeScope();
+
+      
 
     }
   }

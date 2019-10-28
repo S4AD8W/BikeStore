@@ -7,9 +7,9 @@ using Newtonsoft.Json;
 using System;
 
 namespace BikeStore.Infrastructure.Services {
-  public class SessionCart : Cart {
+  public class SessionCart : BikeStore.core.Domain.Cart {
 
-    public static Cart GetCart(IServiceProvider xService) {
+    public static BikeStore.core.Domain.Cart GetCart(IServiceProvider xService) {
 
       ISession pSession = xService.GetRequiredService<IHttpContextAccessor>()?
                     .HttpContext.Session;
