@@ -6,6 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using BikeStore.core.Domain.Product_NS;
+using BikeStore.core.Domain;
+
 namespace BikeStore.Infrastructure.EF {
 
   public abstract class DB_TABLE {
@@ -14,6 +16,8 @@ namespace BikeStore.Infrastructure.EF {
     public const string Products = "product";
     public const string ProductCategory = "productcategory";
     public const string ProductImages = "productimages";
+    public const string Users = "users";
+   
   }
 
   public static class ExtensionsDataBase {
@@ -84,6 +88,10 @@ namespace BikeStore.Infrastructure.EF {
         yield return pSql;
       }
 
+      foreach (string pSql in GetSqlToCreateTableUsers()) {
+        yield return pSql;
+      }
+
     }
     private static int GetDBVersion(DatabaseFacade xDatabase) {
       // funkcja zwracająca wersję bazy danych zapisaną w tabeli DBInfo
@@ -118,11 +126,11 @@ namespace BikeStore.Infrastructure.EF {
       // xDatabase - obiekt do bazy danych
 
       string pSql = $@"
-CREATE TABLE IF NOT EXISTS {DB_TABLE.DBInfo} (
-  IdxDBInfo SERIAL PRIMARY KEY NOT NULL,
-  DBVersion int DEFAULT 0 NOT NULL,
-  DateOfUpdate timestamp DEFAULT now() 
-);";
+        CREATE TABLE IF NOT EXISTS {DB_TABLE.DBInfo} (
+          IdxDBInfo SERIAL PRIMARY KEY NOT NULL,
+          DBVersion int DEFAULT 0 NOT NULL,
+          DateOfUpdate timestamp DEFAULT now() 
+        );";
 
       xDatabase.TryExecuteSqlCommand(pSql);
 
@@ -180,6 +188,24 @@ CREATE TABLE IF NOT EXISTS {DB_TABLE.DBInfo} (
           {nameof(ProductImage.Size)} INTEGER,
           {nameof(ProductImage.Content)} BYTEA
       )";
+    }
+
+    private static IEnumerable<string> GetSqlToCreateTableUsers() {
+
+      yield return $@"
+        CREATE TABlE IF NOT EXISTS {DB_TABLE.Users}(
+        {nameof(User.IdxUser)} SERIAL PRIMARY KEY,
+        {nameof(User.CreatedAt)} TIMESTAMP,
+        {nameof(User.Email)} TEXT,
+        {nameof(User.Id)} UUID,
+        {nameof(User.IsEmailConfirm)} BOOLEAN NOT NULL DEFAULT FALSE,
+        {nameof(User.Name)} TEXT,
+        {nameof(User.Password)} TEXT,
+        {nameof(User.Role)} TEXT,
+        {nameof(User.Salt)} TEXT, 
+        {nameof(User.Surname)} TEXT,
+        {nameof(User.UpdatedAt)} TIMESTAMP 
+        )";
     }
 
   }

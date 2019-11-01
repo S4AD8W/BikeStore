@@ -3,22 +3,23 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using BikeStore.core.Domain;
 using BikeStore.core.Repositories;
 using BikeStore.Infrastructure.Commands.Cart;
+using BikeStore.Infrastructure.Extensions;
 using BikeStore.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Http;
 
-namespace BikeStore.Infrastructure.Services.Cart {
+namespace BikeStore.Infrastructure.Services.Carts {
   public class CartService : ICartService {
-
-    private readonly SessionCart mSessionCart;
-    private readonly IHttpContextAccessor mHttpContext;
+      
+    private readonly IHttpContextAccessor mContext;
     private readonly IProductsRepository mProductRepository;
 
     public CartService(IHttpContextAccessor xHttpContent, IProductsRepository xProductsRepository) {
     //  mSessionCart = xSessionCart;
-      mHttpContext = xHttpContent;
+      mContext = xHttpContent;
       mProductRepository = xProductsRepository;
 
     }
@@ -44,9 +45,15 @@ namespace BikeStore.Infrastructure.Services.Cart {
 
       var pProduct = await mProductRepository.GetAsync(xIdxProduct);
       if (pProduct == null) return false;
+      
+      var pCart = mContext.HttpContext.Session.GetCart();
+      if (pCart == null) pCart = new Cart();
+      pCart.AddItem(pProduct, xQuantiti);
 
-      mSessionCart.AddItem(pProduct,xQuantiti);
+      mContext.HttpContext.Session.SetJson(SessionEnum.Cart.ToString(), pCart);
+
       return true;
+
     }
 
     

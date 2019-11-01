@@ -1,6 +1,6 @@
 ﻿using BikeStore.Infrastructure.Commands;
 using BikeStore.Infrastructure.Commands.Cart;
-using BikeStore.Infrastructure.Services.Cart;
+using BikeStore.Infrastructure.Services.Carts;
 using BikeStore.Infrastructure.Types;
 using System;
 using System.Collections.Generic;
