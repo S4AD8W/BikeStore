@@ -1,5 +1,4 @@
-﻿using BikeStore.core.Domain.Notification;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
@@ -20,9 +19,6 @@ namespace BikeStore.core.Domain {
     public string Salt { get; private set; }
     public string Surname { get; private set; }
     public DateTime UpdatedAt { get; private set; }
-
-    public ICollection<ForkNotification> ForkNotifications { get; set; }
-   
 
     protected User() {
 

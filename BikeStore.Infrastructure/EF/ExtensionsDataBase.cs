@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Text;
 using BikeStore.core.Domain.Product_NS;
 using BikeStore.core.Domain;
+using BikeStore.core.Domain.Notification_NS;
 
 namespace BikeStore.Infrastructure.EF {
 
@@ -17,7 +18,10 @@ namespace BikeStore.Infrastructure.EF {
     public const string ProductCategory = "productcategory";
     public const string ProductImages = "productimages";
     public const string Users = "users";
-   
+    public const string Notification = "notifications";
+    public const string NotificationImage = "notificationimages";
+    public const string NotificationMessage = "notificationmessages";
+
   }
 
   public static class ExtensionsDataBase {
@@ -89,6 +93,18 @@ namespace BikeStore.Infrastructure.EF {
       }
 
       foreach (string pSql in GetSqlToCreateTableUsers()) {
+        yield return pSql;
+      }
+
+      foreach (string pSql in GetSqlToCreateTableNotification()) {
+        yield return pSql;
+      }
+
+      foreach (string pSql in GetSqlToCreateTableNotificationImages()) {
+        yield return pSql;
+      }
+      
+      foreach (string pSql in GetSqlToCreateTableNotificationMessages()) {
         yield return pSql;
       }
 
@@ -194,19 +210,68 @@ namespace BikeStore.Infrastructure.EF {
 
       yield return $@"
         CREATE TABlE IF NOT EXISTS {DB_TABLE.Users}(
-        {nameof(User.IdxUser)} SERIAL PRIMARY KEY,
-        {nameof(User.CreatedAt)} TIMESTAMP,
-        {nameof(User.Email)} TEXT,
-        {nameof(User.Id)} UUID,
-        {nameof(User.IsEmailConfirm)} BOOLEAN NOT NULL DEFAULT FALSE,
-        {nameof(User.Name)} TEXT,
-        {nameof(User.Password)} TEXT,
-        {nameof(User.Role)} TEXT,
-        {nameof(User.Salt)} TEXT, 
-        {nameof(User.Surname)} TEXT,
-        {nameof(User.UpdatedAt)} TIMESTAMP 
+          {nameof(User.IdxUser)} SERIAL PRIMARY KEY,
+          {nameof(User.CreatedAt)} TIMESTAMP,
+          {nameof(User.Email)} TEXT,
+          {nameof(User.Id)} UUID,
+          {nameof(User.IsEmailConfirm)} BOOLEAN NOT NULL DEFAULT FALSE,
+          {nameof(User.Name)} TEXT,
+          {nameof(User.Password)} TEXT,
+          {nameof(User.Role)} TEXT,
+          {nameof(User.Salt)} TEXT, 
+          {nameof(User.Surname)} TEXT,
+          {nameof(User.UpdatedAt)} TIMESTAMP 
         )";
     }
 
+    private static IEnumerable<string> GetSqlToCreateTableNotification() {
+
+      yield return $@"
+        CREATE TABLE IF NOT EXISTS {DB_TABLE.Notification}(
+          {nameof(Notification.IdxNotification)} SERIAL PRIMARY KEY,
+          {nameof(Notification.IdxUser)} INTEGER REFERENCES {DB_TABLE.Users} ({nameof(User.IdxUser)}) ON DELETE CASCADE,
+          {nameof(Notification.Guid)} UUID,
+          {nameof(Notification.CreateAt)} TIMESTAMP,
+          {nameof(Notification.UpdateAt)} TIMESTAMP,
+          {nameof(Notification.NotificationStatus)} INTEGER,
+          {nameof(Notification.Dscr)} TEXT,
+          {nameof(Notification.UserUuId)} UUID,
+          {nameof(Notification.NotificationType)} INTEGER,
+          {nameof(Notification.Brand)} TEXT,
+          {nameof(Notification.Model)} TEXT
+        )
+      ";
+
+    }
+
+    private static IEnumerable<string> GetSqlToCreateTableNotificationImages() {
+
+      yield return $@"
+        CREATE TABLE IF NOT EXISTS {DB_TABLE.NotificationImage}(
+          {nameof(NotificationImage.IdxNotoificationImage)} SERIAL PRIMARY KEY,
+          {nameof(NotificationImage.IdxNotification)} INTEGER REFERENCES {DB_TABLE.Notification} ({nameof(Notification.IdxNotification)}) ON DELETE CASCADE,
+          {nameof(NotificationImage.Name)} TEXT,
+          {nameof(NotificationImage.Size)} INTEGER,
+          {nameof(NotificationImage.Content)} BYTEA
+        )
+      ";
+
+    }
+
+    private static IEnumerable<string> GetSqlToCreateTableNotificationMessages() {
+
+      yield return $@"
+        CREATE TABLE IF NOT EXISTS {DB_TABLE.NotificationMessage}(
+          {nameof(NotificationMessage.IdxNotificationMessage)} SERIAL PRIMARY KEY,
+          {nameof(NotificationMessage.IdxUser)} INTEGER REFERENCES {DB_TABLE.Users} ({nameof(User.IdxUser)}) ON DELETE CASCADE,
+          {nameof(NotificationMessage.IdxNotfication)} INTEGER REFERENCES {DB_TABLE.Notification} ({nameof(Notification.IdxNotification)}) ON DELETE CASCADE,
+          {nameof(NotificationMessage.Message)} TEXT,
+          {nameof(NotificationMessage.CreateAT)} TIMESTAMP
+        )
+      ";
+    }
+
+
   }
+
 }

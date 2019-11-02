@@ -1,5 +1,5 @@
 ﻿using BikeStore.core.Domain;
-using BikeStore.core.Domain.Notification;
+using BikeStore.core.Domain.Notification_NS;
 using BikeStore.core.Domain.Product_NS;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -10,9 +10,9 @@ namespace BikeStore.Infrastructure.EF {
   public class BikeStoreContext : DbContext {
 
     public DbSet<User> Users { get; set; }
-    public DbSet<ForkNotification> ForksNotifications { get; set; }
+    public DbSet<Notification> Notifications { get; set; }
     public DbSet<Product> Product { get; set; }
-    public DbSet<ForkNotificationImage> ForkNotficationImages { get; set; }
+    public DbSet<NotificationImage> NotificationImages { get; set; }
     public DbSet<ProductCategory> ProductCategory { get; set; }
     public DbSet<ProductImage> ProductImages { get; set; }
 

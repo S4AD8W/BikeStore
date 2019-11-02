@@ -42,7 +42,7 @@ namespace BikeStore.Controllers {
 
       UserNotificationInfo pVM = new UserNotificationInfo();
 
-      pVM.Forks = mDB.ForksNotifications.Where(x => x.UserId == pUserId);
+      pVM.Notification = mDB.Notifications.Where(x => x.UserUuId == pUserId);
 
       return View("UserAccount", pVM);
 

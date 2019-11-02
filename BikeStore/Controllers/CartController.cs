@@ -12,12 +12,11 @@ using BikeStore.Infrastructure.Extensions;
 using BikeStore.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BikeStore.Controllers
-{
+namespace BikeStore.Controllers {
   public class CartController : BikeStoreControllerBaseController {
     private IProductsRepository mProductRepository;
 
-    public CartController(IProductsRepository xProductRepository,ICommandDispatcher xCommandDispatcher, IMapper xMapper)
+    public CartController(IProductsRepository xProductRepository, ICommandDispatcher xCommandDispatcher, IMapper xMapper)
            : base(xCommandDispatcher, xMapper) {
       mProductRepository = xProductRepository;
     }
@@ -29,7 +28,7 @@ namespace BikeStore.Controllers
       });
     }
 
-    public async Task< RedirectToActionResult> Add(AddProductCommand xCommand) {
+    public async Task<RedirectToActionResult> Add(AddProductCommand xCommand) {
 
       await DispatchAsync(xCommand);
 

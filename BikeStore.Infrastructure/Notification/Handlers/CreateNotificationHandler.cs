@@ -1,6 +1,4 @@
 ﻿using BikeStore.Infrastructure.Commands;
-using BikeStore.Infrastructure.Notification.Commands;
-using BikeStore.Infrastructure.Notification.Services;
 using BikeStore.Infrastructure.Services.Emails;
 using BikeStore.Infrastructure.Types;
 using Microsoft.AspNetCore.Http;
@@ -11,20 +9,22 @@ using System.Threading.Tasks;
 using System.Linq;
 using System.Security.Claims;
 using BikeStore.Infrastructure.Extensions;
+using BikeStore.Infrastructure.Notification_NS.Commands;
+using BikeStore.Infrastructure.Notification_NS.Services;
 
-namespace BikeStore.Infrastructure.Notification.Handlers {
-  public class CreateForkNotificationHandler : ICommandHandler<CreateForkNotificationCommand> {
+namespace BikeStore.Infrastructure.Notification_NS.Handlers {
+  public class CreateNotificationHandler : ICommandHandler<CreateNotificationCommand> {
 
-    private readonly IForkNotificationService mForkNotyificationServices;
+    private readonly INotificationService mNotificationServices;
     private readonly IEmailService mEmailService;
     private readonly IHttpContextAccessor mHttpContextAcessor;
-    public CreateForkNotificationHandler(IForkNotificationService xForkNotificationService, IEmailService xEmailService, IHttpContextAccessor xHttpContextAcessor) {
-      mForkNotyificationServices = xForkNotificationService;
+    public CreateNotificationHandler(INotificationService xForkNotificationService, IEmailService xEmailService, IHttpContextAccessor xHttpContextAcessor) {
+      mNotificationServices = xForkNotificationService;
       mEmailService = xEmailService;
       mHttpContextAcessor = xHttpContextAcessor;
     }
 
-    public async Task<CommandResult> HandleAsync(CreateForkNotificationCommand xCommand) {
+    public async Task<CommandResult> HandleAsync(CreateNotificationCommand xCommand) {
 
       CommandResult pCommandResult = new CommandResult();
       Guid pUseruId;
@@ -36,7 +36,7 @@ namespace BikeStore.Infrastructure.Notification.Handlers {
 
       xCommand.IdxUser = Convert.ToInt32(pIdxUser);
       xCommand.UserId = pUseruId;
-      var pResul = await mForkNotyificationServices.AddForkNotificationAsync(xCommand);
+      var pResul = await mNotificationServices.AddNotificationAsync(xCommand);
 
       if (pResul.IsSucces) {
         string pEmail = mHttpContextAcessor.HttpContext.User.Claims.Where(x => x.Type == ClaimTypes.Email)

@@ -24,7 +24,7 @@ namespace BikeStore.ViewsComponent.Information {
     public async Task<IViewComponentResult> InvokeAsync() {
 
       NotificationCartInfoVM pVM = new NotificationCartInfoVM();
-      pVM.ForkNotyficationCount = mDB.ForksNotifications.Count(x => x.NotificationStatus == core.Domain.Notification.NotificationStatusEnum.New);
+      pVM.ForkNotyficationCount = mDB.Notifications.Count(x => x.NotificationStatus == core.Domain.Notification_NS.NotificationStatusEnum.New);
 
       return View("NotificationCartInfo",pVM);
     }

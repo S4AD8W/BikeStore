@@ -1,4 +1,4 @@
-﻿@using BikeStore.core.Domain.Notification
+﻿@using BikeStore.core.Domain.Notification_NS
 @{
   ViewData["Title"] = "Fork";
   Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
@@ -92,11 +92,11 @@
           </tr>
         </tfoot>
         <tbody>
-          @foreach (var pItem in Model.Forks) {
+          @foreach (var pItem in Model.Notifications) {
 
             <tr role="row" class="odd">
               <td>@pItem.Dscr</td>
-              <td>@pItem.ForksModel</td>
+              <td>@pItem.Model</td>
               <td>@pItem.NotificationStatus</td>
               <td>@pItem.CreateAt</td>
             </tr>

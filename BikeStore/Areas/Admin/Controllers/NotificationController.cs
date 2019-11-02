@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using BikeStore.Areas.Admin.ViewModel;
 using BikeStore.Controllers;
-using BikeStore.core.Domain.Notification;
+using BikeStore.core.Domain.Notification_NS;
 using BikeStore.Infrastructure.Commands;
 using BikeStore.Infrastructure.EF;
 using BikeStore.ViewModels;
@@ -25,9 +25,9 @@ namespace BikeStore.Areas.Admin.Controllers {
     public async Task<IActionResult> Fork(NotificationStatusEnum xStatus = NotificationStatusEnum.New, int productpage = 1) {
 
       AllForkVM pVM = new AllForkVM();
-      pVM.Forks = await mDB.ForksNotifications.ToListAsync();
+      pVM.Notifications = await mDB.Notifications.ToListAsync();
 
-      pVM.Forks = await mDB.ForksNotifications
+      pVM.Notifications = await mDB.Notifications
                     .Where(p =>  p.NotificationStatus == xStatus)
                     //.OrderBy(p => p.ProductID)
                     .Skip((productpage - 1) * mPageSize)
@@ -36,7 +36,7 @@ namespace BikeStore.Areas.Admin.Controllers {
       pVM.PagingInfo = new PagingInfo {
         CurrentPage = productpage,
         ItemsPerPage = mPageSize,
-        TotalItems = mDB.ForksNotifications.Where(e =>
+        TotalItems = mDB.Notifications.Where(e =>
                             e.NotificationStatus == xStatus).Count()
       };
       

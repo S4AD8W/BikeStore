@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using BikeStore.core.Domain;
-using BikeStore.Infrastructure.Notification.Commands;
+
 
 namespace BikeStore.Infrastructure.Mappers{
 

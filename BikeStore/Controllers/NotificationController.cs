@@ -4,10 +4,10 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
-using BikeStore.core.Domain.Notification;
+using BikeStore.core.Domain.Notification_NS;
 using BikeStore.Infrastructure.Commands;
 using BikeStore.Infrastructure.EF;
-using BikeStore.Infrastructure.Notification.Commands;
+using BikeStore.Infrastructure.Notification_NS.Commands;
 using BikeStore.ViewModels.Notfication;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -32,16 +32,16 @@ namespace BikeStore.Controllers {
     [HttpPost]
     public async Task<IActionResult> CreateForksNotfication(ForkNotificationVM xNotification, ICollection<IFormFile> xFiles) {
 
-      CreateForkNotificationCommand pCommand;
+      CreateNotificationCommand pCommand;
 
-      pCommand = mMapper.Map<ForkNotificationVM, CreateForkNotificationCommand>(xNotification);
+      pCommand = mMapper.Map<ForkNotificationVM, CreateNotificationCommand>(xNotification);
 
       if (xFiles != null) {                                 //sprawdzenie czy lista plików niejest pusta i odczytanie zawatość 
-        pCommand.Images = new List<core.Domain.Notification.ForkNotificationImage>();
+        pCommand.Images = new List<core.Domain.Notification_NS.NotificationImage>();
         using (var memoryStream = new MemoryStream()) {
           foreach (var pFile in xFiles) {
             await pFile.CopyToAsync(memoryStream);
-            pCommand.Images.Add(new core.Domain.Notification.ForkNotificationImage {
+            pCommand.Images.Add(new core.Domain.Notification_NS.NotificationImage {
               Content = memoryStream.ToArray(),
               Name = pFile.FileName,
               Size = pFile.Length
@@ -58,12 +58,12 @@ namespace BikeStore.Controllers {
 
     }
 
-    public async Task<IActionResult> ForkNotyficationDetails(Guid xUid) {
+    public async Task<IActionResult> NotificationDetails(Guid xUid) {
 
-      ForkNotification pForkNotification = mDB.ForksNotifications.SingleOrDefault(x => x.Guid == xUid);
-      ForkNotificationVM pVM = new ForkNotificationVM(pForkNotification);
+      Notification pNotification = mDB.Notifications.SingleOrDefault(x => x.Guid == xUid);
+      ForkNotificationVM pVM = new ForkNotificationVM(pNotification);
 
-      pVM.ForkNotificationImages = await mDB.ForkNotficationImages.Where(x => x.IdxForkNotfication == pForkNotification.IdxForkNotfication).ToListAsync();
+      pVM.NotificationImages = await mDB.NotificationImages.Where(x => x.IdxNotification == pNotification.IdxNotification).ToListAsync();
 
 
 

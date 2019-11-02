@@ -1,4 +1,4 @@
-﻿using BikeStore.core.Domain.Notification;
+﻿using BikeStore.core.Domain.Notification_NS;
 using BikeStore.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace BikeStore.ViewModels.Notfication {
   public class UserNotificationInfo {
 
-    public IEnumerable<ForkNotification> Forks { get; set; }
+    public IEnumerable<Notification> Notification { get; set; }
     public PagingInfo PagingInfo { get; set; }
 
 
