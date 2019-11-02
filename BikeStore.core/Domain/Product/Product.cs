@@ -1,11 +1,12 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace BikeStore.core.Domain.Product_NS {
   public class Product {
-    
+
 
     [Key]
     public int IdxProduct { get; private set; }
@@ -41,6 +42,18 @@ namespace BikeStore.core.Domain.Product_NS {
       this.EditAt = DateTime.UtcNow;
       this.Quantity = xQuantity;
       this.CreateAt = xCreateAT;
+    }
+
+    [JsonConstructor]
+    public Product(int idxProduct, string name, string description, decimal price, int idxCategory, DateTime createAt, DateTime editAt, int quantity) {
+      IdxProduct = idxProduct;
+      Name = name;
+      Description = description;
+      Price = price;
+      IdxCategory = idxCategory;
+      CreateAt = createAt;
+      EditAt = editAt;
+      Quantity = quantity;
     }
   }
 

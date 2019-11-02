@@ -58,6 +58,12 @@ namespace BikeStore.Infrastructure {
     Quantity = 44,
     CreationDate = 45,
     AddToShopCart =46,
+    Product = 47,
+    Together = 48,
+    PurchaseValue = 49,
+    SearchForTheNextProduct = 50,
+    GoToPayment = 51,
+
   }
 
   public class Languages {
@@ -164,6 +170,11 @@ namespace BikeStore.Infrastructure {
       AddText(TextEnum.Quantity, "Quantity", "Ilość");
       AddText(TextEnum.CreationDate, "Creation date", "Data utworzenia");
       AddText(TextEnum.AddToShopCart, "Add to shop cart", "Dodaj to koszyka");
+      AddText(TextEnum.Product, "Product", "Produkt");
+      AddText(TextEnum.Together, "Together", "Razem");
+      AddText(TextEnum.PurchaseValue, "Purchase value", "Wartość zakpów");
+      AddText(TextEnum.SearchForTheNextProduct, "Search for the next product", "Szukaj kolejnego produktu");
+      AddText(TextEnum.GoToPayment, "Go to payment", "Przjdź do płatność");
     }
 
     private void AddText(TextEnum xCntText, string xEN, string xPL) {

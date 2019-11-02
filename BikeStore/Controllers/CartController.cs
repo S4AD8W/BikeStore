@@ -15,17 +15,18 @@ using Microsoft.AspNetCore.Mvc;
 namespace BikeStore.Controllers {
   public class CartController : BikeStoreControllerBaseController {
     private IProductsRepository mProductRepository;
-
-    public CartController(IProductsRepository xProductRepository, ICommandDispatcher xCommandDispatcher, IMapper xMapper)
+    private IProductImageRepository  mProductImageRepository;
+    public CartController(IProductsRepository xProductRepository, ICommandDispatcher xCommandDispatcher, IMapper xMapper, IProductImageRepository xProductImageRepository)
            : base(xCommandDispatcher, xMapper) {
       mProductRepository = xProductRepository;
+      mProductImageRepository = xProductImageRepository;
     }
 
     public ViewResult Index(string returnUrl) {
-      return View(new CartIndexVM {
-        Cart = GetCart(),
-        ReturnUrl = returnUrl
-      });
+
+      CartIndexVM pVM  = new CartIndexVM(mProductImageRepository, HttpContext.Session.GetCart());
+
+      return View(pVM);
     }
 
     public async Task<RedirectToActionResult> Add(AddProductCommand xCommand) {
@@ -39,27 +40,31 @@ namespace BikeStore.Controllers {
       return RedirectToAction("Index");
     }
 
+    public async Task ChangeQuantiti (int xIdxProduct, int xQuantiti) {
 
-    public RedirectToActionResult RemoveFromCart(int productId,
-            string returnUrl) {
-      Product product = mProductRepository.Products
-          .FirstOrDefault(p => p.IdxProduct == productId);
+      var pCart = HttpContext.Session.GetCart();
 
-      if (product != null) {
-        Cart cart = GetCart();
-        cart.RemoveLine(product);
-        SaveCart(cart);
-      }
-      return RedirectToAction("Index", new { returnUrl });
+      if (!pCart.ChangeQuantiti(xIdxProduct, xQuantiti)) Response.StatusCode = 405;
+
+      HttpContext.Session.SetJson(SessionEnum.Cart.ToString(), pCart);
+      Response.StatusCode = 200;
+
+      await Task.CompletedTask;
+
+    }
+    
+    public async Task RemoveItem (int xIdxProduct) {
+
+      var pCart = HttpContext.Session.GetCart();
+
+      if (!pCart.RemoveItem(xIdxProduct)) Response.StatusCode = 405;
+
+      HttpContext.Session.SetJson(SessionEnum.Cart.ToString(), pCart);
+      Response.StatusCode = 200;
+
+      await Task.CompletedTask;
     }
 
-    private Cart GetCart() {
-      Cart cart = HttpContext.Session.GetJson<Cart>("Cart") ?? new Cart();
-      return cart;
-    }
 
-    private void SaveCart(Cart cart) {
-      HttpContext.Session.SetJson("Cart", cart);
-    }
   }
 }

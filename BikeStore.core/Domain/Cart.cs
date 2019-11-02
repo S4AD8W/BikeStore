@@ -24,6 +24,27 @@ namespace BikeStore.core.Domain {
       }
     }
 
+    public bool ChangeQuantiti (int xIdxProduct, int xQuantiti) {
+
+      CartLine pLine = lineCollection.FirstOrDefault(x => x.Product.IdxProduct == xIdxProduct);
+
+      if (pLine == null) return false;
+
+      pLine.Quantity = xQuantiti;
+      return true;
+
+    }
+
+    public bool RemoveItem (int xIdxProduct) {
+
+      CartLine pLine = lineCollection.FirstOrDefault(x => x.Product.IdxProduct == xIdxProduct);
+
+      if (pLine == null) return false;
+
+      lineCollection.Remove(pLine);
+      return true;
+
+    }
     public virtual void RemoveLine(BikeStore.core.Domain.Product_NS.Product product) =>
         lineCollection.RemoveAll(l => l.Product.IdxProduct ==
             product.IdxProduct);

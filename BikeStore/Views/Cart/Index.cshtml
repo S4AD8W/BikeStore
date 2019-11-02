@@ -1,38 +1,145 @@
 ﻿
 @model BikeStore.ViewModels.CartIndexVM
 
-<h2>Twój koszyk</h2>
-<table class="table table-bordered table-striped">
-  <thead>
-    <tr>
-      <th>Ilość</th>
-      <th>Produkt</th>
-      <th class="text-right">Cena</th>
-      <th class="text-right">Wartość</th>
-    </tr>
-  </thead>
-  <tbody>
-    @foreach (var line in Model.Cart.Lines) {
-      <tr>
-        <td class="text-center">@line.Quantity</td>
-        <td class="text-left">@line.Product.Name</td>
-        <td class="text-right">@line.Product.Price.ToString("c")</td>
-        <td class="text-right">
-          @((line.Quantity * line.Product.Price).ToString("c"))
-        </td>
-      </tr>
+<style>
+  .quantity {
+    margin-right: 60px;
+  }
+
+    .quantity input {
+      -webkit-appearance: none;
+      border: none;
+      text-align: center;
+      width: 32px;
+      font-size: 16px;
+      color: #43484D;
+      font-weight: 300;
     }
-  </tbody>
-  <tfoot>
-    <tr>
-      <td colspan="3" class="text-right">Razem:</td>
-      <td class="text-right">
-        @Model.Cart.ComputeTotalValue().ToString("c")
-      </td>
-    </tr>
-  </tfoot>
-</table>
+
+  .btn-increment {
+    width: 30px;
+    height: 30px;
+    background-color: #E1E8EE;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+  }
+
+  .minus-btn img {
+    margin-bottom: 3px;
+  }
+
+  .plus-btn img {
+    margin-bottom: 5px;
+  }
+
+  button:focus,
+  input:focus {
+    outline: 0;
+  }
+</style>
+
+@if (Model.CartLines != null) {
+  <div class="row">
+    <div class="col">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col" class="col-5">@Languages.GetText(TextEnum.Product)</th>
+            <th scope="col" class="col-2">@Languages.GetText(TextEnum.Price)</th>
+            <th scope="col" class="col-3">@Languages.GetText(TextEnum.Quantity)</th>
+            <th scope="col" class="col-2">@Languages.GetText(TextEnum.Together)</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @foreach (var pItem in Model.CartLines) {
+            <tr>
+              <td>
+                <img src="data:image/jpeg;base64,@(Convert.ToBase64String(pItem.Picture))" style="width:50px" />
+                @pItem.Product.Name
+              </td>
+              <td>@pItem.Product.Price.ToString("c")</td>
+              <td>
+                <div class="quantity">
+                  <button class="plus-btn btn-increment" type="button" name="button">
+                    <i class="fas fa-plus"></i>
+                  </button>
+                  <input type="text" name="name" type="number" value="@pItem.Quantiti" data-IdxProduct="@pItem.Product.IdxProduct"
+                          min="1"  />
+                  <button class="minus-btn btn-increment" type="button" name="button">
+                    <i class="fas fa-minus"></i>
+                  </button>
+                </div>
+              </td>
+              <td>@((pItem.Product.Price * pItem.Quantiti).ToString("c"))</td>
+              <td><button class="btnRemoveCartItem" data-IdxProduct="@pItem.Product.IdxProduct"><i class="fas fa-trash"></i></button></td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <span class="float-right font-weight-bold">@Languages.GetText(TextEnum.PurchaseValue):@Model.TotalValue.ToString("c")</span>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <a asp-controller="Shop" asp-action="ListOfProduct" class="btn btn-circle btn-primary float-left">@Languages.GetText(TextEnum.SearchForTheNextProduct)</a>
+      <a  class="btn btn-circle btn-success float-right">@Languages.GetText(TextEnum.GoToPayment)</a>
+    </div>
+  </div>
+} else {
+  <h1>Koszyk jest pusty</h1>
+}
 
 <div class="text-center">
-  <a class="btn btn-primary" href="@Model.ReturnUrl">Kontynuuj zakupy</a>
+  <a class="btn btn-primary" href="@Model.ReturnUrl">Kontynuuj</a>
 </div>
+
+<script>
+
+   $('.minus-btn').on('click', function (e) {
+    e.preventDefault();
+    let $pThis = $(this),
+      $pInput = $pThis.closest('div').find('input');
+    pValue = parseInt($pInput.val());
+
+    if (pValue > 1) {
+      pValue = pValue - 1;
+    } else {
+      pValue = 0;
+    }
+
+     $pInput.val(pValue);
+     JsCart.ChangeProductQuantiti($pInput);
+  });
+
+  $('.plus-btn').on('click', function (e) {
+    let $pThis = $(this),
+      $pInput = $pThis.closest('div').find('input');
+      pValue = parseInt($pInput.val());
+
+    if (pValue < 100) {
+      pValue = pValue + 1;
+    } else {
+      pValue = 100;
+    }
+    $pInput.val(pValue);
+    JsCart.ChangeProductQuantiti($pInput);
+  });
+
+
+  let pBtns = document.getElementsByClassName("btnRemoveCartItem");
+
+  for (const pItem of pBtns) {
+    pItem.addEventListener("click", JsCart.RemoveItem);
+  }
+
+
+</script>
