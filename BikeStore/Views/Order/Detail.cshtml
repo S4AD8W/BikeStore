@@ -1,33 +1,53 @@
-﻿
+﻿@using BikeStore.core.Domain
+
 @{
   ViewData["Title"] = "Detail";
   Layout = "~/Views/Shared/_Layout.cshtml";
 }
-  <form asp-action="" method="post">
-    <!--   Delelivery method-->
-    <div class="row ">
-
-      <div class="card p-2 Card_MenuItem ml-4 mb-4 ">
-        <span class="text-center"><i class="fas fa-truck-loading fa-5x"></i> </span>
-        
-
+<form asp-action="" method="post">
+  <div class="card">
+    <div class=" card-body">
+      <!--   Delelivery method-->
+      <div class="row mb-3">
+        <div class="col border-bottom textHeaderCard" style="border-bottom-color:#0fc547!important">
+          @Languages.GetText(TextEnum.ChooseYourDeliveryOrCollectionMethod)
+        </div>
       </div>
-      <div class="card p-2 Card_MenuItem ml-4 mb-4">
-        <span class="text-center"> <i class="fas fa-home fa-5x"></i></span>
-        <a class="card-block stretched-link text-decoration-none text-center " href>
-          zamówienia
-        </a>
+      <div class="row ">
+        <div class="card p-2 Card_MenuItem DeleliverMethod ml-4 mb-4 ">
+          <label for="DeleliveryMethod" class="control-label"></label>
+          <span class="text-center"><i class="fas fa-truck-loading fa-5x"></i> </span>
+          <input name="DeleliveryMethod" type="radio" value="@DeleliveryMethodEenum.Courier" />
+          <span class="text-center" >@Languages.GetText(TextEnum.Courier)</span>
+        </div>
+        <div class="card p-2 Card_MenuItem DeleliverMethod ml-4 mb-4">
+          <span class="text-center"> <i class="fas fa-home fa-5x"></i></span>
+          <label for="DeleliveryMethod" class="control-label"></label>
+          <input name="DeleliveryMethod" type="radio" value="@DeleliveryMethodEenum.PersonalPickup" />
+          <span class="text-center">@Languages.GetText(TextEnum.PersonalPickup)</span>
+        </div>
 
-      </div>
-
-      <div class="card p-2 Card_MenuItem ml-4 mb-4">
-        <span class="text-center"> <i class="fas fa-hotel fa-5x"></i></span>
-        <a class="card-block stretched-link text-decoration-none text-center " href>
-          zamówienia
-        </a>
-
+        <div class="card p-2 Card_MenuItem  DeleliverMethod ml-4 mb-4">
+          <span class="text-center"> <i class="fas fa-hotel fa-5x"></i></span>
+          <label for="DeleliveryMethod" class="control-label"></label>
+          <input name="DeleliveryMethod" type="radio" value="@DeleliveryMethodEenum.InPost" />
+          <span class="text-center">@Languages.GetText(TextEnum.InPost)</span>
+        </div>
       </div>
     </div>
+  </div>
+  <!--   Delelivery method-->
+</form>
 
-    <!--   Delelivery method-->
-  </form>
+
+<script>
+  $('.DeleliverMethod').on('click', function (e) {
+    debugger;
+    e.preventDefault();
+    let $pThis = $(this),
+      $pInput = $pThis.closest('div').find('input');
+
+    $pInput[0].checked = true
+
+  });
+</script>

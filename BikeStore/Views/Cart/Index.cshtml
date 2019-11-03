@@ -91,7 +91,7 @@
   <div class="row">
     <div class="col">
       <a asp-controller="Shop" asp-action="ListOfProduct" class="btn btn-circle btn-primary float-left">@Languages.GetText(TextEnum.SearchForTheNextProduct)</a>
-      <a  class="btn btn-circle btn-success float-right">@Languages.GetText(TextEnum.GoToPayment)</a>
+      <a asp-controller="Order" asp-action="Detail" class="btn btn-circle btn-success float-right">@Languages.GetText(TextEnum.GoToPayment)</a>
     </div>
   </div>
 } else {

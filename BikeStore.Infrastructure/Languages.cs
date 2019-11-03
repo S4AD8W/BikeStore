@@ -63,7 +63,10 @@ namespace BikeStore.Infrastructure {
     PurchaseValue = 49,
     SearchForTheNextProduct = 50,
     GoToPayment = 51,
-
+    ChooseYourDeliveryOrCollectionMethod = 52,
+    Courier = 53,
+    PersonalPickup = 54,
+    InPost = 55,
   }
 
   public class Languages {
@@ -175,6 +178,10 @@ namespace BikeStore.Infrastructure {
       AddText(TextEnum.PurchaseValue, "Purchase value", "Wartość zakpów");
       AddText(TextEnum.SearchForTheNextProduct, "Search for the next product", "Szukaj kolejnego produktu");
       AddText(TextEnum.GoToPayment, "Go to payment", "Przjdź do płatność");
+      AddText(TextEnum.ChooseYourDeliveryOrCollectionMethod, "Choose your delivery or collection method", " Wybierz sposób dostawy lub odbioru");
+      AddText(TextEnum.Courier, "Courier", "Kurier");
+      AddText(TextEnum.PersonalPickup, "Personal pickuo", "Odbiur osobisty");
+      AddText(TextEnum.InPost, "InPost", "InPost");
     }
 
     private void AddText(TextEnum xCntText, string xEN, string xPL) {
