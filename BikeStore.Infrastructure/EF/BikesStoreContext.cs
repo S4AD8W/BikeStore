@@ -15,6 +15,8 @@ namespace BikeStore.Infrastructure.EF {
     public DbSet<NotificationImage> NotificationImages { get; set; }
     public DbSet<ProductCategory> ProductCategory { get; set; }
     public DbSet<ProductImage> ProductImages { get; set; }
+    public DbSet<Order> Orders { get; set; }
+    public DbSet<OrderItem> OrderItems { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             => optionsBuilder.UseNpgsql("Server=127.0.0.1;Port=5432;Database=BikeStore;Username=postgres;Password=test");

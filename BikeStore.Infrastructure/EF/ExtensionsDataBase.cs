@@ -21,12 +21,14 @@ namespace BikeStore.Infrastructure.EF {
     public const string Notification = "notifications";
     public const string NotificationImage = "notificationimages";
     public const string NotificationMessage = "notificationmessages";
+    public const string Orders = "orders";
+    public const string OrderItems = "orderitems";
 
   }
 
   public static class ExtensionsDataBase {
 
-    private const int DB_VERSION = (3);
+    private const int DB_VERSION = (4);
 
     public static IWebHost UpdateDatabase(this IWebHost xIWebHost) {
       // funkcja jako rozszrzenie, aktualizująca bazę danych
@@ -105,6 +107,14 @@ namespace BikeStore.Infrastructure.EF {
       }
       
       foreach (string pSql in GetSqlToCreateTableNotificationMessages()) {
+        yield return pSql;
+      }
+
+      foreach (string pSql in GetSqlToCreateTableOrder()) {
+        yield return pSql;
+      }
+      
+      foreach (string pSql in GetSqlToCreateTableOrderItems()) {
         yield return pSql;
       }
 
@@ -271,6 +281,38 @@ namespace BikeStore.Infrastructure.EF {
       ";
     }
 
+    private static IEnumerable<string> GetSqlToCreateTableOrder() {
+
+      yield return $@"
+        CREATE TABLE IF NOT EXISTS {DB_TABLE.Orders}(
+          {nameof(Order.IdxOrder)} SERIAL PRIMARY KEY,
+          {nameof(Order.UuId)} UUID,
+          {nameof(Order.IdxUser)} INTEGER,
+          {nameof(Order.OrderStatus)} INTEGER,
+          {nameof(Order.IdxDeleliveryAddress)} INTEGER NOT NULL,
+          {nameof(Order.IsInvoice)} BOOLEAN DEFAULT FALSE,
+          {nameof(Order.IdxInvoiceAddress)} INTEGER,
+          {nameof(Order.OrderAttention)} TEXT,
+          {nameof(Order.IsAcceptStoreRules)} BOOLEAN NOT NULL,
+          {nameof(Order.IsAcceptElectronicInvoice)} BOOLEAN DEFAULT TRUE,
+          {nameof(Order.DeleliveryMethod)} INTEGER,
+          {nameof(Order.PaymentMethod)} INTEGER
+      )";
+    }
+
+    private static IEnumerable<string> GetSqlToCreateTableOrderItems() {
+
+      yield return $@"
+        CREATE TABLE IF NOT EXISTS {DB_TABLE.OrderItems} (
+          {nameof(OrderItem.IdxOrderItem)} SERIAL PRIMARY KEY,
+          {nameof(OrderItem.IdxOrder)} INTEGER REFERENCES {DB_TABLE.Orders} ({nameof(Order.IdxOrder)}) ON DELETE CASCADE,
+          {nameof(OrderItem.Name)} TEXT,
+          {nameof(OrderItem.Quantiti)} INTEGER,
+          {nameof(OrderItem.UnitPrice)}  DECIMAL DEFAULT 0.0,
+          {nameof(OrderItem.IdxProduct)} INTEGER NOT NULL DEFAULT 0
+        )
+      ";
+    }
 
   }
 

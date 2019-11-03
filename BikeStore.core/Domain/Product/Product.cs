@@ -17,7 +17,7 @@ namespace BikeStore.core.Domain.Product_NS {
     public DateTime CreateAt { get; private set; }
     public DateTime EditAt { get; private set; }
     public int Quantity { get; private set; }
-
+    
 
     public Product() {
 
