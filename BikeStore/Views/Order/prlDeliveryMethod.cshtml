@@ -1,0 +1,28 @@
+﻿@using BikeStore.core.Domain
+
+<div class="row mb-3">
+  <div class="col border-bottom textHeaderCard" style="border-bottom-color:#0fc547!important">
+    @Languages.GetText(TextEnum.ChooseYourDeliveryOrCollectionMethod)
+  </div>
+</div>
+<div class="row ">
+  <div class="card p-2 Card_MenuItem CardRadio ml-4 mb-4 ">
+    <label for="DeleliveryMethod" class="control-label"></label>
+    <span class="text-center"><i class="fas fa-truck-loading fa-5x"></i> </span>
+    <input name="DeleliveryMethod" type="radio" value="@DeliveryMethodEenum.Courier" />
+    <span class="text-center">@Languages.GetText(TextEnum.Courier)</span>
+  </div>
+  <div class="card p-2 Card_MenuItem CardRadio ml-4 mb-4">
+    <span class="text-center"> <i class="fas fa-home fa-5x"></i></span>
+    <label for="DeleliveryMethod" class="control-label"></label>
+    <input name="DeleliveryMethod" type="radio" value="@DeliveryMethodEenum.PersonalPickup" />
+    <span class="text-center">@Languages.GetText(TextEnum.PersonalPickup)</span>
+  </div>
+
+  <div class="card p-2 Card_MenuItem  CardRadio ml-4 mb-4">
+    <span class="text-center"> <i class="fas fa-hotel fa-5x"></i></span>
+    <label for="DeleliveryMethod" class="control-label"></label>
+    <input name="DeleliveryMethod" type="radio" value="@DeliveryMethodEenum.InPost" />
+    <span class="text-center">@Languages.GetText(TextEnum.InPost)</span>
+  </div>
+</div>

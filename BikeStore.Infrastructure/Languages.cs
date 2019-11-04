@@ -40,7 +40,7 @@ namespace BikeStore.Infrastructure {
     Account = 26,
     LastLogIn = 27,
     Notifications = 28,
-    Shop= 29,
+    Shop = 29,
     AddProduct = 30,
     Name_Product = 31,
     Description = 32,
@@ -54,10 +54,10 @@ namespace BikeStore.Infrastructure {
     Delete = 40,
     Edit = 41,
     BackToList = 42,
-    Close =43,
+    Close = 43,
     Quantity = 44,
     CreationDate = 45,
-    AddToShopCart =46,
+    AddToShopCart = 46,
     Product = 47,
     Together = 48,
     PurchaseValue = 49,
@@ -67,6 +67,11 @@ namespace BikeStore.Infrastructure {
     Courier = 53,
     PersonalPickup = 54,
     InPost = 55,
+    ChooseYourPaymentMethod = 56,
+    CashOnDelivery = 57,
+    BankTransver = 58,
+    PayU = 59,
+    EnterYourShippingData = 60,
   }
 
   public class Languages {
@@ -182,6 +187,11 @@ namespace BikeStore.Infrastructure {
       AddText(TextEnum.Courier, "Courier", "Kurier");
       AddText(TextEnum.PersonalPickup, "Personal pickuo", "Odbiur osobisty");
       AddText(TextEnum.InPost, "InPost", "InPost");
+      AddText(TextEnum.ChooseYourPaymentMethod, "Choose your payment method", "Wybierz system płatność");
+      AddText(TextEnum.CashOnDelivery, "Cash on delivery", "Gotówka przy odbiorze");
+      AddText(TextEnum.BankTransver, "Bank transver", "Przelew bankowy");
+      AddText(TextEnum.PayU, "PayU", "PayU");
+      AddText(TextEnum.EnterYourShippingData, "Enter your shipping data", "Wpisz dane do wysyłki")
     }
 
     private void AddText(TextEnum xCntText, string xEN, string xPL) {

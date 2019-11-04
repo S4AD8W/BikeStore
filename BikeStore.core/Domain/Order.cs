@@ -11,7 +11,7 @@ namespace BikeStore.core.Domain {
     Realized = 3,
   }
 
-  public enum DeleliveryMethodEenum {
+  public enum DeliveryMethodEenum {
     Courier = 1,
     InPost = 2,
     PersonalPickup =3
@@ -31,7 +31,7 @@ namespace BikeStore.core.Domain {
     public Guid UuId { get; private set; }
     public int IdxUser { get; private set; }
     public OrderStatusEnum OrderStatus { get; private set; }
-    public DeleliveryMethodEenum DeleliveryMethod { get; private set; }
+    public DeliveryMethodEenum DeleliveryMethod { get; private set; }
     public PaymentMethodEenum PaymentMethod { get; private set; }
     public int IdxDeleliveryAddress { get; private set; }
     public bool IsInvoice { get; private set; } = false;

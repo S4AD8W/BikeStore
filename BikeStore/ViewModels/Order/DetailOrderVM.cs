@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace BikeStore.ViewModels.Order {
   public class DetailOrderVM {
 
-    public DeleliveryMethodEenum DeleliveryMethod { get; set; }
+    public DeliveryMethodEenum DeliveryMethod { get; set; }
     public PaymentMethodEenum PaymentMethod { get; set; }
     public string Name { get; set; }
     public string SurName { get; set; }
