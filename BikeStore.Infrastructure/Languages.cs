@@ -72,6 +72,15 @@ namespace BikeStore.Infrastructure {
     BankTransver = 58,
     PayU = 59,
     EnterYourShippingData = 60,
+    Address = 61,
+    ZipCodeAndCity = 62,
+    PhoneNumber = 63,
+    IWantToSendThisPackageToADifferentAddress = 64,
+    IWantToProvideOtherDetailsForTheInvoice = 65,
+    IWantToAddNotesToTheOrder = 66,
+    EnterYourCommentsOnTheOrderHere = 67,
+    IAcceptTheTermsAndConditionsOfTheShop = 68,
+    IAgreeToIssueAndSendAnInvoiceInElectronicForm =69,
   }
 
   public class Languages {
@@ -191,7 +200,16 @@ namespace BikeStore.Infrastructure {
       AddText(TextEnum.CashOnDelivery, "Cash on delivery", "Gotówka przy odbiorze");
       AddText(TextEnum.BankTransver, "Bank transver", "Przelew bankowy");
       AddText(TextEnum.PayU, "PayU", "PayU");
-      AddText(TextEnum.EnterYourShippingData, "Enter your shipping data", "Wpisz dane do wysyłki")
+      AddText(TextEnum.EnterYourShippingData, "Enter your shipping data", "Wpisz dane do wysyłki");
+      AddText(TextEnum.Address, "Address", "Adres");
+      AddText(TextEnum.ZipCodeAndCity, "Zip code and city", "kod pocztowy i miejscowść");
+      AddText(TextEnum.PhoneNumber, "Phone number", "Numer telefonu");
+      AddText(TextEnum.IWantToSendThisPackageToADifferentAddress, "I want to send this package to a different address", "tę przesłkę chcę przesłać na inny adres");
+      AddText(TextEnum.IWantToProvideOtherDetailsForTheInvoice, "I want to provide other details for the invoice", "Chcę podać inne dane do faktury");
+      AddText(TextEnum.IWantToAddNotesToTheOrder, "I want to add notes to the order", "chcę dodać uwagi do zamówienia");
+      AddText(TextEnum.EnterYourCommentsOnTheOrderHere, "Enter your comments on the order here", "Tutaj wpisz swoje uwagi do zamówienia");
+      AddText(TextEnum.IAcceptTheTermsAndConditionsOfTheShop, "I accept the terms and conditions of the shop", "Akceptuję regulamin sklepu");
+      AddText(TextEnum.IAgreeToIssueAndSendAnInvoiceInElectronicForm, "I agree to issue and send an invoice in electronic form", "Wyrażam zgodę na wystawienie i przesłanie faktury w formie elektronicznej");
     }
 
     private void AddText(TextEnum xCntText, string xEN, string xPL) {

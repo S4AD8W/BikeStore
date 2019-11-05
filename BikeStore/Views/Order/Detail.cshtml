@@ -8,12 +8,14 @@
     <div class="card">
       <div class=" card-body">
         <!--   Delelivery method-->
-        @await Html.PartialAsync("prlDeleliveryMethod.cshtml")
+        @await Html.PartialAsync("prlDeliveryMethod.cshtml")
         <!--   Delelivery method-->
         <!--   Payment method  -->
         @await Html.PartialAsync("prlPaymentMethod.cshtml")
         <!--   Payment method  -->
-        
+        <!-- ShippingData-->
+        @await Html.PartialAsync("prlShippingData.cshtml")
+        <!-- ShippingData-->
       </div>
    </div>
   </form>
