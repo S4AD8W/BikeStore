@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using BikeStore.Infrastructure.Commands;
+using BikeStore.ViewModels.Order;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BikeStore.Controllers {
@@ -17,5 +18,12 @@ namespace BikeStore.Controllers {
     public IActionResult Detail() {
       return View();
     }
+
+    [HttpPost]
+    public async Task<IActionResult> CreateOrder(DetailOrderVM xDetailOrdor) {
+
+      return View();
+    }
+
   }
 }

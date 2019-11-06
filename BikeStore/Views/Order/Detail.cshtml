@@ -1,10 +1,11 @@
 ﻿@using BikeStore.core.Domain
 
+@model BikeStore.ViewModels.Order.DetailOrderVM
 @{
   ViewData["Title"] = "Detail";
   Layout = "~/Views/Shared/_Layout.cshtml";
 }
-  <form asp-action="" method="post">
+  <form asp-action="CreateOrder" method="post">
     <div class="card">
       <div class=" card-body">
         <!--   Delelivery method-->
@@ -17,6 +18,7 @@
         @await Html.PartialAsync("prlShippingData.cshtml")
         <!-- ShippingData-->
       </div>
+      <button type="submit">sdfcs</button>
    </div>
   </form>
 
