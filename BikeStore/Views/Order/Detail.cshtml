@@ -33,4 +33,39 @@
     $pInput[0].checked = true
 
   });
+
+ 
+  document.getElementById("DeleliveryAnotherAddress").addEventListener("click", function (xEvent) {
+    let pAnotherAddressWraper = document.getElementById("AnotherShippingAddressWrap");
+    if (this.checked) {
+      pAnotherAddressWraper.classList.remove("hidden");
+    } else {
+      pAnotherAddressWraper.classList.add("hidden");
+    }
+
+  });
+
+  document.getElementById("AnotherDataInvoice").addEventListener("click", function (xEvent) {
+    let pAnotherDataInvoiceWrap = document.getElementById("AnotherDataInvoiceWrap");
+    if (this.checked) {
+      pAnotherDataInvoiceWrap.classList.remove("hidden");
+    } else {
+      pAnotherDataInvoiceWrap.classList.add("hidden");
+    }
+
+  });
+
+  document.getElementById("IsOrderAttention").addEventListener("click", function (xEvent) {
+    let pIsOrderAttentionWrap = document.getElementById("IsOrderAttentionWrap");
+    if (this.checked) {
+      pIsOrderAttentionWrap.classList.remove("hidden");
+    } else {
+      pIsOrderAttentionWrap.classList.add("hidden");
+    }
+
+  });
+
+  
+
+ 
 </script>

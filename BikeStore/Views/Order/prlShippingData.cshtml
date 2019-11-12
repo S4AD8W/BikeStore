@@ -8,7 +8,7 @@
 </div>
 <div class="row ">
   <div class="col-md-8 col-md-offset-3">
-    <div class="form-horizontal " style="border-bottom: 1px solid red;">
+    <div class="form-horizontal " >
 
       <div class="form-group row offset-1">
         <label for="Name" class="col-sm-5 control-label">@Languages.GetText(TextEnum.Name)</label>
@@ -31,7 +31,7 @@
       <div class="form-group row offset-1">
         <label for="" class="col-sm-5 control-label">@Languages.GetText(TextEnum.Address)</label>
         <div class="col-sm-7">
-          <input type="text"asp-for="Address" class="form-control" />
+          <input type="text" asp-for="Address" class="form-control" />
         </div>
       </div>
 
@@ -57,93 +57,96 @@
       </div>
 
       <div class="checkbox">
-        <input type="checkbox" id="DeleliveryAnotherAddress" asp-for="DeleliveryAnotherAddress" value="1" data-bind="checked: switchers.otherShipmentAddress" class="valid" aria-invalid="false">
+        <input type="checkbox" id="DeleliveryAnotherAddress" asp-for="DeleliveryAnotherAddress" value="true" data-bind="checked: switchers.otherShipmentAddress" class="valid" aria-invalid="false">
         <label for="DeleliveryAnotherAddress">@Languages.GetText(TextEnum.IWantToSendThisPackageToADifferentAddress)</label>
       </div>
 
-      <div class="form-group row offset-1">
-        <label for="AnotherName" class="col-sm-5 control-label">@Languages.GetText(TextEnum.Name)</label>
-        <div class="col-sm-7">
-          <input type="text" asp-for="AnotherName" class="form-control" />
+      <div id="AnotherShippingAddressWrap" class="hidden" style="">
+        <div class="form-group row offset-1">
+          <label for="AnotherName" class="col-sm-5 control-label">@Languages.GetText(TextEnum.Name)</label>
+          <div class="col-sm-7">
+            <input type="text" asp-for="AnotherName" class="form-control" />
+          </div>
         </div>
-      </div>
-      <div class="form-group row offset-1">
-        <label for="AnotherSurName" class="col-sm-5 control-label">@Languages.GetText(TextEnum.SurName)</label>
-        <div class="col-sm-7">
-          <input type="text" asp-for="AnotherSurName" class="form-control" />
+        <div class="form-group row offset-1">
+          <label for="AnotherSurName" class="col-sm-5 control-label">@Languages.GetText(TextEnum.SurName)</label>
+          <div class="col-sm-7">
+            <input type="text" asp-for="AnotherSurName" class="form-control" />
+          </div>
         </div>
-      </div>
 
-      <div class="form-group row offset-1">
-        <label for="AnotherAddress" class="col-sm-5 control-label">@Languages.GetText(TextEnum.Address)</label>
-        <div class="col-sm-7">
-          <input type="text" asp-for="AnotherAddress" class="form-control" />
+        <div class="form-group row offset-1">
+          <label for="AnotherAddress" class="col-sm-5 control-label">@Languages.GetText(TextEnum.Address)</label>
+          <div class="col-sm-7">
+            <input type="text" asp-for="AnotherAddress" class="form-control" />
+          </div>
+        </div>
+
+        <div class="form-group row offset-1">
+          <div class="col-sx-offset-7 col-sm-5">
+            <label for="customerPostcode" class="control-label zip-post-label text-right">@Languages.GetText(TextEnum.ZipCodeAndCity)</label>
+          </div>
+          <div class="col-xs-4 col-sm-3">
+            <input type="text" class="form-control" id="AnotherPostCode" asp-for="AnotherPostCode" maxlength="6" value="" autocomplete="off" aria-required="true" aria-describedby="customerPostcode-error" aria-invalid="true">
+          </div>
+          <div class="col-xs-8 col-sm-4">
+            <input type="text" class="form-control" id="AnotherCity" asp-for="AnotherCity" maxlength="30" value="">
+          </div>
+        </div>
+
+        <div class="form-group row offset-1">
+          <label for="AnotherPhoneNumber" class="col-sm-5 control-label">@Languages.GetText(TextEnum.PhoneNumber)</label>
+          <div class="col-sm-7">
+            <input type="tel" asp-for="AnotherPhoneNumber" class="form-control" />
+          </div>
         </div>
       </div>
-
-      <div class="form-group row offset-1">
-        <div class="col-sx-offset-7 col-sm-5">
-          <label for="customerPostcode" class="control-label zip-post-label text-right">@Languages.GetText(TextEnum.ZipCodeAndCity)</label>
-        </div>
-        <div class="col-xs-4 col-sm-3">
-          <input type="text" class="form-control" id="AnotherPostCode" asp-for="AnotherPostCode" maxlength="6" value="" autocomplete="off" aria-required="true" aria-describedby="customerPostcode-error" aria-invalid="true">
-        </div>
-        <div class="col-xs-8 col-sm-4">
-          <input type="text" class="form-control" id="AnotherCity" asp-for="AnotherCity" maxlength="30" value="">
-        </div>
+     
+      <div class="checkbox">
+        <input type="checkbox"  asp-for="AnotherDataInvoice" value="true" data-bind="checked: switchers.otherShipmentAddress" class="valid" aria-invalid="false">
+        <label for="AnotherDataInvoice">@Languages.GetText(TextEnum.IWantToProvideOtherDetailsForTheInvoice)</label>
       </div>
+      <div id="AnotherDataInvoiceWrap" class="hidden">
+        <div class="form-group row offset-1">
+          <label for="Invoice_Name" class="col-sm-5 control-label">@Languages.GetText(TextEnum.Name)</label>
+          <div class="col-sm-7">
+            <input type="text" asp-for="Invoice_Name" class="form-control" />
+          </div>
+        </div>
 
-      <div class="form-group row offset-1">
-        <label for="AnotherPhoneNumber" class="col-sm-5 control-label">@Languages.GetText(TextEnum.PhoneNumber)</label>
-        <div class="col-sm-7">
-          <input type="tel" asp-for="AnotherPhoneNumber" class="form-control" />
+        <div class="form-group row offset-1">
+          <label for="Invoice_Address" class="col-sm-5 control-label">@Languages.GetText(TextEnum.Address)</label>
+          <div class="col-sm-7">
+            <input type="text" asp-for="Invoice_Address" class="form-control" />
+          </div>
+        </div>
+
+        <div class="form-group row offset-1">
+          <div class="col-sx-offset-7 col-sm-5">
+            <label for="Invoice_PostCode" class="control-label zip-post-label text-right">@Languages.GetText(TextEnum.ZipCodeAndCity)</label>
+          </div>
+          <div class="col-xs-4 col-sm-3">
+            <input type="text" class="form-control" id="Invoice_PostCode" asp-for="Invoice_PostCode" maxlength="6" value="" autocomplete="off" aria-required="true" aria-describedby="customerPostcode-error" aria-invalid="true">
+          </div>
+          <div class="col-xs-8 col-sm-4">
+            <input type="text" class="form-control" id="Invoice_Citi" asp-for="Invoice_Citi" maxlength="30" value="">
+          </div>
+        </div>
+
+        <div class="form-group row offset-1">
+          <label for="" class="col-sm-5 control-label">Nip</label>
+          <div class="col-sm-7">
+            <input type="text" class="form-control" />
+          </div>
         </div>
       </div>
 
       <div class="checkbox">
-        <input type="checkbox" id="otherShipmentAddress" asp-for="AnotherDataInvoice" value="1" data-bind="checked: switchers.otherShipmentAddress" class="valid" aria-invalid="false">
-        <label for="AnotherDataInvoice">@Languages.GetText(TextEnum.IWantToSendThisPackageToADifferentAddress)</label>
-      </div>
-
-      <div class="form-group row offset-1">
-        <label for="Invoice_Name" class="col-sm-5 control-label">@Languages.GetText(TextEnum.Name)</label>
-        <div class="col-sm-7">
-          <input type="text" asp-for="Invoice_Name" class="form-control" />
-        </div>
-      </div>
-
-      <div class="form-group row offset-1">
-        <label for="Invoice_Address" class="col-sm-5 control-label">@Languages.GetText(TextEnum.Address)</label>
-        <div class="col-sm-7">
-          <input type="text"asp-for="Invoice_Address" class="form-control" />
-        </div>
-      </div>
-
-      <div class="form-group row offset-1">
-        <div class="col-sx-offset-7 col-sm-5">
-          <label for="Invoice_PostCode" class="control-label zip-post-label text-right">@Languages.GetText(TextEnum.ZipCodeAndCity)</label>
-        </div>
-        <div class="col-xs-4 col-sm-3">
-          <input type="text" class="form-control" id="Invoice_PostCode" asp-for="Invoice_PostCode" maxlength="6" value="" autocomplete="off" aria-required="true" aria-describedby="customerPostcode-error" aria-invalid="true">
-        </div>
-        <div class="col-xs-8 col-sm-4">
-          <input type="text" class="form-control" id="Invoice_Citi" asp-for="Invoice_Citi" maxlength="30" value="">
-        </div>
-      </div>
-
-      <div class="form-group row offset-1">
-        <label for="" class="col-sm-5 control-label">Nip</label>
-        <div class="col-sm-7">
-          <input type="text" class="form-control" />
-        </div>
-      </div>
-
-      <div class="checkbox">
-        <input type="checkbox" id="IsOrderAttention" asp-for="IsOrderAttention" value="1" data-bind="checked: switchers.otherShipmentAddress" class="valid" aria-invalid="false">
+        <input type="checkbox"  asp-for="IsOrderAttention" value="true" >
         <label for="IsOrderAttention">@Languages.GetText(TextEnum.IWantToAddNotesToTheOrder)</label>
       </div>
 
-      <div class="form-group row">
+      <div class="form-group row hidden" id="IsOrderAttentionWrap">
         <div class="col-sm-7 offset-5">
           <textarea class="form-control" placeholder="Tutaj wpisz swoje uwagi do zamówienia" rows="6" asp-for="Attention" maxlength="2000"></textarea>
         </div>
@@ -151,11 +154,11 @@
 
     </div>
     <div class="checkbox">
-      <input type="checkbox" id="IsAcceptStoreRules" asp-for="IsAcceptStoreRules" value="1" data-bind="checked: switchers.otherShipmentAddress" class="valid" aria-invalid="false">
+      <input type="checkbox" id="IsAcceptStoreRules" asp-for="IsAcceptStoreRules" value="true" >
       <label for="otherShipmentAddress">@Languages.GetText(TextEnum.IAcceptTheTermsAndConditionsOfTheShop)</label>
     </div>
     <div class="checkbox">
-      <input type="checkbox" id="IsEloctronicInvoice" asp-for="IsEloctronicInvoice" value="1" data-bind="checked: switchers.otherShipmentAddress" class="valid" aria-invalid="false">
+      <input type="checkbox" id="IsEloctronicInvoice" asp-for="IsEloctronicInvoice" value="true" >
       <label for="IsEloctronicInvoice">@Languages.GetText(TextEnum.IAgreeToIssueAndSendAnInvoiceInElectronicForm)</label>
     </div>
 
