@@ -3,11 +3,189 @@
 @model BikeStore.ViewModels.Order.DetailOrderVM
 @{
   ViewData["Title"] = "Detail";
-  Layout = "~/Views/Shared/_Layout.cshtml";
+  Layout = "~/Views/Shared/_CreateOrderLayout.cshtml";
 }
-  <form asp-action="CreateOrder" method="post">
-    <div class="card">
-      <div class=" card-body">
+
+<style>
+  #PaymetWizardForm .error {
+    color: red;
+  }
+
+  .checkout-step h2 {
+    font-size: 22px;
+  }
+
+  .checkout-step .content {
+    margin: 20px 0;
+  }
+
+  .checkout-step .tiles {
+    font-size: 0;
+    list-style-type: none;
+    padding: 0;
+  }
+
+  .checkout-step .indent-block {
+    margin: 10px 44px;
+  }
+
+  .checkout-step .tiles li {
+    display: inline-block;
+    font-size: 14px;
+    margin: 0 15px 20px 0;
+    position: relative;
+    text-align: center;
+    vertical-align: top;
+  }
+
+  .checkout-step .tiles label {
+    cursor: pointer;
+    display: block;
+    font-weight: 400;
+    height: 130px;
+    padding: 6px 10px;
+    position: relative;
+    width: 150px;
+  }
+
+  .checkout-step .tiles input[type=checkbox], .checkout-step .tiles input[type=radio] {
+    float: left;
+    height: 0;
+    visibility: hidden;
+  }
+
+  .checkout-step .tiles label input {
+    position: absolute;
+  }
+
+  input[type=checkbox], input[type=radio] {
+    margin: 4px 0 0;
+    margin-top: 1px\9;
+    line-height: normal;
+  }
+
+  input[type=checkbox], input[type=radio] {
+    box-sizing: border-box;
+    padding: 0;
+  }
+
+  .checkout-step .tiles label img {
+    display: block;
+    height: 45%;
+    margin: auto;
+    max-height: 70px;
+    width: 55%;
+  }
+
+  .checkout-step .tiles label .title {
+    height: 40px;
+  }
+
+  .checkout-step .tiles label {
+    cursor: pointer;
+    display: block;
+    font-weight: 400;
+    height: 130px;
+    padding: 6px 10px;
+    position: relative;
+    width: 150px;
+  }
+
+  hr.line {
+    background: #0fc547;
+    border-radius: 10px;
+    border: 0 transparent;
+    display: block;
+    height: 2px;
+    margin: 15px 0;
+    overflow: hidden;
+    position: relative;
+  }
+
+    hr.line:before {
+      background: #1d1d1e;
+      border-radius: 10px 0 0 10px;
+      left: 0;
+    }
+
+    hr.line:after, hr.line:before {
+      background: #87919b;
+      border-radius: 10px;
+      border: 0 transparent;
+      content: "";
+      height: 100%;
+      left: 4%;
+      position: absolute;
+      top: 0;
+      width: 5%;
+    }
+
+  .checkout-step h2 {
+    font-size: 22px;
+  }
+
+  .checkout-step .content {
+    margin: 20px 0;
+  }
+
+  .checkout-step.checkout-step-shipment label {
+    white-space: nowrap;
+  }
+
+  .form-horizontal .form-group:before {
+    content: " ";
+    display: table;
+  }
+
+  .form-horizontal .control-label {
+    text-align: right;
+    margin-bottom: 0;
+    padding-top: 7px;
+  }
+
+  .checkout-summary-wrapper {
+    bottom: 80px;
+    left: inherit;
+    position: fixed;
+    width: 290px;
+    z-index: 2;
+  }
+
+  .checkout-summary {
+    font-size: 16px;
+  }
+
+  .checkout-step .tiles input[type=checkbox]:checked ~ .border, .checkout-step .tiles input[type=radio]:checked ~ .border {
+    border: 2px solid #0fd2ff;
+    box-shadow: none;
+  }
+
+  .help-block {
+    color: #878787;
+    font-size: 12px;
+    display: block;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    color: #8d8d8d;
+  }
+
+  .OrdertTab {
+    display: none;
+  }
+
+  .PayWizBack {
+    display: none;
+  }
+
+  .PayWizNext {
+    display: none;
+  }
+</style>
+
+<div class="row">
+  <div class="col-lg-8 col-lg-offset-1" id="checkoutViewSection">
+    <form asp-action="CreateOrder" method="post" id="PaymetWizardForm">
+      <div class="OrdertTab">
         <!--   Delelivery method-->
         @await Html.PartialAsync("prlDeliveryMethod.cshtml")
         <!--   Delelivery method-->
@@ -18,9 +196,70 @@
         @await Html.PartialAsync("prlShippingData.cshtml")
         <!-- ShippingData-->
       </div>
-      <button type="submit">sdfcs</button>
-   </div>
-  </form>
+
+      <div class="OrdertTab">
+        <h1>test</h1>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="row mb-4">
+  <div class="col-md-5 col-lg-3   order-md-7 order-lg-9   checkout-summary-col">
+    <div class="checkout-summary-wrapper">
+      <hr class="line">
+      <div class="checkout-summary">
+        <table>
+          <tbody>
+            <tr>
+              <td>Wartość zakupów</td>
+              <td data-bind="formatCurrency: { value: grossValue() }">69,00 zł</td>
+            </tr>
+            <!-- ko if: deliveryMethod() && paymentMethodExist() -->
+            <tr>
+              <td>Dostawa</td>
+              <td data-bind="formatCurrency: { value: shippingCost() }">20,00 zł</td>
+            </tr>
+            <tr>
+              <td>Sposób płatności</td>
+              <td data-bind="formatCurrency: { value: paymentCost() }">0,00 zł</td>
+            </tr>
+            <tr>
+              <td>Usługi dodatkowe</td>
+              <td data-bind="formatCurrency: { value: additionalServicesCost() }">0,00 zł</td>
+            </tr>
+            <!-- /ko -->
+            <tr>
+              <td>Do zapłaty</td>
+              <td data-bind="formatCurrency: { value: overallValue() }">89,00 zł</td>
+            </tr>
+            <!-- /ko -->
+          </tbody>
+        </table>
+
+        <button type="submit" id="goToSummaryButton" data-go="1" class="btn btn-info btnStandard w-100 PayWizNext PWizStep">
+          Przejdź do podsumowania
+        </button>
+        <button type="submit" id="buyButton" data-go="1" class="btn btn-info btnStandard w-100 PayWizNext PWizStep">
+          Kupuję i płacę
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-7 col-lg-8 col-lg-offset-1 col-md-pull-5 col-lg-pull-3 checkout-buttons">
+
+
+    <button href="/koszyk/" data-go="-1" class="btn btn-info btnStandard  PayWizBack PWizStep">
+      wróć do koszyka
+    </button>
+
+    <button href="#" data-go="-1" class="btn btn-info btnStandard PayWizBack PWizStep">
+      <span class="fontello fontello-minimize-size icon-left-open"></span> wróć do dostawy i płatności
+    </button>
+  </div>
+</div>
+
 
 
 <script>
@@ -34,7 +273,7 @@
 
   });
 
- 
+
   document.getElementById("DeleliveryAnotherAddress").addEventListener("click", function (xEvent) {
     let pAnotherAddressWraper = document.getElementById("AnotherShippingAddressWrap");
     if (this.checked) {
@@ -65,7 +304,246 @@
 
   });
 
-  
 
+
+
+</script>
+<script>
  
+  var PaymentWizardForm = $("#PaymetWizardForm");
+
+  PaymentWizardForm.validate({
+    rules: {
+      FirstName: {
+        required: true
+
+      },
+      LastName: {
+        required: true
+
+      },
+      City: {
+        required: true
+      },
+
+      Street: {
+        required: true
+      },
+
+      ZipCode: {
+        required: true
+      },
+      Phone: {
+        required: true
+      },
+
+      Email: {
+        required: true,
+        email: true,
+        remote: {
+          url: "Account/CheckEmailIfAlreadyExist",
+          type: "post"
+        }
+      },
+
+
+      Password: {
+        required: true,
+        minlength: 6
+      },
+
+      ConfirmPassword: {
+        required: true,
+        minlength: 6,
+        equalTo: "#Password"
+      },
+
+
+      ADFirstName: {
+        required: true
+
+      },
+      ADLastName: {
+        required: true
+
+      },
+
+      ADCity: {
+        required: true
+      },
+
+      ADStreet: {
+        required: true
+      },
+
+      ADZipCode: {
+        required: true
+      },
+      payPayU: {
+        required: true
+      },
+
+      IFirstName: {
+        required: true
+
+      },
+      ILastName: {
+        required: true
+
+      },
+      ICity: {
+        required: true
+      },
+
+      IStreet: {
+        required: true
+      },
+
+      IZipCode: {
+        required: true
+      },
+
+
+    },
+
+    messages: {
+
+      FirstName: {
+        required: "s"
+      },
+      LastName: {
+        required: "s"
+      },
+      Password: {
+        required: "",
+        minlength: "",
+        equalTo: ""
+      },
+      Email: {
+        required: "",
+        remote: ""
+      },
+      ZipCode: {
+        required: ""
+      },
+      City: {
+        required: ""
+      },
+      Street: {
+        required: ""
+      },
+      Phone: {
+        required: ""
+      },
+      ADLastName: {
+        required: ""
+      },
+      ADFirstName: {
+        required: ""
+      },
+      ADZipCode: {
+        required: ""
+      },
+      ADCity: {
+        required: ""
+      },
+      ADStreet: {
+        required: ""
+      },
+      ADHouseNumber: {
+        required: ""
+      },
+      ADPhone: {
+        required: ""
+      },
+      ConfirmPassword: {
+        required: ""
+      },
+      ILastName: {
+        required: ""
+      },
+      IFirstName: {
+        required: ""
+      },
+      IZipCode: {
+        required: ""
+      },
+      ICity: {
+        required: ""
+      },
+      IStreet: {
+        required: ""
+      },
+      IHouseNumber: {
+        required: ""
+      },
+      IPhone: {
+        required: ""
+      },
+    }
+  });
+
+
+
+  var jsPaymentVizard = {
+    mCurrentTap: 0,
+
+    ShowTab(xIdxTab) {
+
+      let pTabs = document.getElementsByClassName("OrdertTab"),
+        pStepsBars = document.getElementsByClassName("PayWizStepBar"),
+        pBtnNext = document.getElementsByClassName("PayWizNext"),
+        pBtnBack = document.getElementsByClassName("PayWizBack");
+
+      for (var i = 0; i < pStepsBars.length; i++) {
+        pTabs[i].style.display = "none";
+        pBtnNext[i].style.display = "none";
+        pBtnBack[i].style.display = "none";
+        if (i > xIdxTab) {
+          pStepsBars[i].classList.remove("active");
+          pStepsBars[i].classList.remove("completed");
+        } else {
+          pStepsBars[i].classList.remove("active");
+          pStepsBars[i].classList.add("completed");
+        }
+      }
+
+      pStepsBars[xIdxTab].classList.add("active")
+      pTabs[xIdxTab].style.display = "block";
+      pBtnNext[xIdxTab].style.display = "block";
+      pBtnBack[xIdxTab].style.display = "block";
+      jsPaymentVizard.mCurrentTap = xIdxTab;
+    },
+
+    NextPrev(xCurrent) {
+      debugger;
+      let pCurrent = parseInt(xCurrent),
+        pTabCount = document.getElementsByClassName("OrdertTab").length,
+        pNextTab = jsPaymentVizard.mCurrentTap + pCurrent;
+
+
+      if (pNextTab === 1) {
+      var p = PaymentWizardForm.valid()
+        if (PaymentWizardForm.valid()) {
+          jsPaymentVizard.ShowTab(pNextTab);
+        }
+        return;
+      }
+
+      if (pNextTab === -1) {
+        window.location.href = "index";
+      }
+
+      jsPaymentVizard.ShowTab(pNextTab);
+    }
+
+  };
+  debugger;
+  jsPaymentVizard.ShowTab(0);
+
+  for (const pItem of document.getElementsByClassName("PWizStep")) {
+    pItem.addEventListener("click", function () {
+      jsPaymentVizard.NextPrev(this.dataset.go);
+    });
+  }
 </script>

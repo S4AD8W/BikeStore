@@ -1,0 +1,181 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Oknovid WebStore</title>
+
+  <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+  <link rel="font" href="~/css/site.css" />
+  <link rel="stylesheet" href="~/css/site.css" />
+  <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" />
+  <link rel="shortcut icon" href="~/favico.png" />
+  <script src="~/js/jquery-3.3.1.min.js"></script>
+  <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+  <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+  <script src="~/lib/Microsoft.jQuery.Unobtrusive.Ajax/jquery.unobtrusive-ajax.min.js"></script>
+  <script src="~/js/Common.js"></script>
+  <script src="~/js/Popper.js"></script>
+  <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+  <script src="~/js/site.js"></script>
+  <script src="~/js/portamento-min.js"></script>
+
+  <!----------- TESTOWE ------------------------------------->
+  <!------------------------------------------------------ -->
+
+</head>
+
+<body>
+  <style>
+    .WrapertChoiceContainerAdditives {
+      display: block;
+      background: #fafafa;
+      box-shadow: 1px 1px 12px rgba(0, 0, 0, 0.1);
+      max-width: 1366px;
+      min-width: 1331px;
+      margin: auto;
+      position: absolute;
+      left: 0;
+      right: 0;
+    }
+
+    .test {
+      height: 88px;
+      position: relative;
+      background: #fff;
+      box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1);
+      z-index: 100;
+    }
+
+    @@media (max-width: 800px) {
+      .NavBarContenCenterHide {
+        display: none !important;
+      }
+    }
+  </style>
+  <div class="header-wrapper">
+    <header class="container">
+      <div class="row">
+        <div class="col-xs-7 col-sm-4 col-md-3 col-lg-3 logo-wrapper">
+          <div class="row">
+            <div class="col-xs-12">
+              <a href="/" title="Oknovid" class="logo">
+                <img src="~/images/logo.svg" class="img-logo" alt="x-kom.pl - Sklep komputerowy">
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-8 hidden-xs">
+
+          <ul class="basket-steps-bar">
+            <li class="completed"><div class="wrapper"><span>1</span> Koszyk</div></li>
+            <li class="completed"><div class="wrapper"><span>2</span> Logowanie</div></li>
+            <li class="PayWizStepBar"><div class="wrapper"><span>3</span> Dostawa i płatność</div></li>
+            <li class="PayWizStepBar"><div class="wrapper"><span>4</span> Podsumowanie</div></li>
+            <li class=""><div class="wrapper"><span>5</span> Potwierdzenie</div></li>
+          </ul>
+        </div>
+      </div>
+      <hr class="no-margin-bottom">
+    </header>
+  </div>
+
+  <style>
+    .basket-steps-bar {
+      color: #828282;
+      display: table;
+      margin: 10px 0 0;
+      padding: 0;
+      position: relative;
+    }
+
+      .basket-steps-bar li {
+        font-family: "Open Sans",sans-serif;
+        font-size: 12px;
+        text-align: center;
+      }
+
+    .basket-steps-bar {
+      color: #828282;
+    }
+
+      .basket-steps-bar li.active, .basket-steps-bar li.completed {
+        opacity: 1;
+      }
+
+      .basket-steps-bar li {
+        display: table-cell;
+        font-family: "Open Sans",sans-serif;
+        font-size: 12px;
+        min-width: 105px;
+        opacity: .5;
+        position: relative;
+        text-align: center;
+        width: 20%;
+      }
+
+    *, :after, :before {
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+    }
+
+    .basket-steps-bar li.completed span {
+      background-color: #0fc547;
+      border-color: #0fc547;
+      color: #fff;
+    }
+
+    .basket-steps-bar li:first-child span:after {
+      left: auto;
+    }
+
+    .basket-steps-bar li:last-child span:after {
+      min-width: 50%;
+    }
+
+    .basket-steps-bar li span:after {
+      border: 1px solid #0fc547;
+      content: "";
+      display: block;
+      left: 0;
+      min-width: 100%;
+      position: absolute;
+      top: 10px;
+      z-index: -1;
+    }
+
+    .basket-steps-bar li span {
+      border-radius: 50%;
+      border: 2px solid #0fc547;
+      display: block;
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 21px;
+      margin: 0 auto 5px;
+      width: 24px;
+    }
+
+    .basket-steps-bar li span, .basket-steps-bar li.active span {
+      background-color: #fff;
+      color: #828282;
+    }
+  </style>
+
+
+  <div class="container">
+    @RenderBody()
+  </div>
+
+
+  <section id="footer">
+  </section>
+
+
+
+</body>
+</html>
+
+
+<style>
+</style>
