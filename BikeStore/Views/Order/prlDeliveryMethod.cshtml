@@ -1,28 +1,55 @@
 ﻿@using BikeStore.core.Domain
 
-<div class="row mb-3">
-  <div class="col border-bottom textHeaderCard" style="border-bottom-color:#0fc547!important">
-    @Languages.GetText(TextEnum.ChooseYourDeliveryOrCollectionMethod)
-  </div>
-</div>
-<div class="row ">
-  <div class="card p-2 Card_MenuItem CardRadio ml-4 mb-4 ">
-    <label for="DeleliveryMethod" class="control-label"></label>
-    <span class="text-center"><i class="fas fa-truck-loading fa-5x"></i> </span>
-    <input name="DeliveryMethod" type="radio" value="@DeliveryMethodEenum.Courier" />
-    <span class="text-center">@Languages.GetText(TextEnum.Courier)</span>
-  </div>
-  <div class="card p-2 Card_MenuItem CardRadio ml-4 mb-4">
-    <span class="text-center"> <i class="fas fa-home fa-5x"></i></span>
-    <label for="DeleliveryMethod" class="control-label"></label>
-    <input name="DeliveryMethod" type="radio" value="@DeliveryMethodEenum.PersonalPickup" />
-    <span class="text-center">@Languages.GetText(TextEnum.PersonalPickup)</span>
-  </div>
 
-  <div class="card p-2 Card_MenuItem  CardRadio ml-4 mb-4">
-    <span class="text-center"> <i class="fas fa-hotel fa-5x"></i></span>
-    <label for="DeleliveryMethod" class="control-label"></label>
-    <input name="DeliveryMethod" type="radio" value="@DeliveryMethodEenum.InPost" />
-    <span class="text-center">@Languages.GetText(TextEnum.InPost)</span>
-  </div>
-</div>
+
+  <section class="checkout-step">
+    <hr class="line">
+    <h2 class=""> @Languages.GetText(TextEnum.ChooseYourDeliveryOrCollectionMethod)</h2>
+    <div class="content radio-buttons-container">
+      <ul class="tiles indent-block">
+        <li class="anything-selected">
+          <label class="DeliveryType">
+            <input id="DeliveryMethod" name="DeliveryMethod" type="radio" value="@DeliveryMethodEenum.Courier" required />
+            <span class="text-center"><i class="fas fa-truck-loading fa-5x"></i> </span>
+            <div class="title">@Languages.GetText(TextEnum.Courier)</div>
+            @*<div class="delivery-payment-cost">+ 5,00 zł</div>
+        <span class="border"></span>
+        <span class="marker"><i class="fontello icon-ok"></i></span>*@
+          </label>
+
+        </li>
+        <li class="anything-selected">
+          <label class="DeliveryType">
+            <input id="DeliveryMethod" name="DeliveryMethod" type="radio" value="@DeliveryMethodEenum.PersonalPickup" required />
+            <span class="text-center"> <i class="fas fa-hotel fa-5x"></i></span>
+            <div class="title">@Languages.GetText(TextEnum.PersonalPickup)</div>
+            @*<div class="delivery-payment-cost">+ 5,00 zł</div>
+    <span class="border"></span>
+    <span class="marker"><i class="fontello icon-ok"></i></span>*@
+          </label>
+
+        </li>
+
+        <li class="anything-selected">
+          <label class="DeliveryType">
+            <input id="DeliveryMethod" name="DeliveryMethod" type="radio" value="@DeliveryMethodEenum.InPost" required />
+            <span class="text-center"> <i class="fas fa-home fa-5x"></i></span>
+            <div class="title">@Languages.GetText(TextEnum.InPost)</div>
+            @*<div class="delivery-payment-cost">+ 5,00 zł</div>
+        <span class="border"></span>
+        <span class="marker"><i class="fontello icon-ok"></i></span>*@
+          </label>
+
+        </li>
+      </ul>
+      <p data-bind="visible: paymentInformation() != null" style="">
+        <i class="icon icon-small-info"></i>
+        <span data-bind="html: paymentInformation">Realizację zamówienia rozpoczynamy w momencie zaksięgowania wpłaty na naszym koncie.</span>
+      </p>
+    </div>
+
+
+
+  </section>
+
+

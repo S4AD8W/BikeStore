@@ -1,31 +1,50 @@
 ﻿@using BikeStore.core.Domain
 
 
-<div class="row mb-3">
-  <div class="col border-bottom textHeaderCard" style="border-bottom-color:#0fc547!important">
-    @Languages.GetText(TextEnum.ChooseYourPaymentMethod)
-  </div>
-</div>
+<section class="checkout-step">
+  <hr class="line">
+  <h2 class=""> @Languages.GetText(TextEnum.ChooseYourPaymentMethod)</h2>
+  <div class="content radio-buttons-container">
+    <ul class="tiles indent-block">
+      <li class="anything-selected">
+        <label class="PayType" id="PaymentMethod" for="PaymentMethod">
+          <input name="PaymentMethod" type="radio" value="@PaymentMethodEenum.CashOnDelivery" />
+          <span class="text-center"><i class="fas fa-hand-holding-usd fa-5x"></i> </span>
+          <div class="title">@Languages.GetText(TextEnum.CashOnDelivery)</div>
+          @*<div class="delivery-payment-cost">+ 5,00 zł</div>
+            <span class="border"></span>
+            <span class="marker"><i class="fontello icon-ok"></i></span>*@
+        </label>
 
-<div class="row ">
-  <div class="card p-2 Card_MenuItem CardRadio ml-4 mb-4 ">
-    <label for="PaymentMethod" class="control-label"></label>
-    <span class="text-center"><i class="fas fa-hand-holding-usd fa-5x"></i> </span>
-    <input name="PaymentMethod" type="radio" value="@PaymentMethodEenum.CashOnDelivery" />
-    <span class="text-center">@Languages.GetText(TextEnum.CashOnDelivery)</span>
-  </div>
-  <div class="card p-2 Card_MenuItem CardRadio ml-4 mb-4">
-    <span class="text-center"> <i class="fas fa-file-invoice-dollar fa-5x"></i></span>
-    <label for="PaymentMethod" class="control-label"></label>
-    <input name="PaymentMethod" type="radio" value="@PaymentMethodEenum.Transfer" />
-    <span class="text-center">@Languages.GetText(TextEnum.BankTransver)</span>
+      </li>
+      <li class="anything-selected">
+        <label class="PayType">
+          <input name="PaymentMethod" type="radio" value="@PaymentMethodEenum.Transfer" />
+          <span class="text-center"> <i class="fas fa-file-invoice-dollar fa-5x"></i></span>
+          <div class="title">@Languages.GetText(TextEnum.BankTransver)</div>
+          @*<div class="delivery-payment-cost">+ 5,00 zł</div>
+            <span class="border"></span>
+            <span class="marker"><i class="fontello icon-ok"></i></span>*@
+        </label>
+
+      </li>
+
+      <li class="anything-selected">
+        <label class="PayType">
+          <input name="PaymentMethod" type="radio" value="@PaymentMethodEenum.PayU" />
+          <span class="text-center"> <i class="fas fa-amazon-pay fa-5x"></i></span>
+          <div class="title">@Languages.GetText(TextEnum.PayU)</div>
+          @*<div class="delivery-payment-cost">+ 5,00 zł</div>
+    <span class="border"></span>
+    <span class="marker"><i class="fontello icon-ok"></i></span>*@
+        </label>
+
+      </li>
+    </ul>
+    
   </div>
 
-  <div class="card p-2 Card_MenuItem  CardRadio ml-4 mb-4">
-    <span class="text-center"> <i class="fas fa-amazon-pay fa-5x"></i></span>
-    <label for="PaymentMethod" class="control-label"></label>
-    <input name="PaymentMethod" type="radio" value="@PaymentMethodEenum.PayU" />
-    <span class="text-center">@Languages.GetText(TextEnum.PayU)</span>
-  </div>
 
-</div>
+
+</section>
+

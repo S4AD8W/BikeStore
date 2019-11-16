@@ -263,6 +263,32 @@
 
 
 <script>
+  $(".DeliveryType").on('click', function (e) {
+      e.preventDefault();
+    let $pThis = $(this),
+      pLables = document.getElementsByClassName("DeliveryType");
+      $pInput = $pThis.find('input');
+   
+    for (const pItem of pLables) {
+      pItem.classList.remove("SelectedBorder");
+    }
+    $pInput[0].parentNode.classList.add("SelectedBorder");
+    $pInput[0].checked = true
+  });
+   $('.PayType').on('click', function (e) {
+    debugger;
+    e.preventDefault();
+    let $pThis = $(this),
+      pLables = document.getElementsByClassName("PayType");
+      $pInput = $pThis.find('input');
+   
+    for (const pItem of pLables) {
+      pItem.classList.remove("SelectedBorder");
+    }
+    $pInput[0].parentNode.classList.add("SelectedBorder");
+    $pInput[0].checked = true
+  });
+
   $('.CardRadio').on('click', function (e) {
     debugger;
     e.preventDefault();
@@ -314,95 +340,87 @@
 
   PaymentWizardForm.validate({
     rules: {
-      FirstName: {
+
+      DeliveryMethod: {
+        required: true
+      },
+
+      PaymentMethod: {
+        required: true
+      },
+
+      Name: {
         required: true
 
       },
-      LastName: {
+      SurName: {
         required: true
 
+      },
+      Email: {
+        required: true
+      },
+
+      Address: {
+        required: true
+      },
+
+      PostCode: {
+        required: true
       },
       City: {
         required: true
       },
 
-      Street: {
-        required: true
-      },
-
-      ZipCode: {
-        required: true
-      },
-      Phone: {
-        required: true
-      },
-
-      Email: {
+      PhoneNumber: {
         required: true,
-        email: true,
-        remote: {
-          url: "Account/CheckEmailIfAlreadyExist",
-          type: "post"
-        }
       },
 
-
-      Password: {
+      AnotherName: {
         required: true,
-        minlength: 6
+       
       },
 
-      ConfirmPassword: {
+      AnotherSurName: {
         required: true,
-        minlength: 6,
-        equalTo: "#Password"
       },
 
 
-      ADFirstName: {
+      AnotherAddress: {
         required: true
 
       },
-      ADLastName: {
+      AnotherPostCode: {
         required: true
 
       },
 
-      ADCity: {
+      AnotherCity: {
         required: true
       },
 
-      ADStreet: {
+      AnotherPhoneNumber: {
         required: true
       },
 
-      ADZipCode: {
+      Invoice_Name: {
         required: true
       },
-      payPayU: {
-        required: true
-      },
-
-      IFirstName: {
-        required: true
-
-      },
-      ILastName: {
-        required: true
-
-      },
-      ICity: {
+      Invoice_Address: {
         required: true
       },
 
-      IStreet: {
+      Invoice_PostCode: {
+        required: true
+
+      },
+      Invoice_Citi: {
+        required: true
+
+      },
+      IsAcceptStoreRules: {
         required: true
       },
-
-      IZipCode: {
-        required: true
-      },
-
 
     },
 
@@ -546,4 +564,4 @@
       jsPaymentVizard.NextPrev(this.dataset.go);
     });
   }
-</script>
+</script> 
