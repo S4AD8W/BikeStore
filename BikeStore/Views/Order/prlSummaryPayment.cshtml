@@ -1,1 +1,166 @@
-﻿
+﻿@using BikeStore.core.Domain
+
+@model BikeStore.ViewModels.Order.DetailOrderVM
+
+
+<style>
+  .BorderBotomGreen {
+    border-bottom: 1px solid #0fc547;
+  }
+</style>
+<section class="checkout-step">
+  <hr class="line" />
+  <h2>@Languages.GetText(TextEnum.TheMethodOfPaymentChosen)</h2>
+  <div class="content radio-buttons-container">
+    <ul class="tiles indent-block">
+      <li class="anything-selected">
+        <label id="Lab@(PaymentMethodEenum.PayU)" class="hidden">
+          <span class="text-center"> <i class="fas fa-amazon-pay fa-5x"></i></span>
+          <div class="title">@Languages.GetText(TextEnum.PayU)</div>
+          @*<div class="delivery-payment-cost">+ 5,00 zł</div>
+            <span class="border"></span>
+            <span class="marker"><i class="fontello icon-ok"></i></span>*@
+        </label>
+
+      </li>
+      <li class="anything-selected">
+        <label id="Lab@(PaymentMethodEenum.CashOnDelivery)" class="hidden">
+          <span class="text-center"><i class="fas fa-hand-holding-usd fa-5x"></i> </span>
+          <div class="title">@Languages.GetText(TextEnum.CashOnDelivery)</div>
+          @*<div class="delivery-payment-cost">+ 5,00 zł</div>
+            <span class="border"></span>
+            <span class="marker"><i class="fontello icon-ok"></i></span>*@
+        </label>
+      <li class="anything-selected">
+        <label id="Lab@(PaymentMethodEenum.Transfer)" class="hidden">
+          <span class="text-center"> <i class="fas fa-file-invoice-dollar fa-5x"></i></span>
+          <div class="title">@Languages.GetText(TextEnum.BankTransver)</div>
+          @*<div class="delivery-payment-cost">+ 5,00 zł</div>
+            <span class="border"></span>
+            <span class="marker"><i class="fontello icon-ok"></i></span>*@
+        </label>
+      </li>
+    </ul>
+    <p style="">
+      <i class="icon icon-small-info"></i>
+      <span>Realizację zamówienia rozpoczynamy w momencie zaksięgowania wpłaty na naszym koncie.</span>
+    </p>
+  </div>
+</section>
+
+<section class="checkout-step">
+  <hr class="line" />
+  <h2>@Languages.GetText(TextEnum.SelectedDeliveryMethod)</h2>
+  <div class="content radio-buttons-container">
+    <ul class="tiles indent-block">
+      <li class="anything-selected">
+        <label id="Lab@(DeliveryMethodEenum.Courier)" class="hidden">
+          <span class="text-center"><i class="fas fa-truck-loading fa-5x"></i> </span>
+          <div class="title">@Languages.GetText(TextEnum.Courier)</div>
+          @*<div class="delivery-payment-cost">+ 5,00 zł</div>
+    <span class="border"></span>
+    <span class="marker"><i class="fontello icon-ok"></i></span>*@
+        </label>
+
+      </li>
+      <li class="anything-selected">
+        <label id="Lab@(DeliveryMethodEenum.InPost)" class="hidden">
+          <span class="text-center"> <i class="fas fa-home fa-5x"></i></span>
+          <div class="title">@Languages.GetText(TextEnum.InPost)</div>
+          @*<div class="delivery-payment-cost">+ 5,00 zł</div>
+    <span class="border"></span>
+    <span class="marker"><i class="fontello icon-ok"></i></span>*@
+        </label>
+      <li class="anything-selected">
+        <label id="Lab@(DeliveryMethodEenum.PersonalPickup)" class="hidden">
+          <span class="text-center"> <i class="fas fa-hotel fa-5x"></i></span>
+          <div class="title">@Languages.GetText(TextEnum.PersonalPickup)</div>
+          @*<div class="delivery-payment-cost">+ 5,00 zł</div>
+    <span class="border"></span>
+    <span class="marker"><i class="fontello icon-ok"></i></span>*@
+        </label>
+      </li>
+    </ul>
+    <p style="">
+      <i class="icon icon-small-info"></i>
+      <span>Realizację zamówienia rozpoczynamy w momencie zaksięgowania wpłaty na naszym koncie.</span>
+    </p>
+  </div>
+</section>
+
+
+<section class=" checkout-step">
+  <hr class="line" />
+  <h2>Dane kontaktowe</h2>
+  <div class="content">
+
+    <div class="row">
+      <div class="col-md-8 col-md-offset-1">
+        <div class="form-horizontal">
+
+          <div class="form-group row">
+            <label class="col-sm-5 control-label">@*Imie*@ @Languages.GetText(TextEnum.Name)</label>
+            <div class="col-sm-7">
+              <span class="" id="SMFirstName"></span>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-sm-5 control-label">@*Nazwisko*@@Languages.GetText(TextEnum.SurName)</label>
+            <div class="col-sm-7">
+              <span class="" id="SMLastName"></span>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-sm-5 control-label">@*Phone Number*@@Languages.GetText_WC(TextEnum.PhoneNumber)</label>
+            <div class="col-sm-7">
+              <span class="" id="SMPhone"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class=" checkout-step">
+  <hr class="line" />
+  <h2>Dane do wysłki</h2>
+  <div class="content">
+
+    <div class="row">
+      <div class="col-md-8 col-md-offset-1">
+        <div class="form-horizontal">
+
+          <div class="form-group row">
+            <label class="col-sm-5 control-label">@*numer domu*@@Languages.GetText(TextEnum.Address)</label>
+            <div class="col-sm-7">
+              <span class="" id="SMSAddress"></span>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-5 control-label">@*Zip Code*@ @Languages.GetText(TextEnum.ZipCode)</label>
+            <div class="col-sm-7">
+              <span class="" id="SMZipCode"></span>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-5 control-label">@*Miasto*@@Languages.GetText(TextEnum.Citi)</label>
+            <div class="col-sm-7">
+              <span class="" id="SMCity"></span>
+            </div>
+          </div>
+
+          @*<div class="form-group row">
+              <label class="col-sm-5 control-label">@cLanguages.GetText(TextEnum.House_FlatNumber)</label>
+              <div class="col-sm-7">
+                <span class="" id="SMCity"></span>
+              </div>
+            </div>*@
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -6,182 +6,6 @@
   Layout = "~/Views/Shared/_CreateOrderLayout.cshtml";
 }
 
-<style>
-  #PaymetWizardForm .error {
-    color: red;
-  }
-
-  .checkout-step h2 {
-    font-size: 22px;
-  }
-
-  .checkout-step .content {
-    margin: 20px 0;
-  }
-
-  .checkout-step .tiles {
-    font-size: 0;
-    list-style-type: none;
-    padding: 0;
-  }
-
-  .checkout-step .indent-block {
-    margin: 10px 44px;
-  }
-
-  .checkout-step .tiles li {
-    display: inline-block;
-    font-size: 14px;
-    margin: 0 15px 20px 0;
-    position: relative;
-    text-align: center;
-    vertical-align: top;
-  }
-
-  .checkout-step .tiles label {
-    cursor: pointer;
-    display: block;
-    font-weight: 400;
-    height: 130px;
-    padding: 6px 10px;
-    position: relative;
-    width: 150px;
-  }
-
-  .checkout-step .tiles input[type=checkbox], .checkout-step .tiles input[type=radio] {
-    float: left;
-    height: 0;
-    visibility: hidden;
-  }
-
-  .checkout-step .tiles label input {
-    position: absolute;
-  }
-
-  input[type=checkbox], input[type=radio] {
-    margin: 4px 0 0;
-    margin-top: 1px\9;
-    line-height: normal;
-  }
-
-  input[type=checkbox], input[type=radio] {
-    box-sizing: border-box;
-    padding: 0;
-  }
-
-  .checkout-step .tiles label img {
-    display: block;
-    height: 45%;
-    margin: auto;
-    max-height: 70px;
-    width: 55%;
-  }
-
-  .checkout-step .tiles label .title {
-    height: 40px;
-  }
-
-  .checkout-step .tiles label {
-    cursor: pointer;
-    display: block;
-    font-weight: 400;
-    height: 130px;
-    padding: 6px 10px;
-    position: relative;
-    width: 150px;
-  }
-
-  hr.line {
-    background: #0fc547;
-    border-radius: 10px;
-    border: 0 transparent;
-    display: block;
-    height: 2px;
-    margin: 15px 0;
-    overflow: hidden;
-    position: relative;
-  }
-
-    hr.line:before {
-      background: #1d1d1e;
-      border-radius: 10px 0 0 10px;
-      left: 0;
-    }
-
-    hr.line:after, hr.line:before {
-      background: #87919b;
-      border-radius: 10px;
-      border: 0 transparent;
-      content: "";
-      height: 100%;
-      left: 4%;
-      position: absolute;
-      top: 0;
-      width: 5%;
-    }
-
-  .checkout-step h2 {
-    font-size: 22px;
-  }
-
-  .checkout-step .content {
-    margin: 20px 0;
-  }
-
-  .checkout-step.checkout-step-shipment label {
-    white-space: nowrap;
-  }
-
-  .form-horizontal .form-group:before {
-    content: " ";
-    display: table;
-  }
-
-  .form-horizontal .control-label {
-    text-align: right;
-    margin-bottom: 0;
-    padding-top: 7px;
-  }
-
-  .checkout-summary-wrapper {
-    bottom: 80px;
-    left: inherit;
-    position: fixed;
-    width: 290px;
-    z-index: 2;
-  }
-
-  .checkout-summary {
-    font-size: 16px;
-  }
-
-  .checkout-step .tiles input[type=checkbox]:checked ~ .border, .checkout-step .tiles input[type=radio]:checked ~ .border {
-    border: 2px solid #0fd2ff;
-    box-shadow: none;
-  }
-
-  .help-block {
-    color: #878787;
-    font-size: 12px;
-    display: block;
-    margin-top: 5px;
-    margin-bottom: 10px;
-    color: #8d8d8d;
-  }
-
-  .OrdertTab {
-    display: none;
-  }
-
-  .PayWizBack {
-    display: none;
-  }
-
-  .PayWizNext {
-    display: none;
-  }
-</style>
-
 <div class="row">
   <div class="col-lg-8 col-lg-offset-1" id="checkoutViewSection">
     <form asp-action="CreateOrder" method="post" id="PaymetWizardForm">
@@ -541,8 +365,8 @@
 
 
       if (pNextTab === 1) {
-      var p = PaymentWizardForm.valid()
         if (PaymentWizardForm.valid()) {
+         
           jsPaymentVizard.ShowTab(pNextTab);
         }
         return;
@@ -553,7 +377,60 @@
       }
 
       jsPaymentVizard.ShowTab(pNextTab);
-    }
+    },
+
+     SetDateSummaryPayment() {
+      //funkcja ustawiająca dane dla podsumowania płatność 
+      //SM => summary
+      //AD => AnotherDelivery
+
+      let pForm = document.getElementById("PaymetWizardForm"),//Przygotowanie elementów 
+        pSMFirstName = document.getElementById("SMFirstName"),
+        pSMLastName = document.getElementById("SMLastName"),
+        pSMCity = document.getElementById("SMCity"),
+        pSMZipCode = document.getElementById("SMZipCode"),
+        pSMStreet = document.getElementById("SMStreet"),
+        pSMFlatNumber = document.getElementById("SMFlatNumber"),
+        pSMPhone = document.getElementById("SMPhone"),
+        pSMCountry = document.getElementById("SMCountry");
+      pSMTrasferMethod = undefined;
+      pSMTrasferMethod2 = undefined;
+
+
+      if (!pForm["ChkbAnotherDeliveryAddress"].checked === true) {
+        pSMFirstName.innerText = pForm["FirstName"].value;    //Ustawienie wartość dla elementów 
+        pSMLastName.innerText = pForm["LastName"].value;
+        pSMCity.innerText = pForm["City"].value;
+        pSMZipCode.innerText = pForm["ZipCode"].value;
+        pSMStreet.innerText = pForm["Street"].value;
+        pSMFlatNumber.innerText = pForm["HouseNumber"].value;
+        pSMPhone.innerText = pForm["Phone"].value;
+        pSMCountry.innerText = pForm["Country"].value;
+      } else {
+        pSMFirstName.innerText = pForm["ADFirstName"].value;    //Ustawienie wartość dla elementów 
+        pSMLastName.innerText = pForm["ADLastName"].value;
+        pSMCity.innerText = pForm["ADCity"].value;
+        pSMZipCode.innerText = pForm["ADZipCode"].value;
+        pSMStreet.innerText = pForm["ADStreet"].value;
+        pSMFlatNumber.innerText = pForm["ADHouseNumber"].value;
+        pSMPhone.innerText = pForm["Phone"].value;
+        pSMCountry.innerText = pForm["ADCountry"].value;
+      }
+
+      if (pForm["payPayU"].checked === true) {
+   
+        pSMTrasferMethod = document.getElementById("SMPayU");
+        pSMTrasferMethod2 = document.getElementById("SMTransfer");
+        JsCommon.HiddenElement(undefined, pSMTrasferMethod2);
+        JsCommon.SetVisibleElement(undefined, pSMTrasferMethod);
+      } else {
+        pSMTrasferMethod = document.getElementById("SMPayU");
+        pSMTrasferMethod2 = document.getElementById("SMTransfer");
+        JsCommon.HiddenElement(undefined, pSMTrasferMethod);
+        JsCommon.SetVisibleElement(undefined, pSMTrasferMethod2);
+      }
+
+    },
 
   };
   debugger;

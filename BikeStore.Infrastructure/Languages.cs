@@ -81,6 +81,10 @@ namespace BikeStore.Infrastructure {
     EnterYourCommentsOnTheOrderHere = 67,
     IAcceptTheTermsAndConditionsOfTheShop = 68,
     IAgreeToIssueAndSendAnInvoiceInElectronicForm =69,
+    Citi = 70,
+    ZipCode = 71,
+    TheMethodOfPaymentChosen = 72,
+    SelectedDeliveryMethod = 73,
   }
 
   public class Languages {
@@ -210,6 +214,10 @@ namespace BikeStore.Infrastructure {
       AddText(TextEnum.EnterYourCommentsOnTheOrderHere, "Enter your comments on the order here", "Tutaj wpisz swoje uwagi do zamówienia");
       AddText(TextEnum.IAcceptTheTermsAndConditionsOfTheShop, "I accept the terms and conditions of the shop", "Akceptuję regulamin sklepu");
       AddText(TextEnum.IAgreeToIssueAndSendAnInvoiceInElectronicForm, "I agree to issue and send an invoice in electronic form", "Wyrażam zgodę na wystawienie i przesłanie faktury w formie elektronicznej");
+      AddText(TextEnum.Citi, "Citi", "Miasto");
+      AddText(TextEnum.ZipCode, "Zip code", "Kod pocztowy");
+      AddText(TextEnum.TheMethodOfPaymentChosen, "The method of payment chosen", "Wybrany sposób płatność");
+      AddText(TextEnum.SelectedDeliveryMethod, "Selected delivery method", "Wybrany spoób dostawy");
     }
 
     private void AddText(TextEnum xCntText, string xEN, string xPL) {
