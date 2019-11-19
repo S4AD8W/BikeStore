@@ -22,7 +22,7 @@
       </div>
 
       <div class="OrdertTab">
-        <h1>test</h1>
+        @await Html.PartialAsync("prlSummaryPayment.cshtml")
       </div>
     </form>
   </div>
@@ -88,24 +88,24 @@
 
 <script>
   $(".DeliveryType").on('click', function (e) {
-      e.preventDefault();
+    e.preventDefault();
     let $pThis = $(this),
       pLables = document.getElementsByClassName("DeliveryType");
-      $pInput = $pThis.find('input');
-   
+    $pInput = $pThis.find('input');
+
     for (const pItem of pLables) {
       pItem.classList.remove("SelectedBorder");
     }
     $pInput[0].parentNode.classList.add("SelectedBorder");
     $pInput[0].checked = true
   });
-   $('.PayType').on('click', function (e) {
-    debugger;
+  $('.PayType').on('click', function (e) {
+
     e.preventDefault();
     let $pThis = $(this),
       pLables = document.getElementsByClassName("PayType");
-      $pInput = $pThis.find('input');
-   
+    $pInput = $pThis.find('input');
+
     for (const pItem of pLables) {
       pItem.classList.remove("SelectedBorder");
     }
@@ -114,7 +114,7 @@
   });
 
   $('.CardRadio').on('click', function (e) {
-    debugger;
+
     e.preventDefault();
     let $pThis = $(this),
       $pInput = $pThis.closest('div').find('input');
@@ -159,7 +159,7 @@
 
 </script>
 <script>
- 
+
   var PaymentWizardForm = $("#PaymetWizardForm");
 
   PaymentWizardForm.validate({
@@ -202,7 +202,7 @@
 
       AnotherName: {
         required: true,
-       
+
       },
 
       AnotherSurName: {
@@ -358,7 +358,7 @@
     },
 
     NextPrev(xCurrent) {
-      debugger;
+
       let pCurrent = parseInt(xCurrent),
         pTabCount = document.getElementsByClassName("OrdertTab").length,
         pNextTab = jsPaymentVizard.mCurrentTap + pCurrent;
@@ -366,59 +366,58 @@
 
       if (pNextTab === 1) {
         if (PaymentWizardForm.valid()) {
-         
           jsPaymentVizard.ShowTab(pNextTab);
+          jsPaymentVizard.SetDateSummaryPayment();
         }
         return;
       }
 
       if (pNextTab === -1) {
-        window.location.href = "index";
+        window.location.href = "Detail";
       }
 
       jsPaymentVizard.ShowTab(pNextTab);
     },
 
-     SetDateSummaryPayment() {
-      //funkcja ustawiająca dane dla podsumowania płatność 
+    SetDateSummaryPayment() {
+      //funkcja ustawiająca dane dla podsumowania płatność
       //SM => summary
       //AD => AnotherDelivery
-
-      let pForm = document.getElementById("PaymetWizardForm"),//Przygotowanie elementów 
+      debugger
+      let pForm = document.getElementById("PaymetWizardForm"),//Przygotowanie elementów
         pSMFirstName = document.getElementById("SMFirstName"),
         pSMLastName = document.getElementById("SMLastName"),
-        pSMCity = document.getElementById("SMCity"),
-        pSMZipCode = document.getElementById("SMZipCode"),
-        pSMStreet = document.getElementById("SMStreet"),
-        pSMFlatNumber = document.getElementById("SMFlatNumber"),
+        pSMEmail = document.getElementById("SMEmail"),
         pSMPhone = document.getElementById("SMPhone"),
-        pSMCountry = document.getElementById("SMCountry");
-      pSMTrasferMethod = undefined;
-      pSMTrasferMethod2 = undefined;
+        pSMAddress = document.getElementById("SMAddress"),
+        pSMZipCode = document.getElementById("SMZipCode"),
+        pSMCity = document.getElementById("SMCity"),
+        pIsAnotherDeleliveryAddress = document.getElementById("DeleliveryAnotherAddress").checked,
+        pSMTrasferMethod = undefined,
+        pSMTrasferMethod2 = undefined;
 
 
-      if (!pForm["ChkbAnotherDeliveryAddress"].checked === true) {
-        pSMFirstName.innerText = pForm["FirstName"].value;    //Ustawienie wartość dla elementów 
-        pSMLastName.innerText = pForm["LastName"].value;
-        pSMCity.innerText = pForm["City"].value;
-        pSMZipCode.innerText = pForm["ZipCode"].value;
-        pSMStreet.innerText = pForm["Street"].value;
-        pSMFlatNumber.innerText = pForm["HouseNumber"].value;
-        pSMPhone.innerText = pForm["Phone"].value;
-        pSMCountry.innerText = pForm["Country"].value;
+      if (!pIsAnotherDeleliveryAddress) {
+        pSMFirstName.innerHTML = pForm["Name"].value;
+        pSMLastName.innerHTML = pForm["SurName"].value;
+        pSMEmail.innerHTML = pForm["Email"].value;
+        pSMPhone.innerHTML = pForm["PhoneNumber"].value;
+        pSMAddress.innerHTML = pForm["Address"].value;
+        pSMZipCode.innerHTML = pForm["PostCode"].value
+        pSMCity.innerHTML = pForm["City"].value;
       } else {
-        pSMFirstName.innerText = pForm["ADFirstName"].value;    //Ustawienie wartość dla elementów 
-        pSMLastName.innerText = pForm["ADLastName"].value;
-        pSMCity.innerText = pForm["ADCity"].value;
-        pSMZipCode.innerText = pForm["ADZipCode"].value;
-        pSMStreet.innerText = pForm["ADStreet"].value;
-        pSMFlatNumber.innerText = pForm["ADHouseNumber"].value;
-        pSMPhone.innerText = pForm["Phone"].value;
-        pSMCountry.innerText = pForm["ADCountry"].value;
+        //TODO:Nie literówki przy nazwach pull z formulaży
+        pSMFirstName.innerHTML = pForm["AnotherName"].value;
+        pSMLastName.innerHTML = pForm["AnotherSurName"].value;
+        pSMEmail.innerHTML = pForm["AnotherEmail"].value;
+        pSMPhone.innerHTML = pForm["AnotherPhoneNumber"].value;
+        pSMAddress.innerHTML = pForm["AnotherAddress"].value;
+        pSMZipCode.innerHTML = pForm["AnotherPostCode"].value
+        pSMCity.innerHTML = pForm["AnotherCity"].value;
       }
 
       if (pForm["payPayU"].checked === true) {
-   
+
         pSMTrasferMethod = document.getElementById("SMPayU");
         pSMTrasferMethod2 = document.getElementById("SMTransfer");
         JsCommon.HiddenElement(undefined, pSMTrasferMethod2);

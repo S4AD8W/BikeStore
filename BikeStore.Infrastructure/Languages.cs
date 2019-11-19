@@ -85,6 +85,7 @@ namespace BikeStore.Infrastructure {
     ZipCode = 71,
     TheMethodOfPaymentChosen = 72,
     SelectedDeliveryMethod = 73,
+    ShippingData = 74,
   }
 
   public class Languages {
@@ -218,6 +219,7 @@ namespace BikeStore.Infrastructure {
       AddText(TextEnum.ZipCode, "Zip code", "Kod pocztowy");
       AddText(TextEnum.TheMethodOfPaymentChosen, "The method of payment chosen", "Wybrany sposób płatność");
       AddText(TextEnum.SelectedDeliveryMethod, "Selected delivery method", "Wybrany spoób dostawy");
+      AddText(TextEnum.ShippingData, "Shipping data", "Dane do wysłki");
     }
 
     private void AddText(TextEnum xCntText, string xEN, string xPL) {
