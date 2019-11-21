@@ -393,9 +393,23 @@
         pSMZipCode = document.getElementById("SMZipCode"),
         pSMCity = document.getElementById("SMCity"),
         pIsAnotherDeleliveryAddress = document.getElementById("DeleliveryAnotherAddress").checked,
-        pSMTrasferMethod = undefined,
-        pSMTrasferMethod2 = undefined;
+        pPayMethodValue = $('input[name=DeliveryMethod]:checked', '#PaymetWizardForm').val(),
+        pShippingMethodValue = $('input[name=PaymentMethod]:checked', '#PaymetWizardForm').val(),
+        pPayMathodElement = document.getElementById("Lab" + pPayMethodValue),
+        pShipingMathodElement = document.getElementById("Lab" + pShippingMethodValue),
+        pLbDeleliferyTyps = document.getElementsByClassName("DeleliveryMSummary"),
+        pLbPayMethod = document.getElementsByClassName("PaymentMSummary");
 
+      for (const pItem of pLbDeleliferyTyps) {
+        JsCommon.SetCssClassForElement(pItem, "hidden");
+      }
+
+      for (const pItem of pLbPayMethod) {
+        JsCommon.SetCssClassForElement(pItem, "hidden");
+      }
+
+      pPayMathodElement.classList.remove("hidden");
+      pShipingMathodElement.classList.remove("hidden");
 
       if (!pIsAnotherDeleliveryAddress) {
         pSMFirstName.innerHTML = pForm["Name"].value;
@@ -416,18 +430,20 @@
         pSMCity.innerHTML = pForm["AnotherCity"].value;
       }
 
-      if (pForm["payPayU"].checked === true) {
+      var p =
+        console.log(p);
+      //if (pForm["payPayU"].checked === true) {
 
-        pSMTrasferMethod = document.getElementById("SMPayU");
-        pSMTrasferMethod2 = document.getElementById("SMTransfer");
-        JsCommon.HiddenElement(undefined, pSMTrasferMethod2);
-        JsCommon.SetVisibleElement(undefined, pSMTrasferMethod);
-      } else {
-        pSMTrasferMethod = document.getElementById("SMPayU");
-        pSMTrasferMethod2 = document.getElementById("SMTransfer");
-        JsCommon.HiddenElement(undefined, pSMTrasferMethod);
-        JsCommon.SetVisibleElement(undefined, pSMTrasferMethod2);
-      }
+      //  pSMTrasferMethod = document.getElementById("SMPayU");
+      //  pSMTrasferMethod2 = document.getElementById("SMTransfer");
+      //  JsCommon.HiddenElement(undefined, pSMTrasferMethod2);
+      //  JsCommon.SetVisibleElement(undefined, pSMTrasferMethod);
+      //} else {
+      //  pSMTrasferMethod = document.getElementById("SMPayU");
+      //  pSMTrasferMethod2 = document.getElementById("SMTransfer");
+      //  JsCommon.HiddenElement(undefined, pSMTrasferMethod);
+      //  JsCommon.SetVisibleElement(undefined, pSMTrasferMethod2);
+      //}
 
     },
 

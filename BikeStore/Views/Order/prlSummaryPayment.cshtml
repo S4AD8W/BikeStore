@@ -14,7 +14,7 @@
   <div class="content radio-buttons-container">
     <ul class="tiles indent-block">
       <li class="anything-selected">
-        <label id="Lab@(PaymentMethodEenum.PayU)" class="hidden">
+        <label id="Lab@(PaymentMethodEenum.PayU)" class="hidden PaymentMSummary">
           <span class="text-center"> <i class="fas fa-amazon-pay fa-5x"></i></span>
           <div class="title">@Languages.GetText(TextEnum.PayU)</div>
           @*<div class="delivery-payment-cost">+ 5,00 zł</div>
@@ -24,7 +24,7 @@
 
       </li>
       <li class="anything-selected">
-        <label id="Lab@(PaymentMethodEenum.CashOnDelivery)" class="hidden">
+        <label id="Lab@(PaymentMethodEenum.CashOnDelivery)" class="hidden PaymentMSummary">
           <span class="text-center"><i class="fas fa-hand-holding-usd fa-5x"></i> </span>
           <div class="title">@Languages.GetText(TextEnum.CashOnDelivery)</div>
           @*<div class="delivery-payment-cost">+ 5,00 zł</div>
@@ -32,7 +32,7 @@
             <span class="marker"><i class="fontello icon-ok"></i></span>*@
         </label>
       <li class="anything-selected">
-        <label id="Lab@(PaymentMethodEenum.Transfer)" class="hidden">
+        <label id="Lab@(PaymentMethodEenum.Transfer)" class="hidden PaymentMSummary">
           <span class="text-center"> <i class="fas fa-file-invoice-dollar fa-5x"></i></span>
           <div class="title">@Languages.GetText(TextEnum.BankTransver)</div>
           @*<div class="delivery-payment-cost">+ 5,00 zł</div>
@@ -54,7 +54,7 @@
   <div class="content radio-buttons-container">
     <ul class="tiles indent-block">
       <li class="anything-selected">
-        <label id="Lab@(DeliveryMethodEenum.Courier)" class="hidden">
+        <label id="Lab@(DeliveryMethodEenum.Courier)" class="hidden DeleliveryMSummary">
           <span class="text-center"><i class="fas fa-truck-loading fa-5x"></i> </span>
           <div class="title">@Languages.GetText(TextEnum.Courier)</div>
           @*<div class="delivery-payment-cost">+ 5,00 zł</div>
@@ -64,7 +64,7 @@
 
       </li>
       <li class="anything-selected">
-        <label id="Lab@(DeliveryMethodEenum.InPost)" class="hidden">
+        <label id="Lab@(DeliveryMethodEenum.InPost)" class="hidden DeleliveryMSummary">
           <span class="text-center"> <i class="fas fa-home fa-5x"></i></span>
           <div class="title">@Languages.GetText(TextEnum.InPost)</div>
           @*<div class="delivery-payment-cost">+ 5,00 zł</div>
@@ -72,7 +72,7 @@
     <span class="marker"><i class="fontello icon-ok"></i></span>*@
         </label>
       <li class="anything-selected">
-        <label id="Lab@(DeliveryMethodEenum.PersonalPickup)" class="hidden">
+        <label id="Lab@(DeliveryMethodEenum.PersonalPickup)" class="hidden DeleliveryMSummary">
           <span class="text-center"> <i class="fas fa-hotel fa-5x"></i></span>
           <div class="title">@Languages.GetText(TextEnum.PersonalPickup)</div>
           @*<div class="delivery-payment-cost">+ 5,00 zł</div>
