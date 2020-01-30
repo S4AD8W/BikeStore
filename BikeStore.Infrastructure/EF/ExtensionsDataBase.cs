@@ -287,7 +287,7 @@ namespace BikeStore.Infrastructure.EF {
         CREATE TABLE IF NOT EXISTS {DB_TABLE.Orders}(
           {nameof(Order.IdxOrder)} SERIAL PRIMARY KEY,
           {nameof(Order.UuId)} UUID,
-          {nameof(Order.IdxUser)} INTEGER,
+          {nameof(Order.IdxUser)} INTEGER REFERENCES {DB_TABLE.Users} ({nameof(User.IdxUser)}) ON DELETE CASCADE,
           {nameof(Order.OrderStatus)} INTEGER,
           {nameof(Order.IdxDeleliveryAddress)} INTEGER NOT NULL,
           {nameof(Order.IsInvoice)} BOOLEAN DEFAULT FALSE,
