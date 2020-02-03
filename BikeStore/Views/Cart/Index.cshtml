@@ -56,7 +56,11 @@
           @foreach (var pItem in Model.CartLines) {
             <tr>
               <td>
+                @if (pItem.Picture != null) {
                 <img src="data:image/jpeg;base64,@(Convert.ToBase64String(pItem.Picture))" style="width:50px" />
+                } else {
+                  <p>@Languages.GetText(TextEnum.NoDataToDisplay)</p>
+                }
                 @pItem.Product.Name
               </td>
               <td>@pItem.Product.Price.ToString("c")</td>

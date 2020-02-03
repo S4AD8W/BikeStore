@@ -376,7 +376,8 @@
         window.location.href = "Detail";
       }
 
-      jsPaymentVizard.ShowTab(pNextTab);
+      if (pNextTab === 2)
+      jsPaymentVizard.SendPaymentFormFromWizar()
     },
 
     SetDateSummaryPayment() {
@@ -420,7 +421,6 @@
         pSMZipCode.innerHTML = pForm["PostCode"].value
         pSMCity.innerHTML = pForm["City"].value;
       } else {
-        //TODO:Nie literówki przy nazwach pull z formulaży
         pSMFirstName.innerHTML = pForm["AnotherName"].value;
         pSMLastName.innerHTML = pForm["AnotherSurName"].value;
         pSMEmail.innerHTML = pForm["AnotherEmail"].value;
@@ -430,8 +430,7 @@
         pSMCity.innerHTML = pForm["AnotherCity"].value;
       }
 
-      var p =
-        console.log(p);
+  
       //if (pForm["payPayU"].checked === true) {
 
       //  pSMTrasferMethod = document.getElementById("SMPayU");
@@ -447,8 +446,30 @@
 
     },
 
+    SendPaymentFormFromWizar() {
+      //Funkcja wysłająca formularz z danymi pochodzącymi z wizardu płatność 
+
+      debugger;
+      let pForm = $("#PaymetWizardForm"),
+        pFormArr = pForm.serializeArray();
+      pFormObj = JsCommon.ObjectArrayToArray(pFormArr);
+
+      $.post("/Cart/CreateOrder", { xOrderInformation: JSON.stringify(pFormObj) })
+        .done(function (xData) {
+          debugger;
+          if (xData.payType === "Transfer") {
+            JsCart.PaymentWizzard.GetViewSummaryOrder();
+            return;
+          }
+          window.location.href = "/" + xData.controller + "/" + xData.action;
+        })
+        .fail(function (xData) {
+          alert("test");
+        });
+
+    },
   };
-  debugger;
+ 
   jsPaymentVizard.ShowTab(0);
 
   for (const pItem of document.getElementsByClassName("PWizStep")) {

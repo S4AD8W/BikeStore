@@ -28,7 +28,7 @@ namespace BikeStore.ViewModels {
           this.CartLines.Add(new CartLineVM {
             Product = pCartLine.Product,
             Quantiti = pCartLine.Quantity,
-            Picture = xProducImageRepository.ProductsImages.FirstOrDefault(x => x.IdxProduct == pCartLine.Product.IdxProduct).Content
+            Picture = xProducImageRepository.ProductsImages.FirstOrDefault(x => x.IdxProduct == pCartLine.Product.IdxProduct)?.Content
           });
         }
       }

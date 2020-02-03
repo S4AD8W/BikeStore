@@ -86,6 +86,7 @@ namespace BikeStore.Infrastructure {
     TheMethodOfPaymentChosen = 72,
     SelectedDeliveryMethod = 73,
     ShippingData = 74,
+    NoDataToDisplay = 75,
   }
 
   public class Languages {
@@ -220,6 +221,7 @@ namespace BikeStore.Infrastructure {
       AddText(TextEnum.TheMethodOfPaymentChosen, "The method of payment chosen", "Wybrany sposób płatność");
       AddText(TextEnum.SelectedDeliveryMethod, "Selected delivery method", "Wybrany spoób dostawy");
       AddText(TextEnum.ShippingData, "Shipping data", "Dane do wysłki");
+      AddText(TextEnum.NoDataToDisplay, "No data to display", "Brak danych do wyświetlenia" );
     }
 
     private void AddText(TextEnum xCntText, string xEN, string xPL) {

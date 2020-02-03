@@ -65,6 +65,11 @@ namespace BikeStore.Controllers {
       await Task.CompletedTask;
     }
 
+    public async Task<IActionResult> CreateOrder(CreateOrderCommand xCommand) {
+
+      await DispatchAsync(xCommand);
+      return StatusCode(200);
+    }
 
   }
 }
