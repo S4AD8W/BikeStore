@@ -144,6 +144,7 @@ var JsCommon = {
 };
 
 function toJSONString(form) {
+ 
   var obj = {};
   var elements = form.querySelectorAll("input, select, textarea");
   for (var i = 0; i < elements.length; ++i) {
@@ -155,4 +156,7 @@ function toJSONString(form) {
       obj[name] = value;
     }
   }
+
+  return obj;
+
 }

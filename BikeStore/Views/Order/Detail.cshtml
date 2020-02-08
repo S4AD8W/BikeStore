@@ -451,10 +451,10 @@
 
       debugger;
       let pForm = $("#PaymetWizardForm"),
-        pFormArr = pForm.serializeArray();
-      pFormObj = JsCommon.ObjectArrayToArray(pFormArr);
+      pFormToSend = toJSONString(pForm[0]);
+ 
 
-      $.post("/Cart/CreateOrder", { xOrderInformation: JSON.stringify(pFormObj) })
+      $.post("/Cart/CreateOrder", { xCommand: pFormToSend })
         .done(function (xData) {
           debugger;
           if (xData.payType === "Transfer") {
