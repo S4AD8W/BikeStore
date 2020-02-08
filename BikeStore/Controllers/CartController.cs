@@ -8,6 +8,7 @@ using BikeStore.core.Domain.Product_NS;
 using BikeStore.core.Repositories;
 using BikeStore.Infrastructure.Commands;
 using BikeStore.Infrastructure.Commands.Cart;
+using BikeStore.Infrastructure.Dispatcher;
 using BikeStore.Infrastructure.Extensions;
 using BikeStore.ViewModels;
 using Microsoft.AspNetCore.Mvc;
@@ -16,7 +17,7 @@ namespace BikeStore.Controllers {
   public class CartController : BikeStoreControllerBaseController {
     private IProductsRepository mProductRepository;
     private IProductImageRepository  mProductImageRepository;
-    public CartController(IProductsRepository xProductRepository, ICommandDispatcher xCommandDispatcher, IMapper xMapper, IProductImageRepository xProductImageRepository)
+    public CartController(IProductsRepository xProductRepository, IDispatcher xCommandDispatcher, IMapper xMapper, IProductImageRepository xProductImageRepository)
            : base(xCommandDispatcher, xMapper) {
       mProductRepository = xProductRepository;
       mProductImageRepository = xProductImageRepository;
@@ -31,7 +32,7 @@ namespace BikeStore.Controllers {
 
     public async Task<RedirectToActionResult> Add(AddProductCommand xCommand) {
 
-      await DispatchAsync(xCommand);
+      await SendAsync(xCommand);
 
       if (!CommandResult.IsSuccess) {
 
@@ -67,7 +68,7 @@ namespace BikeStore.Controllers {
 
     public async Task<IActionResult> CreateOrder(CreateOrderCommand xCommand) {
 
-      await DispatchAsync(xCommand);
+      await SendAsync(xCommand);
       return StatusCode(200);
     }
 

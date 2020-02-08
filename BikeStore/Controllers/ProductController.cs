@@ -7,6 +7,7 @@ using BikeStore.core.Domain;
 using BikeStore.core.Domain.Product_NS;
 using BikeStore.core.Repositories;
 using BikeStore.Infrastructure.Commands;
+using BikeStore.Infrastructure.Dispatcher;
 using BikeStore.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -19,7 +20,7 @@ namespace BikeStore.Controllers {
 
     //TODO:Prawdopodobnie do usuniecia kontlorel
     public int mPageSize = 3;
-    public ProductController(ICommandDispatcher xCommandDispatcher, IProductsRepository xProductsRepository, IMapper xMapper) 
+    public ProductController(IDispatcher xCommandDispatcher, IProductsRepository xProductsRepository, IMapper xMapper) 
       : base(xCommandDispatcher, xMapper) {
       mProductsRepository = xProductsRepository;
     }

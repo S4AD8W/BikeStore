@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using BikeStore.core.Domain.Notification_NS;
 using BikeStore.Infrastructure.Commands;
+using BikeStore.Infrastructure.Dispatcher;
 using BikeStore.Infrastructure.EF;
 using BikeStore.Infrastructure.Notification_NS.Commands;
 using BikeStore.ViewModels.Notfication;
@@ -18,7 +19,7 @@ namespace BikeStore.Controllers {
 
     private readonly BikeStoreContext mDB;
 
-    public NotificationController(ICommandDispatcher xCommandDispatcher, IMapper xMapper, BikeStoreContext xDB)
+    public NotificationController(IDispatcher xCommandDispatcher, IMapper xMapper, BikeStoreContext xDB)
            : base(xCommandDispatcher, xMapper) {
       mDB = xDB;
     }
@@ -50,7 +51,7 @@ namespace BikeStore.Controllers {
         }
       }
 
-      await DispatchAsync(pCommand);
+      await SendAsync(pCommand);
       if (CommandResult.IsSuccess) {
         return RedirectToAction("Index", "Home");
       }

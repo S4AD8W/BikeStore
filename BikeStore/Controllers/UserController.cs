@@ -6,6 +6,7 @@ using AutoMapper;
 using BikeStore.Extensions;
 using BikeStore.Infrastructure.Commands;
 using BikeStore.Infrastructure.Commands.Users;
+using BikeStore.Infrastructure.Dispatcher;
 using BikeStore.Infrastructure.DTO;
 using BikeStore.Infrastructure.EF;
 using BikeStore.Infrastructure.Services;
@@ -21,7 +22,7 @@ namespace BikeStore.Controllers {
     private readonly BikeStoreContext mDB;
     private readonly IUserService mUserService;
 
-    public UserController(ICommandDispatcher xCommandDispatcher, IMapper xMapper, BikeStoreContext xDB, IUserService xUserService)
+    public UserController(IDispatcher xCommandDispatcher, IMapper xMapper, BikeStoreContext xDB, IUserService xUserService)
            : base(xCommandDispatcher, xMapper) {
       mDB = xDB;
       mUserService = xUserService;
@@ -98,7 +99,7 @@ namespace BikeStore.Controllers {
 
       xCommand.xEmail = pUserIdetities.Email;
       xCommand.UserUuid = pUserIdetities.UserUuid;
-      await DispatchAsync(xCommand);
+      await SendAsync(xCommand);
 
       //TODO:W widoku przerobić na ajxa i dorobić alerty w stylu stravy
       return "Success";
@@ -113,7 +114,7 @@ namespace BikeStore.Controllers {
       var pUserIdetities = HttpContext.User.GetUserIdentities();
       xCommand.UserUuId = pUserIdetities.UserUuid;
 
-      await DispatchAsync(xCommand);
+      await SendAsync(xCommand);
 
       if(!CommandResult.IsSuccess) {
         ModelState.AddModelError(string.Empty, CommandResult.Message);

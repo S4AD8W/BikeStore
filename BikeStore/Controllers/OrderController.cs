@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using BikeStore.Infrastructure.Commands;
+using BikeStore.Infrastructure.Dispatcher;
 using BikeStore.ViewModels.Order;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,7 +12,7 @@ namespace BikeStore.Controllers {
   public class OrderController : BikeStoreControllerBaseController {
    
 
-    public OrderController(ICommandDispatcher xCommandDispatcher, IMapper xMapper)
+    public OrderController(IDispatcher xCommandDispatcher, IMapper xMapper)
            : base(xCommandDispatcher, xMapper) {
     }
 

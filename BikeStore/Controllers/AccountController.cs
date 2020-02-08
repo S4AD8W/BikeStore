@@ -6,6 +6,7 @@ using AutoMapper;
 using BikeStore.Infrastructure.Commands;
 using BikeStore.Infrastructure.Commands.Accounts;
 using BikeStore.Infrastructure.Commands.Users;
+using BikeStore.Infrastructure.Dispatcher;
 using BikeStore.Infrastructure.Extensions;
 using BikeStore.Infrastructure.Services.Account;
 using BikeStore.Infrastructure.Services.Messages;
@@ -21,7 +22,7 @@ namespace BikeStore.Controllers {
     private readonly IMemoryCache mCache;
     private readonly IAccountService mAccountService;
 
-    public AccountController(ICommandDispatcher xCommandDispatcher, IMessage xMessage, IMemoryCache xCache, IMapper xMapper, IAccountService xAccountService)
+    public AccountController(IDispatcher xCommandDispatcher, IMessage xMessage, IMemoryCache xCache, IMapper xMapper, IAccountService xAccountService)
            : base(xCommandDispatcher, xMapper) {
       mMessage = xMessage;
       mCache = xCache;
@@ -36,7 +37,7 @@ namespace BikeStore.Controllers {
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Register(CreateUser xCreateUser) {
 
-      await DispatchAsync(xCreateUser);
+      await SendAsync(xCreateUser);
       if (mMessage.IsMessage) {
         ViewBag.Error = mMessage.Message;
         return View();
@@ -54,7 +55,7 @@ namespace BikeStore.Controllers {
       //xLogin - komenda z danymi logowania
       //TODO:Zmienić TokenID na UserID 
 
-      await DispatchAsync(xLogin);                         //wywołanie Komendy 
+      await SendAsync(xLogin);                         //wywołanie Komendy 
 
       if (mMessage.IsMessage) {                             //sprawdzenie czy serwis nie zwrucił informacji
         ModelState.AddModelError(string.Empty, mMessage.Message);
@@ -90,7 +91,7 @@ namespace BikeStore.Controllers {
         return View(xResetPassword);                        //zwrucenie widoku 
       }
 
-      await DispatchAsync(xResetPassword);                  //wywołanie komendy 
+      await SendAsync(xResetPassword);                  //wywołanie komendy 
 
       if (mMessage.IsMessage) {                             //sprawdzenie czy serwis nie zwrucił komunikatu 
         ViewBag.Error = mMessage.Message;
@@ -108,7 +109,7 @@ namespace BikeStore.Controllers {
 
       ConfirmEmail_Command pCommand = new ConfirmEmail_Command(xUid);
 
-      await DispatchAsync(pCommand);
+      await SendAsync(pCommand);
 
       return RedirectToAction("ConfirmEmailSuccess");
 

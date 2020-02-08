@@ -7,6 +7,7 @@ using BikeStore.Areas.Admin.ViewModel;
 using BikeStore.Controllers;
 using BikeStore.core.Domain.Notification_NS;
 using BikeStore.Infrastructure.Commands;
+using BikeStore.Infrastructure.Dispatcher;
 using BikeStore.Infrastructure.EF;
 using BikeStore.ViewModels;
 using Microsoft.AspNetCore.Mvc;
@@ -18,7 +19,7 @@ namespace BikeStore.Areas.Admin.Controllers {
 
     private readonly BikeStoreContext mDB;
     int mPageSize = 25;
-    public NotificationController(ICommandDispatcher xCommandDispatcher, IMapper xMapper, BikeStoreContext xDB)
+    public NotificationController(IDispatcher xCommandDispatcher, IMapper xMapper, BikeStoreContext xDB)
       : base (xCommandDispatcher,xMapper) {
       mDB = xDB;
     }

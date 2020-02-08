@@ -10,6 +10,7 @@ using BikeStore.core.Domain.Product_NS;
 using BikeStore.core.Repositories;
 using BikeStore.Infrastructure.Commands;
 using BikeStore.Infrastructure.Commands.Product;
+using BikeStore.Infrastructure.Dispatcher;
 using BikeStore.Infrastructure.EF;
 using BikeStore.ViewModels;
 using Microsoft.AspNetCore.Http;
@@ -26,7 +27,7 @@ namespace BikeStore.Areas.Admin.Controllers {
     private readonly IProductImageRepository mProductImageRepository;
     private int mPageSize = 15;
 
-    public ProductController(BikeStoreContext xDB, IMapper xMapper, ICommandDispatcher xCommandDispatcher, IProductsRepository xProductsRepository,
+    public ProductController(BikeStoreContext xDB, IMapper xMapper, IDispatcher xCommandDispatcher, IProductsRepository xProductsRepository,
       IProductsCategoryRepository xProductsCategoryRepository, IProductImageRepository xProductImageRepository)
            : base(xCommandDispatcher, xMapper) {
       mDB = xDB;
@@ -68,7 +69,7 @@ namespace BikeStore.Areas.Admin.Controllers {
       }
 
      
-      await DispatchAsync(pCommand);
+      await SendAsync(pCommand);
 
       return RedirectToAction("AddProduct");
 
@@ -144,7 +145,7 @@ namespace BikeStore.Areas.Admin.Controllers {
         }
       }
 
-      await DispatchAsync(pCommand);
+      await SendAsync(pCommand);
 
       return RedirectToAction("List");
 

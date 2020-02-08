@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using BikeStore.Infrastructure.IoC.Modules;
 using BikeStore.Infrastructure.Mappers;
-
+using BikeStore.Infrastructure.Dispatcher;
 
 namespace BikeStore.Infrastructure.IoC {
 
@@ -26,6 +26,9 @@ namespace BikeStore.Infrastructure.IoC {
       builder.RegisterModule<ServiceModule>();
       builder.RegisterModule<SqlModule>();
       builder.RegisterModule(new SettingsModule(mConfiguration));
+      builder.RegisterModule<QueryModule>();
+      builder.RegisterType<BikeStore.Infrastructure.Dispatcher.Dispatcher>().As<IDispatcher>()
+           .SingleInstance();
     }
 
   }

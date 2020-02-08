@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using BikeStore.core.Repositories;
 using BikeStore.Infrastructure.Commands;
+using BikeStore.Infrastructure.Dispatcher;
 using BikeStore.ViewModels;
 using BikeStore.ViewModels.Shop;
 using Microsoft.AspNetCore.Mvc;
@@ -19,7 +20,7 @@ namespace BikeStore.Controllers {
     private readonly IProductImageRepository mProductImageRepository;
     private int mPageSize = 15;
 
-    public ShopController(IMapper xMapper, ICommandDispatcher xCommandDispatcher, IProductsRepository xProductsRepository,
+    public ShopController(IMapper xMapper, IDispatcher xCommandDispatcher, IProductsRepository xProductsRepository,
       IProductsCategoryRepository xProductsCategoryRepository, IProductImageRepository xProductImageRepository)
            : base(xCommandDispatcher, xMapper) {
       mProductsRepository = xProductsRepository;
