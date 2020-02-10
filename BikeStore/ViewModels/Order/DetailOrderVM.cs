@@ -1,4 +1,5 @@
 ﻿using BikeStore.core.Domain;
+using BikeStore.core.Domain.OrderNS;
 using System;
 using System.Collections.Generic;
 using System.Linq;

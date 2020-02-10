@@ -8,6 +8,7 @@ using System.Text;
 using BikeStore.core.Domain.Product_NS;
 using BikeStore.core.Domain;
 using BikeStore.core.Domain.Notification_NS;
+using BikeStore.core.Domain.OrderNS;
 
 namespace BikeStore.Infrastructure.EF {
 
@@ -28,7 +29,7 @@ namespace BikeStore.Infrastructure.EF {
 
   public static class ExtensionsDataBase {
 
-    private const int DB_VERSION = (4);
+    private const int DB_VERSION = (8);
 
     public static IWebHost UpdateDatabase(this IWebHost xIWebHost) {
       // funkcja jako rozszrzenie, aktualizująca bazę danych
@@ -298,6 +299,14 @@ namespace BikeStore.Infrastructure.EF {
           {nameof(Order.DeleliveryMethod)} INTEGER,
           {nameof(Order.PaymentMethod)} INTEGER
       )";
+
+      yield return $@"
+        ALTER TABLE {DB_TABLE.Orders}
+        ADD COLUMN IF NOT EXISTS {nameof(Order.Ipv4_Request)} TEXT DEFAULT '',
+        ADD COLUMN IF NOT EXISTS {nameof(Order.Ipv6_Request)} TEXT DEFAULT '',
+        ADD COLUMN IF NOT EXISTS {nameof(Order.DateCreation)} timestamp DEFAULT now() 
+        ";
+
     }
 
     private static IEnumerable<string> GetSqlToCreateTableOrderItems() {

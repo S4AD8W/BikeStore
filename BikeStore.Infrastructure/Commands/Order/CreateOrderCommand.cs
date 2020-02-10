@@ -1,10 +1,11 @@
 ﻿using BikeStore.core.Domain;
+using BikeStore.core.Domain.OrderNS;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace BikeStore.Infrastructure.Commands {
- public class CreateOrderCommand : ICommand{
+namespace BikeStore.Infrastructure.Commands.Order {
+  public class CreateOrderCommand : ICommand{
 
     public DeliveryMethodEenum DeliveryMethod { get; set; }
     public PaymentMethodEenum PaymentMethod { get; set; }
@@ -35,45 +36,46 @@ namespace BikeStore.Infrastructure.Commands {
     public DateTime CreateAt { get; set; }
     public string Ipv4 { get; private set; }
     public string Ipv6 { get; private set; }
+    public int IdxUser { get; set; }
+    public string UserEmail { get; set; }
 
 
-    //public void SetConnectionData(string xIpv4, string xIpv6, int? xIdxUser, string xUserEmail) {
-    //  CreateAt = DateTime.UtcNow;
-    //  this.Ipv4 = xIpv4;
-    //  this.Ipv6 = xIpv6;
-    //  this.IdxUser = xIdxUser;
-    //  this.UserEmail = xUserEmail;
-    //}
+    public void SetConnectionData(string xIpv4, string xIpv6, int xIdxUser, string xUserEmail) {
+      CreateAt = DateTime.UtcNow;
+      this.Ipv4 = xIpv4;
+      this.Ipv6 = xIpv6;
+      this.IdxUser = xIdxUser;
+      this.UserEmail = xUserEmail;
+    }
 
 
 
-    //public Address GetUserAddress()//funkcja zwracająca adres użytkownika
-    //  => new Address(this.ZipCode, this.City, this.Street, this.HouseNumber, this.Phone, this.Country);
+    public Address GetUserAddress()//funkcja zwracająca adres użytkownika
+      => new Address(this.PostCode,this.City,this.Address,this.Address,this.PhoneNumber, "PL");
 
-    //public Address GetDeliveryAddress() {
-    //  //funkcja zwracająca adres dostawy/montarzu
+    public Address GetDeliveryAddress() {
+    //funkcja zwracająca adres dostawy/montarzu
 
-    //  if (this.IsAccountDeliveryAdress)
-    //    return new Address(this.ZipCode, this.City, this.Street, this.HouseNumber, this.Phone, this.Country);
+      if (this.DeleliveryAnotherAddress)
+        return new Address(this.AnotherPostCode,this.AnotherCity, this.AnotherAddress,this.AnotherAddress,this.AnotherPhoneNumber,"PL");
 
-    //  return new Address(this.ADZipCode, this.ADCity, this.ADStreet, this.ADHouseNumber, this.ADPhone, this.ADCountry);
+      return new Address(this.PostCode, this.City, this.Address, this.Address, this.PhoneNumber, "PL");
 
-    //}
+    }
 
-    //public Address GetUserInvoiceAddress() {
+    public Address GetUserInvoiceAddress() {
 
-    //  if (string.IsNullOrEmpty(this.IZipCode)) return null;
-    //  if (string.IsNullOrEmpty(this.ICity)) return null;
-    //  if (string.IsNullOrEmpty(this.IStreet)) return null;
-    //  if (string.IsNullOrEmpty(this.IHouseNumber)) return null;
-    //  if (string.IsNullOrEmpty(this.ICountry)) return null;
+      if (string.IsNullOrEmpty(this.Invoice_Address)) return null;
+      if (string.IsNullOrEmpty(this.Invoice_Citi)) return null;
+      if (string.IsNullOrEmpty(this.Invoice_PostCode)) return null;
 
-    //  //return new Address(this.IZipCode, this.ICity, this.IStreet, this.IHouseNumber, this.IPhone, this.ICountry);
+    return new Address(this.Invoice_PostCode,this.Invoice_Citi, this.Invoice_Address, this.Invoice_Address,"","PL");
 
-    //}
+    }
 
 
 
   }
 
 }
+  

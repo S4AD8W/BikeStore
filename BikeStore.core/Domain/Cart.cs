@@ -49,7 +49,7 @@ namespace BikeStore.core.Domain {
         lineCollection.RemoveAll(l => l.Product.IdxProduct ==
             product.IdxProduct);
 
-    public virtual decimal ComputeTotalValue() =>
+    public virtual double ComputeTotalValue() =>
         lineCollection.Sum(e => e.Product.Price * e.Quantity);
 
     public virtual void Clear() => lineCollection.Clear();

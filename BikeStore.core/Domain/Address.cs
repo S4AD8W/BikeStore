@@ -14,9 +14,10 @@ namespace BikeStore.core.Domain {
     public string Phone { get; protected set; }
     public string Country { get; protected set; }
 
+    public Address() {
 
-    public Address(int xIdxAddress, string xZipCode, string xCity, string xStreet, string xHouseNumber, string xPhone, string xCountry) {
-      IdxAddress = xIdxAddress;
+    }
+    public Address( string xZipCode, string xCity, string xStreet, string xHouseNumber, string xPhone, string xCountry) {
       ZipCode = xZipCode;
       City = xCity;
       Street = xStreet;

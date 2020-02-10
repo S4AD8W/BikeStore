@@ -1,4 +1,5 @@
-﻿using BikeStore.Infrastructure.Commands.Cart;
+﻿using BikeStore.core.Domain;
+using BikeStore.Infrastructure.Commands.Cart;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -10,6 +11,8 @@ namespace BikeStore.Infrastructure.Services.Carts {
     Task<bool> AddProductAsync(AddProductCommand xCommand);
     Task<bool> RemoveProduct(RemoveProductCommand xCommand);
     Task<int> GetItemCartAsyc();
+    Task<Cart> GetCartAsync(int xIdxUser);
+
 
   }
 }

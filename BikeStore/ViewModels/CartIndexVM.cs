@@ -17,7 +17,7 @@ namespace BikeStore.ViewModels {
 
     public string ReturnUrl { get; set; }
     public List<CartLineVM> CartLines { get; set; }
-    public decimal TotalValue { get; set; }
+    public double TotalValue { get; set; }
 
     public CartIndexVM(IProductImageRepository xProducImageRepository, Cart xCart) {
 

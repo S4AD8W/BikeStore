@@ -12,7 +12,7 @@ namespace BikeStore.core.Domain.Product_NS {
     public int IdxProduct { get; private set; }
     public string Name { get; private set; }
     public string Description { get; private set; }
-    public decimal Price { get; private set; }
+    public double Price { get; private set; }
     public int IdxCategory { get; private set; }
     public DateTime CreateAt { get; private set; }
     public DateTime EditAt { get; private set; }
@@ -23,7 +23,7 @@ namespace BikeStore.core.Domain.Product_NS {
 
     }
 
-    public Product(string xNe, string xDescription, decimal xPrice, int xIdxCategory, int xQuantity) {
+    public Product(string xNe, string xDescription, double xPrice, int xIdxCategory, int xQuantity) {
       Name = xNe;
       Description = xDescription;
       Price = xPrice;
@@ -33,7 +33,7 @@ namespace BikeStore.core.Domain.Product_NS {
       this.Quantity = xQuantity;
     }
 
-    public Product(int xIdxProduct, string xName, string xDescription, decimal xPrice, int xIdxCategory, int xQuantity, DateTime xCreateAT) {
+    public Product(int xIdxProduct, string xName, string xDescription, double xPrice, int xIdxCategory, int xQuantity, DateTime xCreateAT) {
       this.IdxProduct = xIdxProduct;
       this.Name = xName;
       this.Description = xDescription;
@@ -45,7 +45,7 @@ namespace BikeStore.core.Domain.Product_NS {
     }
 
     [JsonConstructor]
-    public Product(int idxProduct, string name, string description, decimal price, int idxCategory, DateTime createAt, DateTime editAt, int quantity) {
+    public Product(int idxProduct, string name, string description, double price, int idxCategory, DateTime createAt, DateTime editAt, int quantity) {
       IdxProduct = idxProduct;
       Name = name;
       Description = description;

@@ -16,7 +16,7 @@ namespace BikeStore.Infrastructure.Services.Carts {
       
     private readonly IHttpContextAccessor mContext;
     private readonly IProductsRepository mProductRepository;
-
+    
     public CartService(IHttpContextAccessor xHttpContent, IProductsRepository xProductsRepository) {
     //  mSessionCart = xSessionCart;
       mContext = xHttpContent;
@@ -32,12 +32,44 @@ namespace BikeStore.Infrastructure.Services.Carts {
 
     }
 
+    public async Task<Cart> GetCartAsync(int xIdxUser) {
+      Cart pCart;
+      Guid pUserId;
+
+      if (mContext.HttpContext.User.Identity.IsAuthenticated) {//sprawdzenie czy użytkownik jest zalogowany 
+        Guid.TryParse(mContext.HttpContext.User.Identity.Name, out pUserId);//pruba utorzenia id użytkownika
+       //pCart = await this.GetCartForLogInUserAsync(pUserId);// wywołanie funkcji pobierającej karte dla zalogowanego użytkownika
+        pCart = mContext.HttpContext.Session.GetCart(); // pobranie karty z zmienej sesji 
+      } else {
+        pCart = mContext.HttpContext.Session.GetCart(); // pobranie karty z zmienej sesji 
+      }
+
+      return pCart;
+
+    }
+  
+
     public Task<int> GetItemCartAsyc() {
       throw new NotImplementedException();
     }
 
-    public Task<bool> RemoveProduct(RemoveProductCommand xCommand) {
-      throw new NotImplementedException();
+    public async Task<bool> RemoveProduct(RemoveProductCommand xCommand) {
+      Cart pCart;
+      Guid pUserId;
+
+      if (mContext.HttpContext.User.Identity.IsAuthenticated) {//sprawdzenie czy użytkownik jest zalogowany 
+        Guid.TryParse(mContext.HttpContext.User.Identity.Name, out pUserId);//pruba utorzenia id użytkownika
+        await mProductRepository.DeleteProductAsync(xCommand.IdxProduct);
+        if (await this.GetCartItemsCountAsync() == 0) {
+        //  await mCartsRepository.DeleteCartAsync(pUserId);
+        }
+      } else {
+        pCart = mContext.HttpContext.Session.GetCart(); //pobranie karty z zmienej sesji 
+       // await pCart.RemoveProduct_UseOnlyUnknownUsers(xProductId);//usuniecie prodkutu z karty 
+       // mHttpContext.HttpContext.Session.SetJson(Convert.ToString(SessionEnum.UserCart), pCart);// zapisanie karty w zmienej sesji 
+      }
+
+      return true;
     }
 
 
@@ -56,7 +88,36 @@ namespace BikeStore.Infrastructure.Services.Carts {
 
     }
 
-    
+    public async Task<int> GetCartItemsCountAsync() {
+      //funkcja zwracjąca informacje ile jest produktów w koszyku
+
+      int pProductCount;
+      Guid pUserId;
+      Cart pCart;
+      int? pIdxCart;
+
+      //if (mContext.HttpContext.User.Identity.IsAuthenticated) {
+      //  Guid.TryParse(mContext.HttpContext.User.Identity.Name, out pUserId);
+      //  pIdxCart = await mCartsRepository.GetCartIdxAsync(pUserId);
+      //  if (pIdxCart != null) {
+      //    //pProductCount = mProductsRepository.Products.Count(x => x.IdxCart == pIdxCart);
+      //  } else {
+      //    pProductCount = 0;
+      //  }
+      //} else {
+      //  pCart = mHttpContext.HttpContext.Session.GetCart();
+      //  if (pCart != null) {
+      //    pProductCount = pCart.Products.Count();
+      //  } else {
+      //    pProductCount = 0;
+      //  }
+      //}
+
+      await Task.CompletedTask;
+
+      return 2;
+
+    }
 
   }
 }

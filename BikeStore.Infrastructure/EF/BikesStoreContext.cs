@@ -1,5 +1,6 @@
 ﻿using BikeStore.core.Domain;
 using BikeStore.core.Domain.Notification_NS;
+using BikeStore.core.Domain.OrderNS;
 using BikeStore.core.Domain.Product_NS;
 using Microsoft.EntityFrameworkCore;
 using System;
