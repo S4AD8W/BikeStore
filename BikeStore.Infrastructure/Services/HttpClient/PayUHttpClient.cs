@@ -96,7 +96,8 @@ namespace BikeStore.Infrastructure.Services.HttpClient {
       pStringBuilder = new StringBuilder();
 
       pStringBuilder.Append("{");
-      pStringBuilder.Append($"\"notifyUrl\": \"{xOrderInformation.NotifiUrl}\", ");
+      // pStringBuilder.Append($"\"notifyUrl\": \"{xOrderInformation.NotifiUrl}\", ");
+      pStringBuilder.Append($"\"notifyUrl\": \"https://google.com\", ");
       pStringBuilder.Append($"\"customerIp\": \"{xOrderInformation.UserIp}\", ");
       pStringBuilder.Append($"\"merchantPosId\": \"{mPayUSettings.Client_Id}\", ");
       pStringBuilder.Append($"\"description\": \"Test\", ");      //Opis płatność/uwagi płatność 
@@ -115,7 +116,7 @@ namespace BikeStore.Infrastructure.Services.HttpClient {
       foreach (var pItem in xOrderInformation.OrderItems) {
         pStringBuilder.Append("{ ");
         pStringBuilder.Append($"\"name\": \"{pItem.Name}\", ");
-        pStringBuilder.Append($"\"unitPrice\": \"/555\", ");
+        pStringBuilder.Append($"\"unitPrice\": \"555\", ");
         pStringBuilder.Append($"\"quantity\": \"{pItem.Quantiti}\"");
         pStringBuilder.Append(" },");
       }
@@ -123,8 +124,8 @@ namespace BikeStore.Infrastructure.Services.HttpClient {
       pStringBuilder.Append("]}");
 
       await Task.CompletedTask;
-
-      return pStringBuilder.ToString();
+      var foo = pStringBuilder.ToString();
+      return foo;
 
     }
   }

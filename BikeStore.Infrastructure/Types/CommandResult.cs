@@ -7,6 +7,8 @@ namespace BikeStore.Infrastructure.Types {
   public class CommandResult {
     public bool IsSuccess { get; private set; }
     public string Message { get; private set; }
+    public string RedirecURL { get; set; }
+    public Guid UserId { get; set; }
 
     public void SetSuccess(string xMessage) {
       this.IsSuccess = true;

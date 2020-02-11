@@ -24,12 +24,12 @@ namespace BikeStore.Infrastructure.EF {
     public const string NotificationMessage = "notificationmessages";
     public const string Orders = "orders";
     public const string OrderItems = "orderitems";
-
+    public const string Address = "addresses";
   }
 
   public static class ExtensionsDataBase {
 
-    private const int DB_VERSION = (8);
+    private const int DB_VERSION = (10);
 
     public static IWebHost UpdateDatabase(this IWebHost xIWebHost) {
       // funkcja jako rozszrzenie, aktualizująca bazę danych
@@ -119,6 +119,9 @@ namespace BikeStore.Infrastructure.EF {
         yield return pSql;
       }
 
+      foreach (string pSql in GetSqlToCreateTableAdress()) {
+        yield return pSql;
+      }
     }
     private static int GetDBVersion(DatabaseFacade xDatabase) {
       // funkcja zwracająca wersję bazy danych zapisaną w tabeli DBInfo
@@ -319,6 +322,22 @@ namespace BikeStore.Infrastructure.EF {
           {nameof(OrderItem.Quantiti)} INTEGER,
           {nameof(OrderItem.UnitPrice)}  DECIMAL DEFAULT 0.0,
           {nameof(OrderItem.IdxProduct)} INTEGER NOT NULL DEFAULT 0
+        )
+      ";
+    }
+
+    private static IEnumerable<string> GetSqlToCreateTableAdress() {
+
+      yield return $@"
+        CREATE TABLE IF NOT EXISTS {DB_TABLE.Address} (
+          {nameof(Address.IdxAddress)} SERIAL PRIMARY KEY,
+          {nameof(Address.HouseNumber)} TEXT ,
+          {nameof(Address.Country)} TEXT,
+          {nameof(Address.Phone)} TEXT,
+          {nameof(Address.Street)}  TEXT,
+          {nameof(Address.ZipCode)}  TEXT,
+          {nameof(Address.City)} TEXT
+          
         )
       ";
     }

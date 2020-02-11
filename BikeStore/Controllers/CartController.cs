@@ -104,9 +104,9 @@ namespace BikeStore.Controllers {
         Response.StatusCode = Microsoft.AspNetCore.Http.StatusCodes.Status503ServiceUnavailable;
       }
 
-      //var pObj = new { Action = CommandResult.RedirectUrl.Action, Controller = CommandResult.RedirectUrl.Controller, PayType = pCommand.CntPayMethod };
+      var pObj = new { Url = CommandResult.RedirecURL, PayType = xCommand.PaymentMethod };
 
-      return Json("");
+      return Json(pObj);
     }
 
   }

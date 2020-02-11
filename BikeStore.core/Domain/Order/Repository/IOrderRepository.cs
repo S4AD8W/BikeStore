@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BikeStore.core.Domain.OrderNS;
+using BikeStore.core.Repositories;
 
 namespace BikeStore.core.Domain.OrderNS.Repository {
-public interface IOrderRepository {
+public interface IOrderRepository : IRepository{
 
     IQueryable<Order> Orders { get; }
     Task<int> AddOrderAsync(Order xOrder);

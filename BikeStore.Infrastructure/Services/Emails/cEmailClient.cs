@@ -46,7 +46,7 @@ namespace BikeStore.Infrastructure.Services.Users {
        pSmtpClient.Send(pMailMessage );
       } catch (Exception ex) {
         mIsSent = false;
-        throw;
+        
       }
 
       pSmtpClient.Dispose();

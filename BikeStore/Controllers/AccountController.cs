@@ -61,7 +61,7 @@ namespace BikeStore.Controllers {
         ModelState.AddModelError(string.Empty, mMessage.Message);
         return View();                                      //zwrucenie widoku z informacją 
       } else {
-        var pToken = mCache.GetUserClaimsPrincipal(mMessage.UserId); //Odczytanie uprawnień użytkownika z pamięci serwera
+        var pToken = mCache.GetUserClaimsPrincipal(CommandResult.UserId); //Odczytanie uprawnień użytkownika z pamięci serwera
         await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, pToken); //zalogowanie użytkownika 
         return RedirectToAction("Index", "Home");           //przekierowanie użytkownika 
       }

@@ -33,20 +33,20 @@ namespace BikeStore.Infrastructure.Handlers.Accounts {
     public async Task<CommandResult> HandleAsync(LogIn xCommand) {
 
       bool pIsLogin;
-
+      CommandResult pResult = new CommandResult();
       pIsLogin = await mUserService.LoginAsync(xCommand.Email, xCommand.Password);
       if (pIsLogin == true) {
         UserDTO pUser = await mUserService.GetUserDTOAsync(xCommand.Email);
         var pUserPlaimsPrincipal = SetUserClaimsPrincipal(pUser.Role, pUser.Id.ToString(), pUser.Name, pUser.Surname, pUser.IdxUser, pUser.Email);
         mCache.SetUserClaims(pUser.Id, pUserPlaimsPrincipal);
-        mMessage.UserId = pUser.Id;
+        pResult.UserId = pUser.Id;
         await Task.CompletedTask;
       } else {
         mMessage.SetMesage(Languages.GetText(TextEnum.TheUsernameordidnotmatchPleaseTryAgain));
         await Task.CompletedTask;
 
       }
-      return new CommandResult();
+      return pResult;
     }
 
     ClaimsPrincipal SetUserClaimsPrincipal(string xUserRole, string xUserId, string xUserName, string xUserSurname, int xIdxUser, string xEmail) {

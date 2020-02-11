@@ -61,7 +61,7 @@ namespace BikeStore {
 
       xServices.AddMemoryCache();
       xServices.AddSession();
-
+      xServices.AddHttpClient();
       xServices.AddEntityFrameworkNpgsql()
                 .AddDbContext<BikeStoreContext>()
                 .BuildServiceProvider();

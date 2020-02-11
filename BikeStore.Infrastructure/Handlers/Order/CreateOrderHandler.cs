@@ -36,7 +36,9 @@ namespace BikeStore.Infrastructure.Handlers.Order {
         case PaymentMethodEenum.Transfer:
         break;
         case PaymentMethodEenum.PayU:
+        pResult.SetSuccess("");
         pRedirecUrl = await mOrderService.PayOrderFromPayuAsync(pIdxOrder);
+        pResult.RedirecURL = pRedirecUrl;
         break;
         default:
         break;

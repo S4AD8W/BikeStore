@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace BikeStore.core.Domain {
  public class Address {
     
-
+    [Key]
     public int IdxAddress { get; protected set; }
     public string ZipCode { get; protected set; }
     public string City { get; protected set; }

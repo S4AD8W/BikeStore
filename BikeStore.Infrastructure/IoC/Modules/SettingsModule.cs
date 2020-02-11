@@ -23,7 +23,8 @@ namespace BikeStore.Infrastructure.IoC.Modules {
 
       builder.RegisterInstance(mConfiguration.GetSettings<cJwtSettings>())
               .SingleInstance();
-     
+      builder.RegisterInstance(mConfiguration.GetSettings<PayUSettings>())
+              .SingleInstance();
     }
 
   }

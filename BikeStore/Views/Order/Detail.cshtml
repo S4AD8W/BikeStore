@@ -384,7 +384,7 @@
       //funkcja ustawiająca dane dla podsumowania płatność
       //SM => summary
       //AD => AnotherDelivery
-      debugger
+      
       let pForm = document.getElementById("PaymetWizardForm"),//Przygotowanie elementów
         pSMFirstName = document.getElementById("SMFirstName"),
         pSMLastName = document.getElementById("SMLastName"),
@@ -449,7 +449,7 @@
     SendPaymentFormFromWizar() {
       //Funkcja wysłająca formularz z danymi pochodzącymi z wizardu płatność 
 
-      debugger;
+  
       let pForm = $("#PaymetWizardForm"),
       pFormToSend = toJSONString(pForm[0]);
  
@@ -457,11 +457,12 @@
       $.post("/Cart/CreateOrder", { xCommand: pFormToSend })
         .done(function (xData) {
           debugger;
-          if (xData.payType === "Transfer") {
+          if (xData.payType === "PayU") {
+            window.location.href = xData.url;
             JsCart.PaymentWizzard.GetViewSummaryOrder();
             return;
           }
-          window.location.href = "/" + xData.controller + "/" + xData.action;
+          //window.location.href = "/" + xData.controller + "/" + xData.action;
         })
         .fail(function (xData) {
           alert("test");
