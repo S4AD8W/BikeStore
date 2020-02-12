@@ -42,6 +42,7 @@ namespace BikeStore.Infrastructure.Handlers.Accounts {
         pResult.UserId = pUser.Id;
         await Task.CompletedTask;
       } else {
+        pResult.SetFailure("");
         mMessage.SetMesage(Languages.GetText(TextEnum.TheUsernameordidnotmatchPleaseTryAgain));
         await Task.CompletedTask;
 
